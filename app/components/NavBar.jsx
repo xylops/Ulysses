@@ -32,6 +32,7 @@ var NavBar = React.createClass({
             <div>
                 <AppBar
                     title="Ulysses"
+                    className="AppBar"
                     iconElementLeft={<IconButton onTouchTap={this.handleToggle}><NavigationOpen /></IconButton>}
                     iconElementRight={<FlatButton onTouchTap={this.linkButton} label="Glory Clincal Solution"/>}
                 />

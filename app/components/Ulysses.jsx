@@ -8,8 +8,8 @@ var Ulysses = (props) => {
     return(
         <div>
             <NavBar/>
-            <div className="row">
-                <div className="colums small-11 small-centered">
+            <div >
+                <div>
                     {props.children}
                 </div>
             </div>
