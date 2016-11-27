@@ -4,12 +4,13 @@ var {Link} = require('react-router');
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import NavigationOpen from 'material-ui/svg-icons/navigation/menu';
+
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 var NavBar = React.createClass({
     getInitialState:function(){
@@ -51,11 +52,11 @@ var NavBar = React.createClass({
                     <Link to="/"><MenuItem onTouchTap={this.handleClose}>Home</MenuItem></Link>
                     <Link to="/CM"><MenuItem onTouchTap={this.handleClose}>Client Management</MenuItem></Link>
                     <Link to="/IS"><MenuItem onTouchTap={this.handleClose}>Invoice System</MenuItem></Link>
-                    <MenuItem onTouchTap={this.handleClose}>Inventory Management</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose}>Logistic</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose}>Product Database</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose}>Reporting</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose}>Top Management</MenuItem>
+                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Inventory Management</MenuItem>
+                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Logistic</MenuItem>
+                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Product Database</MenuItem>
+                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Reporting</MenuItem>
+                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Top Management</MenuItem>
                     <Divider />
                     <MenuItem onTouchTap={this.handleToggle} className="drawerCloseBtn">
                         <NavigationClose />
