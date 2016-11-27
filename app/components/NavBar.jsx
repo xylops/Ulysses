@@ -1,5 +1,5 @@
 var React = require('react');
-var reactDOM = require('react-dom');
+var {Link} = require('react-router');
 //material-ui
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -15,11 +15,13 @@ var NavBar = React.createClass({
     getInitialState:function(){
         return ({
             open: false,
-            selectedIndex: 0,
         })
     },
     handleToggle:function(){
         this.setState({open: !this.state.open});
+    },
+    handleClose:function(){
+        this.setState({open:false});
     },
     linkButton:function(){
         alert('Link Clicked')
@@ -46,8 +48,9 @@ var NavBar = React.createClass({
                         </div>
                     </MenuItem>
                     <Divider />
-                    <MenuItem onTouchTap={this.handleClose}>Client Management</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose}>Invoice System</MenuItem>
+                    <Link to="/"><MenuItem onTouchTap={this.handleClose}>Home</MenuItem></Link>
+                    <Link to="/CM"><MenuItem onTouchTap={this.handleClose}>Client Management</MenuItem></Link>
+                    <Link to="/IS"><MenuItem onTouchTap={this.handleClose}>Invoice System</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose}>Inventory Management</MenuItem>
                     <MenuItem onTouchTap={this.handleClose}>Logistic</MenuItem>
                     <MenuItem onTouchTap={this.handleClose}>Product Database</MenuItem>
@@ -59,7 +62,6 @@ var NavBar = React.createClass({
                     </MenuItem>
                 </Drawer>
             </div>
-
         )
     }
 })

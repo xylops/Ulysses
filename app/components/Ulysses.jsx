@@ -1,18 +1,20 @@
 var React = require('react');
 var reactDOM = require('react-dom');
-//material-ui
+
 var NavBar = require('Navbar')
 
 
-var Ulysses = React.createClass({
-
-    render:function(){
-        return (
-            <div>
-                <NavBar />
+var Ulysses = (props) => {
+    return(
+        <div>
+            <NavBar/>
+            <div className="row">
+                <div className="colums small-11 small-centered">
+                    {props.children}
+                </div>
             </div>
-        )
-    }
-})
+        </div>
+    );
+}
 
 module.exports = Ulysses;

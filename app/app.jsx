@@ -10,6 +10,10 @@ injectTapEventPlugin();
 
 //Custom Component
 var Ulysses = require('Ulysses');
+var HomePage = require('HomePage');
+var ClientManagement = require('ClientManagement');
+var InvoiceSystem =require('InvoiceSystem');
+
 
 // Redux Function
 // var actions = require('actions');
@@ -29,7 +33,13 @@ require('style!css!sass!applicationStyles')
 
 const App = () => (
   <MuiThemeProvider>
-    <Ulysses/>
+        <Router history={hashHistory}>
+            <Route path="/" component={Ulysses}>
+                <Route path="CM" component={ClientManagement}/>
+                <Route path="IS" component={InvoiceSystem}/>
+                <IndexRoute component={HomePage}/>
+            </Route>
+        </Router>
   </MuiThemeProvider>
 );
 
