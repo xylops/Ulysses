@@ -12,6 +12,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
+const containerStyle={
+    // height: 'calc(100% - 64px)',
+    // top: 64,
+    backgroundColor:'lightblue'
+}
+
 var NavBar = React.createClass({
     getInitialState:function(){
         return ({
@@ -40,8 +46,8 @@ var NavBar = React.createClass({
                 docked={false}
                 width={300}
                 open={this.state.open}
+                containerStyle={containerStyle}
                 onRequestChange={(open) => this.setState({open})}
-                className="NavbarDrawer"
                 >
                     <MenuItem onTouchTap={this.handleClose}>
                         <div className="drawerWelcoming">

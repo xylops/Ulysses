@@ -6,8 +6,7 @@
 @include foundation-everything;
 
 //Navbar
-@import "NavBar/AppBar";
-@import "NavBar/drawer";
+@import "NavBar/main";
 
 //Client Management
-@import "ClientManagement/main.scss";
+// @import "ClientManagement/main.scss";
