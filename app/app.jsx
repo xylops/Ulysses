@@ -12,7 +12,8 @@ injectTapEventPlugin();
 var Ulysses = require('Ulysses');
 var HomePage = require('HomePage');
 var ClientManagement = require('ClientManagement');
-var InvoiceSystem =require('InvoiceSystem');
+var InvoiceSystem = require('InvoiceSystem');
+var ProductDetail = require('ProductDetail');
 
 
 // Redux Function
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/" component={Ulysses}>
                 <Route path="CM" component={ClientManagement}/>
                 <Route path="IS" component={InvoiceSystem}/>
+                <Route path="PD" component={ProductDetail}/>
                 <IndexRoute component={HomePage}/>
             </Route>
         </Router>

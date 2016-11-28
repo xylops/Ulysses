@@ -61,7 +61,7 @@ var NavBar = React.createClass({
                     <Link to="/IS"><MenuItem onTouchTap={this.handleClose}>Invoice System</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Inventory Management</MenuItem>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Logistic</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Product Database</MenuItem>
+                    <Link to="/PD"><MenuItem onTouchTap={this.handleClose}>Product Detail</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Reporting</MenuItem>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Top Management</MenuItem>
                     <Divider />

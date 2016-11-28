@@ -25,7 +25,7 @@ var HomePage = React.createClass({
                 <br/>
                 <div className="row">
                     <div className="column medium-3">
-                        <Link to="" ><RaisedButton label="Product Detail" disabled={true} fullWidth={true} /></Link>
+                        <Link to="/PD" ><RaisedButton label="Product Detail"secondary={true} fullWidth={true} /></Link>
                     </div>
                     <div className="column medium-3">
                         <Link to="" ><RaisedButton label="Reporting" disabled={true} fullWidth={true} /></Link>
