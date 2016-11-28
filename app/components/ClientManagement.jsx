@@ -65,7 +65,7 @@ var ClientManagement = React.createClass({
                 <div className="large-6 columns">
                     <h3 style={style.title}>Previous Purchase Record</h3>
                     <Paper style={style.purchaseRecord} zDepth={3}>
-                        <div className="row" style={{backgroundColor:'#b0d68e'}}>
+                        <div className="row" >
                             <div className="columns small-2">Date</div>
                             <div className="columns small-7">Purchase Item</div>
                             <div className="columns small-1">Edit</div>

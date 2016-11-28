@@ -31,7 +31,7 @@ var NavBar = React.createClass({
         this.setState({open:false});
     },
     linkButton:function(){
-        alert('Link Clicked')
+        alert('仆你個街')
     },
     render:function(){
         return (
