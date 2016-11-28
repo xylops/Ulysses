@@ -15,7 +15,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 const containerStyle={
     // height: 'calc(100% - 64px)',
     // top: 64,
-    backgroundColor:'lightblue'
+    backgroundColor:'white'
 }
 
 var NavBar = React.createClass({
