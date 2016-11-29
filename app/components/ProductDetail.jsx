@@ -5,10 +5,12 @@ var ReactDOM = require('react-dom');
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+
 
 //API
 var productDetailAPI = require('../api/productDetailAPI')
-var singleProduct = require('ProductDetail_singleProduct')
 
 const style={
     title:{
@@ -19,7 +21,6 @@ const style={
     },
     paper:{
         width:'100%',
-        minHeight:500,
         margin:'10 auto'
     },
     tableHeader:{
@@ -28,17 +29,20 @@ const style={
     },
     tableRow:{
         textAlign:'center',
-        paddingTop:10,
-        margin:10,
-        borderTop:'1px solid rgb(0, 170, 114)'
-    }
+        maxHeight:'36px'
+    },
+    spinner:{
+        position:'absolute',
+        top:'calc(50% - 144px)',
+        left:'calc(50% - 80px)'
+    },
 }
-
 var ProductDetail = React.createClass({
     getInitialState:function(){
         return{
             isLoading:false,
-            productList:undefined
+            productList:undefined,
+            open:false,
         }
     },
     componentDidMount:function(){
@@ -50,23 +54,59 @@ var ProductDetail = React.createClass({
             })
         })
     },
+    handleOpen : function(){
+        this.setState({
+            open: true
+        })
+    },
+
+     handleClose : function(){
+        this.setState({
+           open: false
+        });
+   },
+
     render:function(){
         var {isLoading, productList} = this.state;
+        const actions = [
+         <FlatButton
+           label="Cancel"
+           primary={true}
+           onTouchTap={this.handleClose}
+         />,
+         <FlatButton
+           label="Discard"
+           primary={true}
+           onTouchTap={this.handleClose}
+         />,
+       ];
         var renderList = ()=>{
-            if(isLoading){
+            if(isLoading && productList){
                 return productList.map((product)=>{
                     return (
-                        <div key={product._id} className="row" style={style.tableRow}>
-                            <div className="column medium-2 hide-for-small-only"> {product.ProductID} </div>
-                            <div className="column medium-5 small-8"> {product.ProductName} </div>
-                            <div className="column medium-2 hide-for-small-only"> {product.Spec} </div>
-                            <div className="column medium-2 small-4"> {product.Price} </div>
-                            <div className="column medium-1 hide-for-small-only"> {product.Unit} </div>
+                        <div key={product._id} >
+                            <RaisedButton className="row" style={style.tableRow} fullWidth={true} onTouchTap={this.handleOpen}>
+                                <div className="column medium-2 hide-for-small-only"> {product.ProductID} </div>
+                                <div className="column medium-5 small-8"> {product.ProductName} </div>
+                                <div className="column medium-2 hide-for-small-only"> {product.Spec} </div>
+                                <div className="column medium-2 small-4"> {product.Price} </div>
+                                <div className="column medium-1 hide-for-small-only"> {product.Unit} </div>
+                            </RaisedButton>
+                            <Dialog
+                              title="Dialog With Actions"
+                              actions={actions}
+                              modal={false}
+                              open={this.state.open}
+                              onRequestClose={this.handleClose}
+                            >
+                                {product.ProductName}
+                            </Dialog>
                         </div>
+
                     )
                 })
             }else{
-                return <CircularProgress size={80} thickness={5} />
+                return <CircularProgress size={80} thickness={5} style={style.spinner}/>
             }
         }
 
@@ -74,7 +114,7 @@ var ProductDetail = React.createClass({
 
             <div className="row">
                 <h3 style={style.title}>Product Detail Page</h3>
-                <Paper style={style.paper} zDepth={2}>
+                <div style={style.paper}>
                     <div className="row" style={style.tableHeader}>
                         <div className="column medium-2 hide-for-small-only" > Produt ID </div>
                         <div className="column medium-5 small-8"> Product Name </div>
@@ -82,9 +122,9 @@ var ProductDetail = React.createClass({
                         <div className="column medium-2 small-4"> Price </div>
                         <div className="column medium-1 hide-for-small-only"> Unit </div>
                     </div>
-                    {renderList()}
                     <br/>
-                </Paper>
+                </div>
+                {renderList()}
                 <hr></hr>
             </div>
         )
