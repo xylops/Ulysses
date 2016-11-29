@@ -15,7 +15,16 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 const containerStyle={
     // height: 'calc(100% - 64px)',
     // top: 64,
-    backgroundColor:'white'
+    backgroundColor:'#00AA72',
+}
+
+const style={
+    appBar:{
+        backgroundColor:'#006E4A'
+    },
+    drawerText:{
+        color:'white'
+    }
 }
 
 var NavBar = React.createClass({
@@ -38,7 +47,7 @@ var NavBar = React.createClass({
             <div>
                 <AppBar
                     title="Ulysses"
-                    className="AppBar"
+                    style={style.appBar}
                     iconElementLeft={<IconButton onTouchTap={this.handleToggle}><NavigationOpen /></IconButton>}
                     iconElementRight={<FlatButton onTouchTap={this.linkButton} label="Glory Clincal Solution"/>}
                 />
@@ -51,17 +60,17 @@ var NavBar = React.createClass({
                 >
                     <MenuItem onTouchTap={this.handleClose}>
                         <div className="drawerWelcoming">
-                            <h4>Welcome</h4>
-                            <b><h2>User</h2></b>
+                            <h4 style={style.drawerText}>Welcome</h4>
+                            <b><h2 style={style.drawerText}>User</h2></b>
                         </div>
                     </MenuItem>
                     <Divider />
-                    <Link to="/"><MenuItem onTouchTap={this.handleClose}>Home</MenuItem></Link>
-                    <Link to="/CM"><MenuItem onTouchTap={this.handleClose}>Client Management</MenuItem></Link>
-                    <Link to="/IS"><MenuItem onTouchTap={this.handleClose}>Invoice System</MenuItem></Link>
+                    <Link to="/"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Home</MenuItem></Link>
+                    <Link to="/CM"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Client Management</MenuItem></Link>
+                    <Link to="/IS"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Invoice System</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Inventory Management</MenuItem>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Logistic</MenuItem>
-                    <Link to="/PD"><MenuItem onTouchTap={this.handleClose}>Product Detail</MenuItem></Link>
+                    <Link to="/PD"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Product Detail</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Reporting</MenuItem>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Top Management</MenuItem>
                     <Divider />

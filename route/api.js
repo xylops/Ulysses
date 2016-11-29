@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb://xxxx:xxxx@ds163377.mlab.com:63377/taco-db', (err, database) => {
+MongoClient.connect('mongodb://xylops:xxxx@ds113608.mlab.com:13608/ulysses', (err, database) => {
     if (err) return console.log(err)
     db = database
     console.log('connected to db')
 })
 
-router.get('/get', function(req, res, next) {
-    db.collection('movies').find().toArray(function(err, results) {
+router.get('/getFullProductData', function(req, res, next) {
+    db.collection('products').find().toArray(function(err, results) {
         res.json(results)
     })
 });

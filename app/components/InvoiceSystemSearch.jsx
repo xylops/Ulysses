@@ -8,10 +8,9 @@ import DatePicker from 'material-ui/DatePicker';
 const style = {
     paper:{
         width:'96%',
-        margin:30,
     },
     form:{
-        width:'50%',
+        width:'100%',
         margin:30
     },
     formText:{
@@ -23,8 +22,8 @@ const style = {
 var ISS = React.createClass({
     render:function(){
         return(
-            <div style={style.paper}>
-                <div className="column medium-6">
+            <div style={style.paper} className="row">
+                <div className="column medium-6" >
                     <div className="row">
                         <div className="column medium-4" >
                             <h5 style={style.formText}>Name: </h5>
@@ -63,6 +62,7 @@ var ISS = React.createClass({
                         <div className="column medium-8">
                             <TextField
                                 hintText="Invoice Number will be generate"
+                                fullWidth={true}
                             /><br />
                         </div>
                     </div>
@@ -71,7 +71,7 @@ var ISS = React.createClass({
                             <h5 style={style.formText}> Date of Creation </h5>
                         </div>
                         <div className="column medium-8">
-                             <DatePicker hintText="Landscape Dialog" mode="landscape" />
+                             <DatePicker hintText="Landscape Dialog" mode="landscape" fullWidth={true}/>
                         </div>
                     </div>
                 </div>

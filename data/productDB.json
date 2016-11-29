@@ -1,0 +1,342 @@
+[
+{
+  "ProductID": "ZC-GREZ -1",
+  "ProductName": "Zinger Chair 後備輪胎",
+  "Spec": "Null",
+  "Price": " 80.00 ",
+  "Unit": "pcs"
+},
+{
+  "ProductID": "ZC-GREY",
+  "ProductName": "Zinger Chair 可摺合流動椅",
+  "Spec": "灰色 (貨辦轉讓)",
+  "Price": " 11,000.00 ",
+  "Unit": "部"
+},
+{
+  "ProductID": "TS-S",
+  "ProductName": "水銀探熱針套 (TIDI)",
+  "Spec": "500pcs",
+  "Price": " 150.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "TS-MA",
+  "ProductName": "水銀探熱針",
+  "Spec": "12pcs",
+  "Price": " 120.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "TS-E",
+  "ProductName": "電子探熱針套 (TIDI)",
+  "Spec": "500pcs",
+  "Price": " 150.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "TD-C",
+  "ProductName": "妙手牌 小兒木舌壓",
+  "Spec": "1,000pcs",
+  "Price": " 90.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "TD-BS",
+  "ProductName": "澳洲牌 小兒 舌壓 (115mm)",
+  "Spec": "1,000pcs",
+  "Price": " 80.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "TD-BL",
+  "ProductName": "澳洲牌 大人 舌壓 (150mm)",
+  "Spec": "1,000pcs",
+  "Price": " 120.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "TD-A",
+  "ProductName": "妙手牌 大人木舌壓",
+  "Spec": "1,000pcs",
+  "Price": " 145.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SP75",
+  "ProductName": "7.5ml 透明藥匙",
+  "Spec": "500pcs",
+  "Price": " 110.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SP50-1",
+  "ProductName": "SP5mlA 紅A 塑膠藥匙",
+  "Spec": "2,000pcs",
+  "Price": " 410.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SP50",
+  "ProductName": "5ml 透明藥匙",
+  "Spec": "1,000pcs",
+  "Price": " 180.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN-DRESSING",
+  "ProductName": "傷口清洗包",
+  "Spec": "Null",
+  "Price": " 15.00 ",
+  "Unit": "包"
+},
+{
+  "ProductID": "SN-BOX7",
+  "ProductName": "棄針膠箱 7 LT",
+  "Price": " 45.00 ",
+  "Unit": "個"
+},
+{
+  "ProductID": "SN-BOX1",
+  "ProductName": "棄針膠箱 1.3 LT",
+  "Price": " 36.00 ",
+  "Unit": "個"
+},
+{
+  "ProductID": "SN-B5",
+  "ProductName": "5cc (TERUMO) 淨針筒",
+  "Spec": "100pcs",
+  "Price": " 125.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN-B3",
+  "ProductName": "3cc (TERUMO) 淨針筒",
+  "Spec": "100pcs",
+  "Price": " 95.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN-A",
+  "ProductName": "淨針咀",
+  "Spec": "100pcs",
+  "Price": " 60.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN5",
+  "ProductName": "5cc (23G) 針筒連針咀 (LOK)",
+  "Spec": "100pcs",
+  "Price": " 125.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN3",
+  "ProductName": "3cc (23G) 針筒連針咀 (LOK)",
+  "Spec": "100pcs",
+  "Price": " 95.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN2-1",
+  "ProductName": "床墊 (藍色) 17\"x24\"",
+  "Price": " 2.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN2",
+  "ProductName": "床墊 (藍色) 17\"x24\"",
+  "Spec": "300pcs",
+  "Price": " 430.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN10",
+  "ProductName": "10cc (21G) 針筒連針咀 (LOK)",
+  "Spec": "100pcs",
+  "Price": " 180.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SN1",
+  "ProductName": "1cc (25G) 針筒連針咀",
+  "Spec": "100pcs",
+  "Price": " 180.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF909-B",
+  "ProductName": "SF 藥水樽 3oz (9) 封蓋",
+  "Spec": "200pcs",
+  "Price": " 98.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF909-A",
+  "ProductName": "SF 藥水樽 3oz (9) 磅蓋",
+  "Spec": "200pcs",
+  "Price": " 98.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF908-A",
+  "ProductName": "SF 藥水樽 3oz (8) 磅蓋",
+  "Spec": "200pcs",
+  "Price": " 98.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF906-A",
+  "ProductName": "SF 藥水樽 3oz (6) 磅蓋",
+  "Spec": "200pcs",
+  "Price": " 98.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF9012-B",
+  "ProductName": "SF 藥水樽 3oz (12) 封蓋",
+  "Spec": "200pcs",
+  "Price": " 98.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF9012-A",
+  "ProductName": "SF 藥水樽 3oz (12) 磅蓋",
+  "Spec": "200pcs",
+  "Price": " 98.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF808-B",
+  "ProductName": "SF 藥水樽 80ml (8) 封蓋",
+  "Spec": "200pcs",
+  "Price": " 96.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF808-A",
+  "ProductName": "SF 藥水樽 80ml (8) 磅蓋",
+  "Spec": "200pcs",
+  "Price": " 96.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF8016-A",
+  "ProductName": "SF 藥水樽 80ml (16) 磅蓋",
+  "Spec": "200pcs",
+  "Price": " 96.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF800-O",
+  "ProductName": "SF 800 舊款藥丸筒",
+  "Spec": "72pcs",
+  "Price": " 145.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF705",
+  "ProductName": "SF 2oz 軟膠-擰蓋-藥膏盒 (連貼紙)",
+  "Spec": "100pcs",
+  "Price": " 160.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF704-1",
+  "ProductName": "SF 704 1/8oz 硬膠藥膏盒 (連貼紙)",
+  "Spec": "288pcs",
+  "Price": " 83.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF704",
+  "ProductName": "SF 1/8oz 軟膠 藥膏盒 (連貼紙)",
+  "Spec": "400pcs",
+  "Price": " 95.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF703-1",
+  "ProductName": "SF 703 1oz 硬膠藥膏盒 (連貼紙)",
+  "Spec": "288pcs",
+  "Price": " 105.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF703",
+  "ProductName": "SF 1oz 軟膠藥膏盒 (連貼紙)",
+  "Spec": "200pcs",
+  "Price": " 88.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF702-1",
+  "ProductName": "SF 702 1/2oz 硬膠藥膏盒 (連貼紙)",
+  "Spec": "288pcs",
+  "Price": " 103.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF702",
+  "ProductName": "SF 1/2oz 軟膠藥膏盒 (連貼紙)",
+  "Spec": "200pcs",
+  "Price": " 80.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF701-1",
+  "ProductName": "SF 701 1/4oz 硬膠藥膏盒 (連貼紙)",
+  "Spec": "288pcs",
+  "Price": " 88.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF701",
+  "ProductName": "SF 1/4oz 軟膠藥膏盒 (連貼紙)",
+  "Spec": "400pcs",
+  "Price": " 100.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF700-N",
+  "ProductName": "SF 700 藥丸筒 (透明)",
+  "Spec": "150pcs",
+  "Price": " 145.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF609-A",
+  "ProductName": "SF 藥水樽 2oz (9) 磅蓋",
+  "Spec": "400pcs",
+  "Price": " 128.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF608-CAT",
+  "ProductName": "SF 貓仔樽 60ml (8) 磅蓋",
+  "Spec": "200pcs",
+  "Price": " 83.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF608-C",
+  "ProductName": "SF 藥水樽 2oz (8) 磅蓋",
+  "Spec": "200pcs**",
+  "Price": " -   ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF608-B",
+  "ProductName": "SF 藥水樽 2oz( 8) 封蓋",
+  "Spec": "400pcs",
+  "Price": " 128.00 ",
+  "Unit": "盒"
+},
+{
+  "ProductID": "SF608-A",
+  "ProductName": "SF 藥水樽 2oz (8) 磅蓋",
+  "Spec": "400pcs",
+  "Price": " 128.00 ",
+  "Unit": "盒"
+}
+]
