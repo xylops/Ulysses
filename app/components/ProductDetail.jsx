@@ -23,7 +23,14 @@ const style={
         margin:'10 auto'
     },
     tableHeader:{
-        textAlign:'center'
+        textAlign:'center',
+        paddingTop:10,
+    },
+    tableRow:{
+        textAlign:'center',
+        paddingTop:10,
+        margin:10,
+        borderTop:'1px solid rgb(0, 170, 114)'
     }
 }
 
@@ -49,7 +56,7 @@ var ProductDetail = React.createClass({
             if(isLoading){
                 return productList.map((product)=>{
                     return (
-                        <div key={product._id} className="row" style={style.tableHeader}>
+                        <div key={product._id} className="row" style={style.tableRow}>
                             <div className="column medium-2"> {product.ProductID} </div>
                             <div className="column medium-5"> {product.ProductName} </div>
                             <div className="column medium-2"> {product.Spec} </div>
@@ -76,8 +83,9 @@ var ProductDetail = React.createClass({
                         <div className="column medium-1"> Unit </div>
                     </div>
                     {renderList()}
+                    <br/>
                 </Paper>
-                <h3 style={style.title}>End</h3>
+                <hr></hr>
             </div>
         )
     }
