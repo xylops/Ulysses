@@ -57,11 +57,11 @@ var ProductDetail = React.createClass({
                 return productList.map((product)=>{
                     return (
                         <div key={product._id} className="row" style={style.tableRow}>
-                            <div className="column medium-2"> {product.ProductID} </div>
-                            <div className="column medium-5"> {product.ProductName} </div>
-                            <div className="column medium-2"> {product.Spec} </div>
-                            <div className="column medium-2"> {product.Price} </div>
-                            <div className="column medium-1"> {product.Unit} </div>
+                            <div className="column medium-2 hide-for-small-only"> {product.ProductID} </div>
+                            <div className="column medium-5 small-8"> {product.ProductName} </div>
+                            <div className="column medium-2 hide-for-small-only"> {product.Spec} </div>
+                            <div className="column medium-2 small-4"> {product.Price} </div>
+                            <div className="column medium-1 hide-for-small-only"> {product.Unit} </div>
                         </div>
                     )
                 })
@@ -76,11 +76,11 @@ var ProductDetail = React.createClass({
                 <h3 style={style.title}>Product Detail Page</h3>
                 <Paper style={style.paper} zDepth={2}>
                     <div className="row" style={style.tableHeader}>
-                        <div className="column medium-2"> Produt ID </div>
-                        <div className="column medium-5"> Product Name </div>
-                        <div className="column medium-2"> Spec </div>
-                        <div className="column medium-2"> Price </div>
-                        <div className="column medium-1"> Unit </div>
+                        <div className="column medium-2 hide-for-small-only" > Produt ID </div>
+                        <div className="column medium-5 small-8"> Product Name </div>
+                        <div className="column medium-2 hide-for-small-only"> Spec </div>
+                        <div className="column medium-2 small-4"> Price </div>
+                        <div className="column medium-1 hide-for-small-only"> Unit </div>
                     </div>
                     {renderList()}
                     <br/>
