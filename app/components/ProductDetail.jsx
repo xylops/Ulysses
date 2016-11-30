@@ -9,6 +9,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 
 //API
@@ -16,7 +18,7 @@ var productDetailAPI = require('../api/productDetailAPI')
 
 const style={
     title:{
-        textAlign:'center',
+        textAlign:'left',
         fontWeight:'bold',
         paddingTop:'10px',
         paddingBottom:'20px'
@@ -46,7 +48,8 @@ var ProductDetail = React.createClass({
             isLoading:false,
             productList:undefined,
             open:false,
-            singleProduct:undefined
+            singleProduct:undefined,
+            createNew:false
         }
     },
     componentDidMount:function(){
@@ -59,12 +62,14 @@ var ProductDetail = React.createClass({
         })
     },
     handleClose : function(){
-        this.setState({open: false});
+        this.setState({open: false, createNew:false});
     },
     dialogUpdate : function(){
-
+        alert('Current Product Detail would be update \n Do you wannt to proceed? ' )
     },
-
+    dialogDelete : function(prod){
+        alert('Product " ' + this.state.singleProduct[1] +' " would be DELETE ! \n Do you wannt to proceed? ' )
+    },
     render:function(){
         var {isLoading, productList, singleProduct} = this.state;
 
@@ -75,6 +80,18 @@ var ProductDetail = React.createClass({
                 onTouchTap={this.handleClose}
             />,
        ];
+       const newProduct = [
+           <FlatButton
+               label="Close"
+               primary={true}
+               onTouchTap={this.handleClose}
+           />,
+           <FlatButton
+               label="Save"
+               primary={true}
+               onTouchTap={this.handleClose}
+           />,
+      ];
 
         var renderList = ()=>{
             if(isLoading && productList){
@@ -142,12 +159,12 @@ var ProductDetail = React.createClass({
                         <div className="medium-6 small-12 column">
                                 <br/>
                             <div className="small-12 medium-12 column" >
-                                <RaisedButton label="Delete" fullWidth={true} secondary={true} onTouchTap={this.dialogUpdate}></RaisedButton>
+                                <RaisedButton label="Delete" fullWidth={true} secondary={true} onTouchTap={this.dialogDelete}></RaisedButton>
                             </div>
                             <br/>
                             <br/>
                             <div className="small-12 medium-12 column">
-                                <RaisedButton label="SAVE" fullWidth={true}></RaisedButton>
+                                <RaisedButton label="SAVE" fullWidth={true} onTouchTap={this.dialogUpdate}></RaisedButton>
                             </div>
                         </div>
                     </Dialog>
@@ -157,7 +174,57 @@ var ProductDetail = React.createClass({
 
         return(
             <div className="row">
-                <h3 style={style.title}>Product Detail Page</h3>
+                <div className="column small-12 medium-6">
+                    <h2 style={style.title}>Product Detail Page</h2>
+                </div>
+                <div className="column small-12 medium-5" style={{textAlign:'right'}}>
+                    <TextField
+                        hintText="Search Product"
+                        floatingLabelText="Search Product"
+                    /><br />
+                </div>
+                <div className="column small-12 medium-1" >
+                    <FloatingActionButton mini={true} style={{marginTop:'20px'}} onTouchTap={()=>{
+                            this.setState({
+                                createNew:true
+                            })
+                        }}>
+                      <ContentAdd />
+                    </FloatingActionButton>
+                    <Dialog
+                        title="New Product"
+                        actions={newProduct}
+                        modal={false}
+                        open={this.state.createNew}
+                        onRequestClose={this.handleClose}
+                        >
+                        <div className="text-center">
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Product ID"
+                                ref=""
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Product Name"
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Spec"
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Price"
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Unit"
+                            /><br/><br/>
+                        </div>
+                    </Dialog>
+
+                </div>
+                <Divider></Divider>
                 <div style={style.paper}>
                     <div className="row" style={style.tableHeader}>
                         <div className="column medium-2 hide-for-small-only" > Produt ID </div>
