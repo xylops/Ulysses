@@ -7,6 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
 
 
 //API
@@ -37,12 +39,14 @@ const style={
         left:'calc(50% - 80px)'
     },
 }
+
 var ProductDetail = React.createClass({
     getInitialState:function(){
         return{
             isLoading:false,
             productList:undefined,
             open:false,
+            singleProduct:undefined
         }
     },
     componentDidMount:function(){
@@ -54,55 +58,42 @@ var ProductDetail = React.createClass({
             })
         })
     },
-    handleOpen : function(){
-        this.setState({
-            open: true
-        })
+    handleClose : function(){
+        this.setState({open: false});
+    },
+    dialogUpdate : function(){
+
     },
 
-     handleClose : function(){
-        this.setState({
-           open: false
-        });
-   },
-
     render:function(){
-        var {isLoading, productList} = this.state;
+        var {isLoading, productList, singleProduct} = this.state;
+
         const actions = [
-         <FlatButton
-           label="Cancel"
-           primary={true}
-           onTouchTap={this.handleClose}
-         />,
-         <FlatButton
-           label="Discard"
-           primary={true}
-           onTouchTap={this.handleClose}
-         />,
+            <FlatButton
+                label="Close"
+                primary={true}
+                onTouchTap={this.handleClose}
+            />,
        ];
+
         var renderList = ()=>{
             if(isLoading && productList){
                 return productList.map((product)=>{
                     return (
-                        <div key={product._id} >
-                            <RaisedButton className="row" style={style.tableRow} fullWidth={true} onTouchTap={this.handleOpen}>
+                        <div key={product._id}>
+                            <RaisedButton className="row" style={style.tableRow} fullWidth={true} onTouchTap={()=>{
+                                    this.setState({
+                                        open:true,
+                                        singleProduct:[product.ProductID, product.ProductName, product.Spec, product.Price, product.Unit, product._id]
+                                    })
+                                }}>
                                 <div className="column medium-2 hide-for-small-only"> {product.ProductID} </div>
                                 <div className="column medium-5 small-8"> {product.ProductName} </div>
                                 <div className="column medium-2 hide-for-small-only"> {product.Spec} </div>
                                 <div className="column medium-2 small-4"> {product.Price} </div>
                                 <div className="column medium-1 hide-for-small-only"> {product.Unit} </div>
                             </RaisedButton>
-                            <Dialog
-                              title="Dialog With Actions"
-                              actions={actions}
-                              modal={false}
-                              open={this.state.open}
-                              onRequestClose={this.handleClose}
-                            >
-                                {product.ProductName}
-                            </Dialog>
                         </div>
-
                     )
                 })
             }else{
@@ -110,8 +101,61 @@ var ProductDetail = React.createClass({
             }
         }
 
-        return(
+        var renderDialog = ()=>{
+            if(singleProduct){
+                return (
+                    <Dialog
+                        title="Product Detail"
+                        actions={actions}
+                        modal={false}
+                        open={this.state.open}
+                        onRequestClose={this.handleClose}
+                    >
+                        <div className="medium-6 small-12 column">
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Product ID"
+                                defaultValue={this.state.singleProduct[0]}
+                                ref=""
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Product Name"
+                                defaultValue={this.state.singleProduct[1]}
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Spec"
+                                defaultValue={this.state.singleProduct[2]}
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Price"
+                                defaultValue={this.state.singleProduct[3]}
+                            /><br/>
+                            <TextField
+                                id="text-field-default"
+                                floatingLabelText="Unit"
+                                defaultValue={this.state.singleProduct[4]}
+                            /><br/>
+                        </div>
+                        <div className="medium-6 small-12 column">
+                                <br/>
+                            <div className="small-12 medium-12 column" >
+                                <RaisedButton label="Delete" fullWidth={true} secondary={true} onTouchTap={this.dialogUpdate}></RaisedButton>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div className="small-12 medium-12 column">
+                                <RaisedButton label="SAVE" fullWidth={true}></RaisedButton>
+                            </div>
+                        </div>
+                    </Dialog>
+                )
+            }
+        }
 
+        return(
             <div className="row">
                 <h3 style={style.title}>Product Detail Page</h3>
                 <div style={style.paper}>
@@ -125,6 +169,7 @@ var ProductDetail = React.createClass({
                     <br/>
                 </div>
                 {renderList()}
+                {renderDialog()}
                 <hr></hr>
             </div>
         )
