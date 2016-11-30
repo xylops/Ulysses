@@ -49,7 +49,8 @@ var ProductDetail = React.createClass({
             productList:undefined,
             open:false,
             singleProduct:undefined,
-            createNew:false
+            createNew:false,
+            productFilterText:'',
         }
     },
     componentDidMount:function(){
@@ -70,8 +71,14 @@ var ProductDetail = React.createClass({
     dialogDelete : function(prod){
         alert('Product " ' + this.state.singleProduct[1] +' " would be DELETE ! \n Do you wannt to proceed? ' )
     },
+    productFilter:function(e){
+        this.setState({
+            productFilterText: e.target.value
+        })
+    },
+
     render:function(){
-        var {isLoading, productList, singleProduct} = this.state;
+        var {isLoading, productList, singleProduct, productFilter} = this.state;
 
         const actions = [
             <FlatButton
@@ -175,12 +182,14 @@ var ProductDetail = React.createClass({
         return(
             <div className="row">
                 <div className="column small-12 medium-6">
-                    <h2 style={style.title}>Product Detail Page</h2>
+                    <h2 style={style.title}>Product Detail Page {this.state.productFilterText}</h2>
                 </div>
                 <div className="column small-12 medium-5" style={{textAlign:'right'}}>
                     <TextField
                         hintText="Search Product"
                         floatingLabelText="Search Product"
+                        value={this.state.productFilterText}
+                        onChange={this.productFilter}
                     /><br />
                 </div>
                 <div className="column small-12 medium-1" >
