@@ -16,15 +16,9 @@ const style={
 }
 
 var TopSection = React.createClass({
-    getInitialState:function(){
-        return{
-            productFilterText:'',
-        }
-    },
-    productFilter:function(e){
-        this.setState({
-            productFilterText: e.target.value
-        })
+    productFilter:function(){
+        var productFilterText = this.refs.productFilterText.getValue();
+        this.props.onProductFilterTextUpdate(productFilterText);
     },
     render:function(){
 
@@ -37,7 +31,7 @@ var TopSection = React.createClass({
                     <TextField
                         hintText="Search Product"
                         floatingLabelText="Search Product"
-                        value={this.state.productFilterText}
+                        ref="productFilterText"
                         onChange={this.productFilter}
                     /><br />
                 </div>

@@ -4,7 +4,7 @@ module.exports = {
     getFullProductData:function(){
         return axios.get('/PD/getFullProductData').then(function(res){
             // console.log(res.data)
-            return (res)
+            return res
         })
     },
     createNewProduct:function(newProduct){

@@ -67,10 +67,18 @@ var ProductDetail = React.createClass({
     dialogDelete : function(prod){
         alert('Product " ' + this.state.singleProduct[1] +' " would be DELETE ! \n Do you wannt to proceed? ' )
     },
+    productFilterText:function(productFilterText){
+        this.setState({
+            productFilterText
+        })
 
+        if(productFilterText.length > 0){
+            console.log(this.state.productList)
+        }
+    },
 
     render:function(){
-        var {isLoading, productList, singleProduct, productFilter} = this.state;
+        var {isLoading, productList, singleProduct, productFilterText} = this.state;
 
         const actions = [
             <FlatButton
@@ -89,7 +97,7 @@ var ProductDetail = React.createClass({
                                         open:true,
                                         singleProduct:[product.ProductID, product.ProductName, product.Spec, product.Price, product.Unit, product._id]
                                     })
-                                }}>
+                            }}>
                                 <div className="column medium-2 hide-for-small-only"> {product.ProductID} </div>
                                 <div className="column medium-5 small-8"> {product.ProductName} </div>
                                 <div className="column medium-2 hide-for-small-only"> {product.Spec} </div>
@@ -160,7 +168,7 @@ var ProductDetail = React.createClass({
 
         return(
             <div className="row">
-                <TopSection/>
+                <TopSection onProductFilterTextUpdate={this.productFilterText}/>
                 <Divider/>
                 <div style={style.paper}>
                     <div className="row" style={style.tableHeader}>

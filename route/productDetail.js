@@ -15,7 +15,7 @@ router.post('/createNewProduct', function(req, res, next) {
     var Price = req.query.newProduct[3];
     var Unit = req.query.newProduct[4];
 
-    console.log(ProductID, ProductName, Spec, Price, Unit)
+    // console.log(ProductID, ProductName, Spec, Price, Unit)
 
     db.collection('products').insert(
         {
