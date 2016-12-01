@@ -8,12 +8,6 @@ MongoClient.connect('mongodb://xylops:xxxx@ds113608.mlab.com:13608/ulysses', (er
     console.log('connected to db')
 })
 
-router.get('/getFullProductData', function(req, res, next) {
-    db.collection('products').find().toArray(function(err, results) {
-        res.json(results)
-    })
-});
-
 
 router.post('/insert', function(req, res, next){
     console.log(req.query)

@@ -11,9 +11,9 @@ injectTapEventPlugin();
 //Custom Component
 var Ulysses = require('Ulysses');
 var HomePage = require('HomePage');
-var ClientManagement = require('ClientManagement');
-var InvoiceSystem = require('InvoiceSystem');
-var ProductDetail = require('ProductDetail');
+var ClientManagement = require('./components/ClientManagement/ClientManagement');
+var InvoiceSystem = require('./components/InvoiceSystem/InvoiceSystem');
+var ProductDetail = require('./components/ProductDetail/ProductDetail');
 
 
 // Redux Function

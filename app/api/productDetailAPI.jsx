@@ -2,18 +2,17 @@ var axios = require('axios');
 
 module.exports = {
     getFullProductData:function(){
-        return axios.get('/getFullProductData').then(function(res){
+        return axios.get('/PD/getFullProductData').then(function(res){
             // console.log(res.data)
             return (res)
         })
     },
-    postData:function(title, genre){
+    createNewProduct:function(newProduct){
         return axios({
             method:'post',
-            url:'/insert',
+            url:'/PD/createNewProduct',
             params:{
-                title,
-                genre
+                newProduct
             }
         })
 

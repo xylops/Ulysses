@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 
 var routes = require('./route/api');
+var productDetail = require('./route/productDetail');
 
 
 const PORT = process.env.PORT || 3000;
@@ -17,7 +18,8 @@ app.use(function(req, res, next){
 })
 
 app.use(express.static('public'));
-app.use('/', routes)
+app.use('/', routes);
+app.use('/PD', productDetail);
 
 
 
