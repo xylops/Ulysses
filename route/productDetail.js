@@ -39,6 +39,8 @@ router.post('/deleteProduct', function(req, res, next){
     db.collection('products').deleteOne(
         {
             ProductID: input.ID,
+        }, function(err, data){
+            res.json({updatedProduct:true})
         }
     )
 })
@@ -59,6 +61,8 @@ router.post('/updateProduct', function(req, res, next){
                 Price : req.query.UpdatedProduct[3],
                 Unit : req.query.UpdatedProduct[4]
             }
+        }, function(err, data){
+            res.json({updatedProduct:true})
         }
     )
 })

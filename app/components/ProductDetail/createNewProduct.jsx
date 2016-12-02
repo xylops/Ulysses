@@ -35,10 +35,12 @@ var  CreateNewProduct = React.createClass({
                 Price,
                 Unit
             ]
-            productDetailAPI.createNewProduct(newProduct);
-            this.setState({
-                createNewDialog:false
-            })
+            productDetailAPI.createNewProduct(newProduct).then(()=>{
+                location.reload();
+                this.setState({
+                    createNewDialog:false
+                })
+            });
         }
 
     },

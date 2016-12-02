@@ -44,22 +44,22 @@ var ProductDetail = React.createClass({
             singleProduct:undefined,
             singleProductDialog:false,
             productFilterText:'',
-            deleteDialog: false,
-            updateDialog: false,
         }
     },
-    componentDidMount:function(){
+    getData:function(){
         productDetailAPI.getFullProductData().then((prod)=>{
             this.setState({
                 productList:prod.data
             })
         })
     },
+    componentDidMount:function(){
+        this.getData()
+    },
     handleClose : function(){
         this.setState({singleProductDialog: false});
     },
     dialogUpdate : function(){
-        alert('Current Product Detail would be update \n Do you wannt to proceed? ' )
         var ProductID = this.refs.ProductID.getValue();
         var ProductName = this.refs.ProductName.getValue();
         var Spec = this.refs.Spec.getValue();
@@ -67,12 +67,22 @@ var ProductDetail = React.createClass({
         var Unit = this.refs.Unit.getValue();
 
         var updatedProduct = [ProductID, ProductName, Spec, Price, Unit]
-        productDetailAPI.updateProduct(updatedProduct);
+        productDetailAPI.updateProduct(updatedProduct).then(()=>{
+            this.getData();
+            this.setState({
+                singleProductDialog:false,
+            })
+        });
 
     },
     dialogDelete : function(prod){
-        alert('Product " ' + this.state.singleProduct[1] +' " would be DELETE ! \n Do you wannt to proceed? ' )
-        productDetailAPI.deleteProduct(this.state.singleProduct[0])
+        productDetailAPI.deleteProduct(this.state.singleProduct[0]).then(()=>{
+            this.getData();
+            this.setState({
+                singleProductDialog:false,
+            })
+        })
+
     },
     productFilterText:function(productFilterText){
         this.setState({

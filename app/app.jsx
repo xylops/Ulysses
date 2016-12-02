@@ -17,13 +17,13 @@ var ProductDetail = require('./components/ProductDetail/ProductDetail');
 
 
 // Redux Function
-// var actions = require('actions');
-// var store = require('configureStore').configure();
+var actions = require('actions');
+var store = require('configureStore').configure();
 
-// store.subscribe(() => {
-//     var state = store.getState();
-//     console.log('New state', state);
-// });
+store.subscribe(() => {
+    var state = store.getState();
+    console.log('New state', state);
+});
 
 // Load foundation
 $(document).foundation();

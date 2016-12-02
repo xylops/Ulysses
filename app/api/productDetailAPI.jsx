@@ -14,8 +14,6 @@ module.exports = {
             params:{
                 newProduct
             }
-        }).then(()=>{
-            location.reload();
         })
     },
 
