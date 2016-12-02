@@ -41,7 +41,6 @@ const style={
 var ProductDetail = React.createClass({
     getInitialState:function(){
         return{
-            isLoading:false,
             productList:undefined,
             open:false,
             singleProduct:undefined,
@@ -50,10 +49,8 @@ var ProductDetail = React.createClass({
         }
     },
     componentDidMount:function(){
-        this.setState({isLoading:true})
         productDetailAPI.getFullProductData().then((prod)=>{
             this.setState({
-                isLoading:true,
                 productList:prod.data
             })
         })
@@ -71,14 +68,10 @@ var ProductDetail = React.createClass({
         this.setState({
             productFilterText
         })
-
-        if(productFilterText.length > 0){
-            console.log(this.state.productList)
-        }
     },
 
     render:function(){
-        var {isLoading, productList, singleProduct, productFilterText} = this.state;
+        var {productList, singleProduct, productFilterText} = this.state;
 
         const actions = [
             <FlatButton
@@ -88,15 +81,20 @@ var ProductDetail = React.createClass({
             />,
        ];
         var renderList = ()=>{
-            if(isLoading && productList){
-                return productList.map((product)=>{
+            if(productList){
+                //filterProduct List
+                let filteredProductList = this.state.productList.filter((product)=>{
+                    return product.ProductName.indexOf(this.state.productFilterText) !== -1;
+                });
+                //looping through the ProductList
+                return filteredProductList.map((product)=>{
                     return (
                         <div key={product._id}>
                             <RaisedButton className="row" style={style.tableRow} fullWidth={true} onTouchTap={()=>{
-                                    this.setState({
-                                        open:true,
-                                        singleProduct:[product.ProductID, product.ProductName, product.Spec, product.Price, product.Unit, product._id]
-                                    })
+                                this.setState({
+                                    open:true,
+                                    singleProduct:[product.ProductID, product.ProductName, product.Spec, product.Price, product.Unit, product._id]
+                                })
                             }}>
                                 <div className="column medium-2 hide-for-small-only"> {product.ProductID} </div>
                                 <div className="column medium-5 small-8"> {product.ProductName} </div>
@@ -182,7 +180,7 @@ var ProductDetail = React.createClass({
                 </div>
                 {renderList()}
                 {renderDialog()}
-                <hr></hr>
+                <br/>
             </div>
         )
     }
