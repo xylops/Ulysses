@@ -2,7 +2,6 @@ var React = require('react')
 var ReactDOM = require('react-dom');
 
 //material-ui
-import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Dialog from 'material-ui/Dialog';
@@ -42,10 +41,11 @@ var ProductDetail = React.createClass({
     getInitialState:function(){
         return{
             productList:undefined,
-            open:false,
             singleProduct:undefined,
-            createNew:false,
+            singleProductDialog:false,
             productFilterText:'',
+            deleteDialog: false,
+            updateDialog: false,
         }
     },
     componentDidMount:function(){
@@ -56,13 +56,23 @@ var ProductDetail = React.createClass({
         })
     },
     handleClose : function(){
-        this.setState({open: false});
+        this.setState({singleProductDialog: false});
     },
     dialogUpdate : function(){
         alert('Current Product Detail would be update \n Do you wannt to proceed? ' )
+        var ProductID = this.refs.ProductID.getValue();
+        var ProductName = this.refs.ProductName.getValue();
+        var Spec = this.refs.Spec.getValue();
+        var Price = this.refs.Price.getValue();
+        var Unit = this.refs.Unit.getValue();
+
+        var updatedProduct = [ProductID, ProductName, Spec, Price, Unit]
+        productDetailAPI.updateProduct(updatedProduct);
+
     },
     dialogDelete : function(prod){
         alert('Product " ' + this.state.singleProduct[1] +' " would be DELETE ! \n Do you wannt to proceed? ' )
+        productDetailAPI.deleteProduct(this.state.singleProduct[0])
     },
     productFilterText:function(productFilterText){
         this.setState({
@@ -80,6 +90,8 @@ var ProductDetail = React.createClass({
                 onTouchTap={this.handleClose}
             />,
        ];
+
+
         var renderList = ()=>{
             if(productList){
                 //filterProduct List
@@ -92,7 +104,7 @@ var ProductDetail = React.createClass({
                         <div key={product._id}>
                             <RaisedButton className="row" style={style.tableRow} fullWidth={true} onTouchTap={()=>{
                                 this.setState({
-                                    open:true,
+                                    singleProductDialog:true,
                                     singleProduct:[product.ProductID, product.ProductName, product.Spec, product.Price, product.Unit, product._id]
                                 })
                             }}>
@@ -117,7 +129,7 @@ var ProductDetail = React.createClass({
                         title="Product Detail"
                         actions={actions}
                         modal={false}
-                        open={this.state.open}
+                        open={this.state.singleProductDialog}
                         onRequestClose={this.handleClose}
                     >
                         <div className="medium-6 small-12 column">
@@ -125,31 +137,35 @@ var ProductDetail = React.createClass({
                                 id="text-field-default"
                                 floatingLabelText="Product ID"
                                 defaultValue={this.state.singleProduct[0]}
-                                ref=""
+                                ref="ProductID"
                             /><br/>
                             <TextField
                                 id="text-field-default"
                                 floatingLabelText="Product Name"
                                 defaultValue={this.state.singleProduct[1]}
+                                ref="ProductName"
                             /><br/>
                             <TextField
                                 id="text-field-default"
                                 floatingLabelText="Spec"
                                 defaultValue={this.state.singleProduct[2]}
+                                ref="Spec"
                             /><br/>
                             <TextField
                                 id="text-field-default"
                                 floatingLabelText="Price"
                                 defaultValue={this.state.singleProduct[3]}
+                                ref="Price"
                             /><br/>
                             <TextField
                                 id="text-field-default"
                                 floatingLabelText="Unit"
                                 defaultValue={this.state.singleProduct[4]}
+                                ref="Unit"
                             /><br/>
                         </div>
                         <div className="medium-6 small-12 column">
-                                <br/>
+                            <br/>
                             <div className="small-12 medium-12 column" >
                                 <RaisedButton label="Delete" fullWidth={true} secondary={true} onTouchTap={this.dialogDelete}></RaisedButton>
                             </div>

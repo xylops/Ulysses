@@ -8,7 +8,7 @@ router.get('/getFullProductData', function(req, res, next) {
 });
 
 router.post('/createNewProduct', function(req, res, next) {
-    console.log(req.query.newProduct)
+
     var ProductID = req.query.newProduct[0];
     var ProductName = req.query.newProduct[1]
     var Spec = req.query.newProduct[2];
@@ -16,7 +16,7 @@ router.post('/createNewProduct', function(req, res, next) {
     var Unit = req.query.newProduct[4];
 
     // console.log(ProductID, ProductName, Spec, Price, Unit)
-
+    console.log('create new product : ' + req.query.newProduct)
     db.collection('products').insert(
         {
             ProductID,
@@ -24,8 +24,44 @@ router.post('/createNewProduct', function(req, res, next) {
             Spec,
             Price,
             Unit
+        }, function(err, data){
+            res.json({updatedProduct:true})
         }
     )
 });
+
+
+router.post('/deleteProduct', function(req, res, next){
+    var input = {
+        ID: req.query.ID,
+    }
+    console.log('Delete : ' + input.ID)
+    db.collection('products').deleteOne(
+        {
+            ProductID: input.ID,
+        }
+    )
+})
+
+router.post('/updateProduct', function(req, res, next){
+    console.log( req.query.UpdatedProduct)
+    var input = {
+        ID: req.query.ID,
+    }
+
+    db.collection('products').update(
+        {
+            ProductID: req.query.UpdatedProduct[0],
+        }, {
+            $set: {
+                ProductName : req.query.UpdatedProduct[1],
+                Spec : req.query.UpdatedProduct[2],
+                Price : req.query.UpdatedProduct[3],
+                Unit : req.query.UpdatedProduct[4]
+            }
+        }
+    )
+})
+
 
 module.exports = router;

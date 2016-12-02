@@ -14,7 +14,28 @@ module.exports = {
             params:{
                 newProduct
             }
+        }).then(()=>{
+            location.reload();
         })
+    },
 
+    deleteProduct:function(ID){
+        return axios({
+            method:'post',
+            url:'/PD/deleteProduct',
+            params:{
+                ID
+            }
+        })
+    },
+
+    updateProduct:function(UpdatedProduct){
+        return axios({
+            method:'post',
+            url:'/PD/updateProduct',
+            params:{
+                UpdatedProduct
+            }
+        })
     }
 }

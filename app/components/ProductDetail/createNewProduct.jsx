@@ -14,6 +14,7 @@ var  CreateNewProduct = React.createClass({
     getInitialState:function(){
         return{
             createNewDialog:false,
+            updated: false
         }
     },
     handleClose : function(){
