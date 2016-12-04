@@ -14,6 +14,7 @@ export var HomePage = React.createClass({
         dispatch(actions.setSearchText('BBBBBB'))
     },
     render:function(){
+        var {searchText} = this.props
         return(
             <div style={{marginTop:'50px'}}>
                 <div className="row">
@@ -44,11 +45,23 @@ export var HomePage = React.createClass({
                     <div className="column medium-3">
                         <Link to="" ><RaisedButton label="Database" disabled={true} fullWidth={true} /></Link>
                     </div>
+                </div><br/>
+                <div className="row">
+                    <div className="column medium-2">
+                        <RaisedButton label="Testing" primary={true} onTouchTap={this.handleTap}/>
+                    </div>
+                    <div className="column medium-2">
+                        {searchText}
+                    </div>
                 </div>
-                <RaisedButton label="Testing" primary={true} onTouchTap={this.handleTap}/>
+
             </div>
         )
     }
 })
 
-export default connect()(HomePage);
+export default connect((state)=>{
+    return {
+        searchText: state.searchText
+    }
+})(HomePage);
