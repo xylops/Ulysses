@@ -1,10 +1,18 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var {Link} = require('react-router');
+var {connect} = require('react-redux');
+var actions = require('actions');
+
+
 
 import RaisedButton from 'material-ui/RaisedButton';
 
 var HomePage = React.createClass({
+    handleTap : function(){
+        console.log('working')
+        console.log(connect.searchText)
+    },
     render:function(){
         return(
             <div style={{marginTop:'50px'}}>
@@ -37,9 +45,10 @@ var HomePage = React.createClass({
                         <Link to="" ><RaisedButton label="Database" disabled={true} fullWidth={true} /></Link>
                     </div>
                 </div>
+                <RaisedButton label="Testing" primary={true} onTouchTap={this.handleTap}/>
             </div>
         )
     }
 })
 
-module.exports = HomePage;
+export default connect()(HomePage);

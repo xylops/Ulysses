@@ -10,11 +10,13 @@ injectTapEventPlugin();
 
 //Custom Component
 var Ulysses = require('Ulysses');
-var HomePage = require('HomePage');
+import HomePage from 'HomePage';
 var ClientManagement = require('./components/ClientManagement/ClientManagement');
 var InvoiceSystem = require('./components/InvoiceSystem/InvoiceSystem');
 var ProductDetail = require('./components/ProductDetail/ProductDetail');
 
+//api
+var productDetailAPI = require('./api/productDetailAPI')
 
 // Redux Function
 var actions = require('actions');
@@ -24,6 +26,8 @@ store.subscribe(() => {
     var state = store.getState();
     console.log('New state', state);
 });
+console.log(store.getState())
+store.dispatch(actions.setSearchText('HAHAHA'))
 
 // Load foundation
 $(document).foundation();
@@ -31,17 +35,18 @@ $(document).foundation();
 // App css
 require('style!css!sass!applicationStyles')
 
-
 const App = () => (
   <MuiThemeProvider>
-        <Router history={hashHistory}>
-            <Route path="/" component={Ulysses}>
-                <Route path="CM" component={ClientManagement}/>
-                <Route path="IS" component={InvoiceSystem}/>
-                <Route path="PD" component={ProductDetail}/>
-                <IndexRoute component={HomePage}/>
-            </Route>
-        </Router>
+        <Provider store = {store}>
+            <Router history={hashHistory}>
+                <Route path="/" component={Ulysses}>
+                    <Route path="CM" component={ClientManagement}/>
+                    <Route path="IS" component={InvoiceSystem}/>
+                    <Route path="PD" component={ProductDetail}/>
+                    <IndexRoute component={HomePage}/>
+                </Route>
+            </Router>
+        </Provider>
   </MuiThemeProvider>
 );
 
