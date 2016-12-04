@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 injectTapEventPlugin();
 
 //Custom Component
-var Ulysses = require('Ulysses');
+import Ulysses from 'Ulysses';
 import HomePage from 'HomePage';
 var ClientManagement = require('./components/ClientManagement/ClientManagement');
 var InvoiceSystem = require('./components/InvoiceSystem/InvoiceSystem');
