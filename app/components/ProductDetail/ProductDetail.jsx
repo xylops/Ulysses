@@ -73,7 +73,6 @@ var ProductDetail = React.createClass({
                 singleProductDialog:false,
             })
         });
-
     },
     dialogDelete : function(prod){
         productDetailAPI.deleteProduct(this.state.singleProduct[0]).then(()=>{
@@ -100,7 +99,6 @@ var ProductDetail = React.createClass({
                 onTouchTap={this.handleClose}
             />,
        ];
-
 
         var renderList = ()=>{
             if(productList){

@@ -8,7 +8,7 @@ var actions = require('actions');
 
 import RaisedButton from 'material-ui/RaisedButton';
 
-export var HomePage = React.createClass({
+var HomePage = React.createClass({
     handleTap : function(){
         var {dispatch} = this.props;
         dispatch(actions.setSearchText('BBBBBB'))

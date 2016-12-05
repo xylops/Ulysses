@@ -20,6 +20,8 @@ var productDetailAPI = require('./api/productDetailAPI')
 
 // Redux Function
 var actions = require('actions');
+var pdActions = require('./actions/productDetailActions')
+
 var store = require('configureStore').configure();
 
 store.subscribe(() => {
@@ -28,6 +30,7 @@ store.subscribe(() => {
 });
 console.log(store.getState())
 store.dispatch(actions.setSearchText('HAHAHA'))
+store.dispatch(pdActions.setPDText('RRRR'))
 
 // Load foundation
 $(document).foundation();
