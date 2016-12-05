@@ -1,4 +1,7 @@
 var React = require('react')
+var {connect} = require('react-redux');
+var actions = require('../../actions/productDetailActions');
+
 
 //material-ui
 import Dialog from 'material-ui/Dialog';
@@ -11,45 +14,19 @@ import TextField from 'material-ui/TextField'
 var productDetailAPI = require('../../api/productDetailAPI')
 
 var  CreateNewProduct = React.createClass({
-    getInitialState:function(){
-        return{
-            createNewDialog:false,
-            updated: false
-        }
-    },
-    handleClose : function(){
-        this.setState({createNewDialog:false});
-    },
-    handleSave : function(){
-        var ProductID = this.refs.PID.getValue()
-        var ProductName = this.refs.PName.getValue()
-        var Spec = this.refs.PSpec.getValue()
-        var Price = this.refs.PPrice.getValue()
-        var Unit = this.refs.PUnit.getValue()
-
-        if(ProductID.length > 0 && ProductName.length > 0){
-            var newProduct = [
-                ProductID,
-                ProductName,
-                Spec,
-                Price,
-                Unit
-            ]
-            productDetailAPI.createNewProduct(newProduct).then(()=>{
-                location.reload();
-                this.setState({
-                    createNewDialog:false
-                })
-            });
-        }
-
+    toggleDialog:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.closeSingleProductDialog())
     },
     render:function(){
+        //Redux function
+        var {createNewDialog} = this.props;
+
         const newProduct = [
             <FlatButton
                 label="Close"
                 primary={true}
-                onTouchTap={this.handleClose}
+                onTouchTap={this.toggleDialog}
             />,
             <FlatButton
                 label="Save"
@@ -60,19 +37,15 @@ var  CreateNewProduct = React.createClass({
 
         return (
             <div>
-                <FloatingActionButton mini={true} style={{marginTop:'20px'}} onTouchTap={()=>{
-                    this.setState({
-                        createNewDialog:true
-                    })
-                }}>
-                    <ContentAdd />
+                <FloatingActionButton onTouchTap={this.toggleDialog}>
+                    <ContentAdd/>
                 </FloatingActionButton>
                 <Dialog
                     title="Create New Product"
                     actions={newProduct}
                     modal={false}
-                    open={this.state.createNewDialog}
-                    onRequestClose={this.handleClose}
+                    open= {createNewDialog}
+                    onRequestClose={this.toggleDialog}
                     >
                     <div className="text-center">
                         <TextField
@@ -98,8 +71,13 @@ var  CreateNewProduct = React.createClass({
                     </div>
                 </Dialog>
             </div>
+
         )
     }
 })
 
-module.exports = CreateNewProduct;
+export default connect((state)=>{
+    return {
+        createNewDialog: state.productDetailCombiner.createNewDialog
+    }
+})(CreateNewProduct);

@@ -13,7 +13,7 @@ import Ulysses from 'Ulysses';
 import HomePage from 'HomePage';
 var ClientManagement = require('./components/ClientManagement/ClientManagement');
 var InvoiceSystem = require('./components/InvoiceSystem/InvoiceSystem');
-var ProductDetail = require('./components/ProductDetail/ProductDetail');
+import ProductDetail from './components/ProductDetail/main';
 
 //api
 var productDetailAPI = require('./api/productDetailAPI')
@@ -26,11 +26,9 @@ var store = require('configureStore').configure();
 
 store.subscribe(() => {
     var state = store.getState();
-    console.log('New state', state);
+    console.log('New state', state.productDetailCombiner);
 });
 console.log(store.getState())
-store.dispatch(actions.setSearchText('HAHAHA'))
-store.dispatch(pdActions.setPDText('RRRR'))
 
 // Load foundation
 $(document).foundation();

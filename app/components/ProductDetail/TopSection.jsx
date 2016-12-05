@@ -4,9 +4,16 @@ var React = require('react');
 import TextField from 'material-ui/TextField'
 
 //Component
-var CreateNewProduct = require('./CreateNewProduct')
+import CreateNewProduct from './CreateNewProduct'
 
 const style={
+    whole:{
+        paddingTop:'15px',
+        paddingBottom:'5px'
+    },
+    textField : {
+        margin:0,
+    },
     title:{
         textAlign:'left',
         fontWeight:'bold',
@@ -16,26 +23,20 @@ const style={
 }
 
 var TopSection = React.createClass({
-    productFilter:function(){
-        var productFilterText = this.refs.productFilterText.getValue();
-        this.props.onProductFilterTextUpdate(productFilterText);
-    },
     render:function(){
-
         return(
-            <div>
-                <div className="column small-12 medium-6">
-                    <h2 style={style.title}>Product Detail Page</h2>
+            <div className="row" style={style.whole}>
+                <div className="column small-12 medium-7">
+                    <h2 style={style.title}><b>Product Detail</b></h2>
                 </div>
-                <div className="column small-12 medium-5" style={{textAlign:'right'}}>
+                <div className="column small-10 medium-4">
                     <TextField
-                        hintText="Search Product"
-                        floatingLabelText="Search Product"
-                        ref="productFilterText"
-                        onChange={this.productFilter}
+                        style={style.textField}
+                        hintText="Search product"
+                        floatingLabelText="Filter keywords"
                     /><br />
                 </div>
-                <div className="column small-12 medium-1" >
+                <div className="column small-2 medium-1">
                     <CreateNewProduct/>
                 </div>
             </div>

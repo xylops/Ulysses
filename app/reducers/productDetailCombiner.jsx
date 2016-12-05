@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
-import {pdTextReducer} from './PDReducer'
+import {createNewDialog, fetchProductData, toggleSingleProductDialog} from './productDetailReducer'
 
 
 export default combineReducers({
-  pdText: pdTextReducer,
+    createNewDialog,
+    singleProductDialog: toggleSingleProductDialog,
+    productData: fetchProductData,
 })
