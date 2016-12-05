@@ -16,7 +16,7 @@ var productDetailAPI = require('../../api/productDetailAPI')
 var  CreateNewProduct = React.createClass({
     toggleDialog:function(){
         var {dispatch} = this.props;
-        dispatch(actions.closeSingleProductDialog())
+        dispatch(actions.toggleCreateNewDialog())
     },
     render:function(){
         //Redux function
