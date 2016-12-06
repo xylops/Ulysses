@@ -1,4 +1,7 @@
 var React = require('react');
+var {connect} = require('react-redux')
+var actions = require('../../actions/productDetailActions');
+
 
 //material-ui
 import TextField from 'material-ui/TextField'
@@ -23,6 +26,12 @@ const style={
 }
 
 var TopSection = React.createClass({
+    handleChange:function(){
+        var {dispatch} = this.props;
+        var text = this.refs.filterText.getValue();
+        dispatch(actions.updateProductFilterText(text))
+    },
+
     render:function(){
         return(
             <div className="row" style={style.whole}>
@@ -34,6 +43,8 @@ var TopSection = React.createClass({
                         style={style.textField}
                         hintText="Search product"
                         floatingLabelText="Filter keywords"
+                        ref="filterText"
+                        onChange={this.handleChange}
                     /><br />
                 </div>
                 <div className="column small-2 medium-1">
@@ -45,4 +56,4 @@ var TopSection = React.createClass({
     }
 })
 
-module.exports = TopSection;
+export default connect()(TopSection)

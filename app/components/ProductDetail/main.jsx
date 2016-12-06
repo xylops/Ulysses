@@ -7,7 +7,7 @@ var ReactDOM = require('react-dom');
 import Divider from 'material-ui/Divider';
 
 //Component
-var TopSection = require('./TopSection')
+import TopSection from './TopSection'
 import ProductList from './ProductList'
 
 

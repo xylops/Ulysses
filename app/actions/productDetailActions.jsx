@@ -17,14 +17,22 @@ export var completeFetchPDL = (PDL) =>{
     }
 }
 
-export var openSingleProductDialog = ()=>{
+export var openSingleProductDialog = (SPA)=>{
     return {
-        type:'OPEN_SINGLE_PRODUCT_DIALOG'
+        type:'OPEN_SINGLE_PRODUCT_DIALOG',
+        SPA
     }
 }
 
 export var closeSingleProductDialog = ()=>{
     return {
         type:'CLOSE_SINGLE_PRODUCT_DIALOG'
+    }
+}
+
+export var updateProductFilterText = (text)=>{
+    return {
+        type:'UPDATE_PRODUCT_FILTER_TEXT',
+        text
     }
 }

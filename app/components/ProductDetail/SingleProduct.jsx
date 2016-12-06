@@ -23,7 +23,7 @@ var SingleProduct = React.createClass({
         return(
             <div >
                 <RaisedButton className="row" style={style.tableRow} fullWidth={true} onTouchTap={()=>{
-                    dispatch(actions.openSingleProductDialog())
+                    dispatch(actions.openSingleProductDialog(product))
                 }}>
                     <div className="column medium-2 hide-for-small-only"> {product.ProductID} </div>
                     <div className="column medium-5 small-8"> {product.ProductName} </div>

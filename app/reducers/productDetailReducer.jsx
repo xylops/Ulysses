@@ -10,14 +10,29 @@ export var createNewDialog = (state = false, action)=>{
     }
 }
 
-export var toggleSingleProductDialog = (state = false, action) =>{
+export var toggleSingleProductDialog = (state = {open:false, SPA:{}}, action) =>{
     switch (action.type){
         case 'OPEN_SINGLE_PRODUCT_DIALOG':
-            return state = true;
+            return {
+                open:true,
+                SPA: action.SPA
+            };
         case 'CLOSE_SINGLE_PRODUCT_DIALOG':
-            return state = false;
+            return {
+                open:false,
+                SPA: {}
+            }
         default:
             return state;
+    }
+}
+
+export var productFilterText = (state={productFilterText:undefined}, action) =>{
+    switch(action.type){
+        case 'UPDATE_PRODUCT_FILTER_TEXT':
+            return action.text
+        default:
+            return state
     }
 }
 

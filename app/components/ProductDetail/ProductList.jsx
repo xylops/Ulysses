@@ -19,12 +19,18 @@ var ProductList = React.createClass({
         productDetailAPI.getFullProductData().then((PDL)=>{
             dispatch(actions.completeFetchPDL(PDL.data));
         })
+        dispatch(actions.updateProductFilterText(""))
     },
     render:function(){
-        var {isFetching, productList} = this.props;
+        var {isFetching, productList, productFilterText} = this.props;
+
+        let filteredProductList = productList.filter((prod)=>{
+            return prod.ProductName.indexOf(productFilterText) !== -1;
+        });
+
         var renderList = ()=> {
             if(!isFetching){
-                return productList.map((product)=>{
+                return filteredProductList.map((product)=>{
                     return(
                         <SingleProduct key={product._id} product={product}/>
                     )
@@ -46,6 +52,6 @@ export default connect((state)=>{
     return{
         isFetching: state.productDetailCombiner.productData.isFetching,
         productList: state.productDetailCombiner.productData.productList,
-
+        productFilterText: state.productDetailCombiner.productFilterText,
     }
 })(ProductList)

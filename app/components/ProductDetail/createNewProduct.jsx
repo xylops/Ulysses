@@ -13,10 +13,54 @@ import TextField from 'material-ui/TextField'
 //api
 var productDetailAPI = require('../../api/productDetailAPI')
 
+const customContentStyle = {
+  width: '80%',
+  maxWidth: 'none',
+};
+
+
 var  CreateNewProduct = React.createClass({
+    getInitialState:function(){
+        return {
+            reConfirm:false
+        }
+    },
     toggleDialog:function(){
         var {dispatch} = this.props;
         dispatch(actions.toggleCreateNewDialog())
+    },
+    handleSave : function(){
+        var {dispatch} = this.props;
+        var ProductID = this.refs.PID.getValue()
+        var ProductName = this.refs.PName.getValue()
+        var Spec = this.refs.PSpec.getValue()
+        var Price = this.refs.PPrice.getValue()
+        var Unit = this.refs.PUnit.getValue()
+
+
+            var newProduct = [
+                ProductID,
+                ProductName,
+                Spec,
+                Price,
+                Unit
+            ]
+            productDetailAPI.createNewProduct(newProduct).then(()=>{
+                dispatch(actions.startFetchPDL())
+                productDetailAPI.getFullProductData().then((PDL)=>{
+                    dispatch(actions.completeFetchPDL(PDL.data));
+                    dispatch(actions.toggleCreateNewDialog())
+                    this.setState({
+                        reConfirm:false
+                    })
+                })
+            });
+
+    },
+    handleClose:function(){
+        this.setState({
+            reConfirm:false
+        })
     },
     render:function(){
         //Redux function
@@ -30,6 +74,25 @@ var  CreateNewProduct = React.createClass({
             />,
             <FlatButton
                 label="Save"
+                primary={true}
+                onTouchTap={()=>{
+                    if(this.refs.PID.getValue() > 0 && this.refs.PName.getValue() > 0){
+                        this.setState({
+                            reConfirm:true
+                        })
+                    }
+                }}
+            />,
+        ];
+
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onTouchTap={this.handleClose}
+            />,
+            <FlatButton
+                label="Confirm"
                 primary={true}
                 onTouchTap={this.handleSave}
             />,
@@ -69,6 +132,15 @@ var  CreateNewProduct = React.createClass({
                             ref="PUnit"
                         /><br/><br/>
                     </div>
+                </Dialog>
+                <Dialog
+                  actions={actions}
+                  modal={false}
+                  open={this.state.reConfirm}
+                  contentStyle={customContentStyle}
+                  onRequestClose={this.handleClose}
+                >
+                  Confirm creating a new product to database?
                 </Dialog>
             </div>
 
