@@ -60,8 +60,8 @@ var ProductList = React.createClass({
 
 export default connect((state)=>{
     return{
-        isFetching: state.productDetailCombiner.productData.isFetching,
-        productList: state.productDetailCombiner.productData.productList,
-        productFilterText: state.productDetailCombiner.productFilterText,
+        isFetching: state.productDetail.productData.isFetching,
+        productList: state.productDetail.productData.productList,
+        productFilterText: state.productDetail.productFilterText,
     }
 })(ProductList)

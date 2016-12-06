@@ -1,6 +1,3 @@
-var axios = require('axios')
-
-
 export var createNewDialog = (state = false, action)=>{
     switch (action.type){
         case 'TOGGLE_CREATE_NEW_DIALOG':

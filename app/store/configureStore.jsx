@@ -1,13 +1,15 @@
  var redux = require('redux');
  var thunk = require('redux-thunk').default;
- import productDetailCombiner from '../reducers/productDetailCombiner'
- import snackBarCombiner from '../reducers/snackBarCombiner'
+ import clientManagement from '../reducers/clientManagementCombiner'
+ import productDetail from '../reducers/productDetailCombiner'
+ import snackBar from '../reducers/snackBarCombiner'
 
 
  export var configure = (initialState = {})=>{
      var reducers = redux.combineReducers({
-        snackBarCombiner,
-        productDetailCombiner
+        snackBar,
+        productDetail,
+        clientManagement
      })
 
      var store = redux.createStore(reducers, initialState,redux.compose(

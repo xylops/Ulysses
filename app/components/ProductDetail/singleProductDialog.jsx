@@ -127,7 +127,7 @@ var singleProductDialog = React.createClass({
 
 export default connect((state)=>{
     return {
-        singleProductDialog: state.productDetailCombiner.singleProductDialog.open,
-        SPA  : state.productDetailCombiner.singleProductDialog.SPA
+        singleProductDialog: state.productDetail.singleProductDialog.open,
+        SPA  : state.productDetail.singleProductDialog.SPA
     }
 })(singleProductDialog)

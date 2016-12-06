@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/getFullProductData', function(req, res, next) {
-    db.collection('products').find().toArray(function(err, results) {
+    db.collection('products').find().sort({ProductID:1}).toArray(function(err, results) {
         res.json(results)
     })
 });

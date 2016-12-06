@@ -15,12 +15,6 @@ import TextField from 'material-ui/TextField'
 //api
 var productDetailAPI = require('../../api/productDetailAPI')
 
-const customContentStyle = {
-  width: '80%',
-  maxWidth: 'none',
-};
-
-
 var  CreateNewProduct = React.createClass({
     toggleDialog:function(){
         var {dispatch} = this.props;
@@ -115,6 +109,6 @@ var  CreateNewProduct = React.createClass({
 
 export default connect((state)=>{
     return {
-        createNewDialog: state.productDetailCombiner.createNewDialog
+        createNewDialog: state.productDetail.createNewDialog
     }
 })(CreateNewProduct);

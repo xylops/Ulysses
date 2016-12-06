@@ -20,7 +20,7 @@ var Ulysses = React.createClass({
             <div>
                 <NavBar/>
                 <div className="row">
-                    <div className='Column small-11 small-centered medium-10'>
+                    <div className='Column small-11 small-centered medium-12'>
                         {this.props.children}
                     </div>
                     <Snackbar
@@ -40,7 +40,7 @@ var Ulysses = React.createClass({
 
 export default connect((state)=>{
     return {
-        open:state.snackBarCombiner.toggleSnackBar.open,
-        snackBarText:state.snackBarCombiner.toggleSnackBar.text,
+        open:state.snackBar.toggleSnackBar.open,
+        snackBarText:state.snackBar.toggleSnackBar.text,
     }
 })(Ulysses)
