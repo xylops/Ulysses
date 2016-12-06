@@ -1,6 +1,9 @@
 var React = require('react')
+
+//redux
 var {connect} = require('react-redux')
 var actions = require('../../actions/productDetailActions');
+var snackBarActions = require('../../actions/snackBarActions')
 
 //material-ui
 import Dialog from 'material-ui/Dialog';
@@ -32,27 +35,25 @@ var singleProductDialog = React.createClass({
         var Unit = this.refs.Unit.getValue();
 
         var updatedProduct = [ProductID, ProductName, Spec, Price, Unit]
-        productDetailAPI.updateProduct(updatedProduct).then(()=>{
+        productDetailAPI.updateProduct(updatedProduct).then((response)=>{
+            var resText = response.data.message;
             dispatch(actions.startFetchPDL())
             productDetailAPI.getFullProductData().then((PDL)=>{
                 dispatch(actions.completeFetchPDL(PDL.data));
                 dispatch(actions.closeSingleProductDialog())
-                this.setState({
-                    reConfirm:false
-                })
+                dispatch(snackBarActions.openSnackBar(resText));
             })
         });
     },
     dialogDelete : function(prod){
         var {dispatch, SPA} =this.props
-        productDetailAPI.deleteProduct(SPA.ProductID).then(()=>{
+        productDetailAPI.deleteProduct(SPA.ProductID).then((response)=>{
+            var resText = response.data.message;
             dispatch(actions.startFetchPDL())
             productDetailAPI.getFullProductData().then((PDL)=>{
                 dispatch(actions.completeFetchPDL(PDL.data));
                 dispatch(actions.closeSingleProductDialog())
-                this.setState({
-                    reConfirm:false
-                })
+                dispatch(snackBarActions.openSnackBar(resText));
             })
         })
     },

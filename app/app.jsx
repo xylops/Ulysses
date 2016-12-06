@@ -15,18 +15,15 @@ var ClientManagement = require('./components/ClientManagement/ClientManagement')
 var InvoiceSystem = require('./components/InvoiceSystem/InvoiceSystem');
 import ProductDetail from './components/ProductDetail/main';
 
-//api
-var productDetailAPI = require('./api/productDetailAPI')
 
 // Redux Function
-var actions = require('actions');
 var pdActions = require('./actions/productDetailActions')
 
 var store = require('configureStore').configure();
 
 store.subscribe(() => {
     var state = store.getState();
-    console.log('New state', state.productDetailCombiner);
+    console.log('New state', state);
 });
 console.log(store.getState())
 

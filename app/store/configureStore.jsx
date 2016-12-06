@@ -1,12 +1,12 @@
  var redux = require('redux');
  var thunk = require('redux-thunk').default;
- var {searchTextReducer} = require('reducers');
  import productDetailCombiner from '../reducers/productDetailCombiner'
+ import snackBarCombiner from '../reducers/snackBarCombiner'
 
 
  export var configure = (initialState = {})=>{
      var reducers = redux.combineReducers({
-        searchText: searchTextReducer,
+        snackBarCombiner,
         productDetailCombiner
      })
 

@@ -13,7 +13,8 @@ module.exports = {
             url:'/PD/createNewProduct',
             params:{
                 newProduct
-            }
+            },
+            json:true
         })
     },
 
@@ -23,7 +24,8 @@ module.exports = {
             url:'/PD/deleteProduct',
             params:{
                 ID
-            }
+            },
+            json:true
         })
     },
 
@@ -33,7 +35,8 @@ module.exports = {
             url:'/PD/updateProduct',
             params:{
                 UpdatedProduct
-            }
+            },
+            json:true
         })
     }
 }

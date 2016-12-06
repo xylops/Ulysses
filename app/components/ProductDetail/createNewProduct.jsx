@@ -1,6 +1,9 @@
 var React = require('react')
+
+//Redux
 var {connect} = require('react-redux');
 var actions = require('../../actions/productDetailActions');
+var snackBarActions = require('../../actions/snackBarActions')
 
 //material-ui
 import Dialog from 'material-ui/Dialog';
@@ -31,7 +34,6 @@ var  CreateNewProduct = React.createClass({
         var Price = this.refs.PPrice.getValue()
         var Unit = this.refs.PUnit.getValue()
 
-
             var newProduct = [
                 ProductID,
                 ProductName,
@@ -39,14 +41,13 @@ var  CreateNewProduct = React.createClass({
                 Price,
                 Unit
             ]
-            productDetailAPI.createNewProduct(newProduct).then(()=>{
+            productDetailAPI.createNewProduct(newProduct).then((response)=>{
+                var resText = response.data.message;
                 dispatch(actions.startFetchPDL())
                 productDetailAPI.getFullProductData().then((PDL)=>{
                     dispatch(actions.completeFetchPDL(PDL.data));
-                    dispatch(actions.toggleCreateNewDialog())
-                    this.setState({
-                        reConfirm:false
-                    })
+                    dispatch(actions.toggleCreateNewDialog());
+                    dispatch(snackBarActions.openSnackBar(resText));
                 })
             });
 

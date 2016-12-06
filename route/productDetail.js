@@ -25,7 +25,7 @@ router.post('/createNewProduct', function(req, res, next) {
             Price,
             Unit
         }, function(err, data){
-            res.json({updatedProduct:true})
+            res.json({message:'Item ' + ProductName + ' have been added to database'})
         }
     )
 });
@@ -35,22 +35,22 @@ router.post('/deleteProduct', function(req, res, next){
     var input = {
         ID: req.query.ID,
     }
-    console.log('Delete : ' + input.ID)
+    console.log('Delete Product: ' + input.ID)
     db.collection('products').deleteOne(
         {
             ProductID: input.ID,
         }, function(err, data){
-            res.json({updatedProduct:true})
+            res.json({message:"Product have been delete from database"})
         }
     )
 })
 
 router.post('/updateProduct', function(req, res, next){
-    console.log( req.query.UpdatedProduct)
+
     var input = {
         ID: req.query.ID,
     }
-
+    console.log( "Update Product : " + req.query.UpdatedProduct)
     db.collection('products').update(
         {
             ProductID: req.query.UpdatedProduct[0],
@@ -62,7 +62,7 @@ router.post('/updateProduct', function(req, res, next){
                 Unit : req.query.UpdatedProduct[4]
             }
         }, function(err, data){
-            res.json({updatedProduct:true})
+            res.json({message:"Product " + req.query.UpdatedProduct[1] + " have been Updated"})
         }
     )
 })
