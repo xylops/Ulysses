@@ -2,7 +2,6 @@ var React = require('react')
 var {connect} = require('react-redux');
 var actions = require('../../actions/productDetailActions');
 
-
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -20,11 +19,6 @@ const customContentStyle = {
 
 
 var  CreateNewProduct = React.createClass({
-    getInitialState:function(){
-        return {
-            reConfirm:false
-        }
-    },
     toggleDialog:function(){
         var {dispatch} = this.props;
         dispatch(actions.toggleCreateNewDialog())
@@ -57,11 +51,6 @@ var  CreateNewProduct = React.createClass({
             });
 
     },
-    handleClose:function(){
-        this.setState({
-            reConfirm:false
-        })
-    },
     render:function(){
         //Redux function
         var {createNewDialog} = this.props;
@@ -75,28 +64,11 @@ var  CreateNewProduct = React.createClass({
             <FlatButton
                 label="Save"
                 primary={true}
-                onTouchTap={()=>{
-                    if(this.refs.PID.getValue() > 0 && this.refs.PName.getValue() > 0){
-                        this.setState({
-                            reConfirm:true
-                        })
-                    }
-                }}
-            />,
-        ];
-
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onTouchTap={this.handleClose}
-            />,
-            <FlatButton
-                label="Confirm"
-                primary={true}
                 onTouchTap={this.handleSave}
             />,
         ];
+
+
 
         return (
             <div>
@@ -133,15 +105,7 @@ var  CreateNewProduct = React.createClass({
                         /><br/><br/>
                     </div>
                 </Dialog>
-                <Dialog
-                  actions={actions}
-                  modal={false}
-                  open={this.state.reConfirm}
-                  contentStyle={customContentStyle}
-                  onRequestClose={this.handleClose}
-                >
-                  Confirm creating a new product to database?
-                </Dialog>
+
             </div>
 
         )

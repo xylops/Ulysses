@@ -17,8 +17,6 @@ const customContentStyle = {
 };
 
 var singleProductDialog = React.createClass({
-    //This Component Only
-
     //Redux handle
     handleClose:function(){
         var {dispatch} = this.props
@@ -57,7 +55,7 @@ var singleProductDialog = React.createClass({
                 })
             })
         })
-  },
+    },
 
     render:function(){
         var {singleProductDialog, SPA} = this.props
@@ -67,8 +65,7 @@ var singleProductDialog = React.createClass({
                 primary={true}
                 onTouchTap={this.handleClose}
             />,
-       ];
-
+        ];
         return(
             <Dialog
                 title="Product Detail"
@@ -82,6 +79,7 @@ var singleProductDialog = React.createClass({
                     <TextField
                         id="text-field-default"
                         floatingLabelText="Product ID"
+                        disabled={true}
                         defaultValue={SPA.ProductID}
                         ref="ProductID"
                     /><br/>
@@ -118,7 +116,7 @@ var singleProductDialog = React.createClass({
                     <br/>
                     <br/>
                     <div className="small-12 medium-12 column">
-                        <RaisedButton label="SAVE" fullWidth={true} onTouchTap={this.dialogUpdate}></RaisedButton>
+                        <RaisedButton label="SAVE" fullWidth={true} primary={true} onTouchTap={this.dialogUpdate}></RaisedButton>
                     </div>
                 </div>
             </Dialog>
