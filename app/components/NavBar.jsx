@@ -22,6 +22,13 @@ const style={
     appBar:{
         backgroundColor:'#006E4A'
     },
+    appBarLogo:{
+        color:'white',
+        fontWeight:'Bold',
+        fontSize:'23px',
+        lineHeight:2,
+        marginRight:'2vw'
+    },
     drawerText:{
         color:'white'
     }
@@ -49,7 +56,7 @@ var NavBar = React.createClass({
                     title="Ulysses"
                     style={style.appBar}
                     iconElementLeft={<IconButton onTouchTap={this.handleToggle}><NavigationOpen /></IconButton>}
-                    iconElementRight={<FlatButton onTouchTap={this.linkButton} label="Glory Clincal Solution"/>}
+                    iconElementRight={<Link to="/" style={style.appBarLogo}>ERP Solution  </Link>}
                 />
                 <Drawer
                 docked={false}
@@ -68,7 +75,7 @@ var NavBar = React.createClass({
                     <Link to="/"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Home</MenuItem></Link>
                     <Link to="/CM"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Client Management</MenuItem></Link>
                     <Link to="/IS"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Invoice System</MenuItem></Link>
-                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Inventory Management</MenuItem>
+                    <Link to="/IM"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Inventory Management</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Logistic</MenuItem>
                     <Link to="/PD"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Product Detail</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Reporting</MenuItem>
