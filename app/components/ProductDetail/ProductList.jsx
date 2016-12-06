@@ -12,6 +12,12 @@ var productDetailAPI = require('productDetailAPI')
 import SingleProduct from './SingleProduct'
 import SingleProductDialog from './SingleProductDialog'
 
+//Style
+const style = {
+    textAlign:'center',
+    paddingTop: 'calc(20%)'
+}
+
 var ProductList = React.createClass({
     componentDidMount:function(){
         var {dispatch} =this.props;
@@ -36,7 +42,11 @@ var ProductList = React.createClass({
                     )
                 })
             } else {
-                return <CircularProgress size={80} thickness={5} />
+                return (
+                    <div style={style}>
+                        <CircularProgress size={80} thickness={5} />
+                    </div>
+                )
             }
         }
         return(
