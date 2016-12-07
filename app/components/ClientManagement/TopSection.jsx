@@ -20,7 +20,8 @@ const style={
         textAlign:'left',
         fontWeight:'bold',
         paddingTop:'10px',
-        paddingBottom:'20px'
+        paddingBottom:'20px',
+        fontSize:'2.5rem'
     },
 }
 
@@ -35,7 +36,7 @@ var TopSection = React.createClass({
                 <div className="column small-12 medium-7">
                     <h2 style={style.title}><b>ClientManagement</b></h2>
                 </div>
-                <div className="column small-10 medium-4">
+                <div className="column small-9 medium-4" style={{textAlign:'right'}}>
                     <TextField
                         style={style.textField}
                         hintText="Search Client"
@@ -44,7 +45,7 @@ var TopSection = React.createClass({
                         onChange={this.handleChange}
                     /><br />
                 </div>
-                <div className="column small-2 medium-1">
+                <div className="column small-3 medium-1">
                     <CreateNewClient/>
                 </div>
             </div>

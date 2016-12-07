@@ -1,3 +1,5 @@
+var axios = require('axios');
+
 module.exports = {
     getFullClientData:function(){
         return axios.get('/CM/getFullClientData').then(function(res){

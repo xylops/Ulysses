@@ -1,12 +1,11 @@
 var React = require('react');
+
+//Redux
 var {connect} = require('react-redux')
 var actions = require('../../actions/productDetailActions');
 
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 
 
 const style={

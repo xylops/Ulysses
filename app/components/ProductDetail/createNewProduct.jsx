@@ -67,7 +67,7 @@ var  CreateNewProduct = React.createClass({
 
         return (
             <div>
-                <FloatingActionButton onTouchTap={this.toggleDialog}>
+                <FloatingActionButton onTouchTap={this.toggleDialog} >
                     <ContentAdd/>
                 </FloatingActionButton>
                 <Dialog

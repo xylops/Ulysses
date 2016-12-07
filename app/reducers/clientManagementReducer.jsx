@@ -6,3 +6,37 @@ export var createNewClientDialog = (state = false, action)=>{
             return state;
     }
 }
+
+export var fetchClientList = (state = {isFetching: false , clientList: []}, action) => {
+    switch (action.type){
+        case 'START_CLIENT_LIST_FETCH':
+            return{
+                isFetching:true,
+                clientList:[]
+            }
+        case 'COMPLETE_CLIENT_LIST_FETCH':
+            return{
+                isFetching:false,
+                clientList: action.CL
+            }
+        default:
+            return state
+    }
+}
+
+export var toggleSingleClientDialog = (state = {open:false, singleClientAttr:{}}, action) =>{
+    switch (action.type){
+        case 'OPEN_SINGLE_CLIENT_DIALOG':
+            return {
+                open:true,
+                singleClientAttr: action.SC
+            };
+        case 'CLOSE_SINGLE_CLIENT_DIALOG':
+            return {
+                open:false,
+                singleClientAttr: {}
+            }
+        default:
+            return state;
+    }
+}

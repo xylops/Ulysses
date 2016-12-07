@@ -1,17 +1,40 @@
-var React = require('react');
+import React from 'react';
 var {Link} = require('react-router');
+
+//React
 var {connect} = require('react-redux');
 
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 const style = {
     navBtn:{
         marginTop: '2vw'
+    },
+    paper:{
+        height: 100,
+        width: 100,
+        margin: 20,
+        textAlign: 'center',
+        display: 'inline-block',
+    },
+    animation:{
+        transition: 'all .5s ease-in'
     }
 }
 
 var HomePage = React.createClass({
+    getInitialState: function(){
+        return {
+            opacity:1
+        }
+    },
+    onHide:function(){
+        this.setState({
+            opacity: this.state.opacity === 0 ? 1 : 0
+        })
+    },
     render:function(){
         var {searchText} = this.props
         return(
@@ -42,6 +65,14 @@ var HomePage = React.createClass({
                     </div>
                     <div className="column medium-3" style={style.navBtn}>
                         <Link to="" ><RaisedButton label="Database" disabled={true} fullWidth={true} /></Link>
+                    </div>
+                </div><br/>
+                <div className="row">
+                    <div className="column medium-3" style={style.navBtn}>
+                        <RaisedButton label="Animation Testing"secondary={true} fullWidth={true} onClick={this.onHide}/>
+                        <div style={{...style.animation, opacity:this.state.opacity}}>
+                            <Paper style={style.paper} zDepth={2} />
+                        </div>
                     </div>
                 </div><br/>
             </div>
