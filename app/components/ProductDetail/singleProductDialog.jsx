@@ -10,6 +10,10 @@ import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentDelete from 'material-ui/svg-icons/content/clear';
+import ContentSave from 'material-ui/svg-icons/content/move-to-inbox';
+
 
 //api
 var productDetailAPI = require('productDetailAPI')
@@ -76,40 +80,45 @@ var singleProductDialog = React.createClass({
                 autoScrollBodyContent={true}
                 onRequestClose={this.handleClose}
             >
-                <div className="medium-6 small-12 column">
+                <div className="medium-6 small-10 column">
                     <TextField
                         id="text-field-default"
                         floatingLabelText="Product ID"
                         disabled={true}
                         defaultValue={SPA.ProductID}
+                        fullWidth={true}
                         ref="ProductID"
                     /><br/>
                     <TextField
                         id="text-field-default"
                         floatingLabelText="Product Name"
                         defaultValue={SPA.ProductName}
+                        fullWidth={true}
                         ref="ProductName"
                     /><br/>
                     <TextField
                         id="text-field-default"
                         floatingLabelText="Spec"
                         defaultValue={SPA.Spec}
+                        fullWidth={true}
                         ref="Spec"
                     /><br/>
                     <TextField
                         id="text-field-default"
                         floatingLabelText="Price"
                         defaultValue={SPA.Price}
+                        fullWidth={true}
                         ref="Price"
                     /><br/>
                     <TextField
                         id="text-field-default"
                         floatingLabelText="Unit"
                         defaultValue={SPA.Unit}
+                        fullWidth={true}
                         ref="Unit"
                     /><br/>
                 </div>
-                <div className="medium-6 small-12 column">
+                <div className="medium-6 small-12 column hide-for-small-only">
                     <br/>
                     <div className="small-12 medium-12 column" >
                         <RaisedButton label="Delete" fullWidth={true} secondary={true} onTouchTap={this.dialogDelete}></RaisedButton>
@@ -119,6 +128,16 @@ var singleProductDialog = React.createClass({
                     <div className="small-12 medium-12 column">
                         <RaisedButton label="SAVE" fullWidth={true} primary={true} onTouchTap={this.dialogUpdate}></RaisedButton>
                     </div>
+                </div>
+                <div className="column small-2 show-for-small-only">
+                    <br/>
+                    <FloatingActionButton onTouchTap={this.dialogUpdate} mini={true} style={{marginTop:'10px'}}>
+                        <ContentSave/>
+                    </FloatingActionButton>
+                    <br/>
+                    <FloatingActionButton onTouchTap={this.dialogDelete} mini={true} secondary={true} style={{marginTop:'10px'}}>
+                        <ContentDelete/>
+                    </FloatingActionButton>
                 </div>
             </Dialog>
         )

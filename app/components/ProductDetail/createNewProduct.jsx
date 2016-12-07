@@ -8,9 +8,9 @@ var snackBarActions = require('../../actions/snackBarActions')
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import TextField from 'material-ui/TextField'
 
 //api
 var productDetailAPI = require('../../api/productDetailAPI')

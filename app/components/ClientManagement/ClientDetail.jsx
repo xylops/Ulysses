@@ -11,7 +11,11 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentDelete from 'material-ui/svg-icons/content/clear';
+import ContentSave from 'material-ui/svg-icons/content/move-to-inbox';
+import PreviousPurchase from 'material-ui/svg-icons/action/receipt';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 //api
 var clientManagementAPI = require('../../api/clientManagementAPI')
 
@@ -88,7 +92,7 @@ var ClientDetail = React.createClass({
                 autoScrollBodyContent={true}
             >
                 <div className="row">
-                    <div className="column small-12 medium-8">
+                    <div className="column small-10 medium-8">
                         <TextField
                             id="text-field-default"
                             floatingLabelText="ID"
@@ -126,12 +130,30 @@ var ClientDetail = React.createClass({
                             ref="delieverytime"
                         /><br/>
                     </div>
-                    <div className="column small-12 medium-4">
+                    <div className="column medium-4 hide-for-small-only">
                         <b style={{textAlign:'center'}}><h3>Actions</h3></b>
                         <RaisedButton label="Previous Purchase Record" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="Save changes" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogUpdate}/>
                         <RaisedButton label="Delete Client" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogDelete}/>
+                    </div>
+                    <div className="column small-2 show-for-small-only">
+                        <br/>
+                        <FloatingActionButton onTouchTap={this.toggleDialog} mini={true}>
+                            <PreviousPurchase/>
+                        </FloatingActionButton>
+                        <br/>
+                        <FloatingActionButton onTouchTap={this.toggleDialog} mini={true} style={{marginTop:'10px'}}>
+                            <ContentAdd/>
+                        </FloatingActionButton>
+                        <br/>
+                        <FloatingActionButton onTouchTap={this.dialogUpdate} mini={true} style={{marginTop:'10px'}}>
+                            <ContentSave/>
+                        </FloatingActionButton>
+                        <br/>
+                        <FloatingActionButton onTouchTap={this.dialogDelete} mini={true} secondary={true} style={{marginTop:'10px'}}>
+                            <ContentDelete/>
+                        </FloatingActionButton>
                     </div>
                 </div>
             </Dialog>

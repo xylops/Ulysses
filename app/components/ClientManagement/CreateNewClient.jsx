@@ -91,7 +91,6 @@ var  CreateNewProduct = React.createClass({
                             floatingLabelText="Delievery Time"
                             ref="delieverytime"
                         /><br/>
-
                     </div>
                 </Dialog>
 
