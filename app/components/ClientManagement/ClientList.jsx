@@ -32,7 +32,6 @@ var ClientList = React.createClass({
     },
     render:function(){
         var {isFetching, clientList, clientFilterText} = this.props;
-        console.log(clientFilterText)
         let filteredClientList = clientList.filter((client)=>{
             return client.name.indexOf(clientFilterText) !== -1;
         });
@@ -45,9 +44,11 @@ var ClientList = React.createClass({
                     )
                 })
             }else{
-                <div style={style}>
-                    <CircularProgress size={80} thickness={5} />
-                </div>
+                return(
+                    <div style={style}>
+                        <CircularProgress size={80} thickness={5} />
+                    </div>
+                )
             }
         }
 
