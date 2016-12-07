@@ -40,3 +40,12 @@ export var toggleSingleClientDialog = (state = {open:false, singleClientAttr:{}}
             return state;
     }
 }
+
+export var clientFilterText = (state={clientFilterText:undefined}, action) =>{
+    switch(action.type){
+        case 'UPDATE_CLIENT_FILTER_TEXT':
+            return action.text
+        default:
+            return state
+    }
+}

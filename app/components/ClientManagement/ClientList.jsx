@@ -28,18 +28,18 @@ var ClientList = React.createClass({
         clientManagementAPI.getFullClientData().then((CL)=>{
             dispatch(actions.completeFetchClientList(CL.data));
         })
-        // dispatch(actions.updateProductFilterText(""))
+        dispatch(actions.updateClientFilterText(""))
     },
     render:function(){
-        var {isFetching, clientList} = this.props;
-
-        // let filteredClientList = clientList.filter((client)=>{
-        //     return client.name.indexOf(productFilterText) !== -1;
-        // });
+        var {isFetching, clientList, clientFilterText} = this.props;
+        console.log(clientFilterText)
+        let filteredClientList = clientList.filter((client)=>{
+            return client.name.indexOf(clientFilterText) !== -1;
+        });
 
         var renderClientList = ()=>{
             if(!isFetching){
-                return clientList.map((client)=>{
+                return filteredClientList.map((client)=>{
                     return(
                         <SingleClient key={client._id} client={client}/>
                     )
@@ -68,5 +68,6 @@ export default connect((state)=>{
         clientList: state.clientManagement.clientData.clientList,
         singleClientDialog: state.clientManagement.singleClient.open,
         singleClientAttr : state.clientManagement.singleClient.singleClientAttr,
+        clientFilterText : state.clientManagement.clientFilterText
     }
 })(ClientList)

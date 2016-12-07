@@ -1,6 +1,6 @@
 var React = require('react');
 var {connect} = require('react-redux')
-
+var actions = require('../../actions/clientManagementActions')
 
 //material-ui
 import TextField from 'material-ui/TextField'
@@ -29,6 +29,7 @@ var TopSection = React.createClass({
     handleChange:function(){
         var {dispatch} = this.props;
         var text = this.refs.filterText.getValue();
+        dispatch(actions.updateClientFilterText(text))
     },
     render:function(){
         return(

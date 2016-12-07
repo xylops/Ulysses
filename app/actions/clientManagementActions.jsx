@@ -29,3 +29,10 @@ export var closeSingleClientDialog = ()=>{
         type:'CLOSE_SINGLE_CLIENT_DIALOG'
     }
 }
+
+export var updateClientFilterText = (text)=>{
+    return {
+        type:'UPDATE_CLIENT_FILTER_TEXT',
+        text
+    }
+}
