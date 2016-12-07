@@ -3,7 +3,7 @@ var React = require('react')
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../actions/clientManagementActions');
-
+var snackBarActions = require('../../actions/snackBarActions')
 
 //material-ui
 import Dialog from 'material-ui/Dialog';
@@ -11,6 +11,9 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
+
+//api
+var clientManagementAPI = require('../../api/clientManagementAPI')
 
 //Style
 const style = {
@@ -28,6 +31,39 @@ var ClientDetail = React.createClass({
     handleClose:function(){
         var {dispatch} = this.props;
         dispatch(actions.closeSingleClientDialog());
+    },
+    dialogUpdate : function(){
+        var {dispatch} = this.props
+
+        var id = this.refs.id.getValue();
+        var name = this.refs.name.getValue();
+        var address = this.refs.address.getValue();
+        var phone = this.refs.phone.getValue();
+        var delieverytime = this.refs.delieverytime.getValue();
+
+        var updatedClient = [id, name, address, phone, delieverytime]
+        console.log(updatedClient)
+        clientManagementAPI.updateClient(updatedClient).then((response)=>{
+            var resText = response.data.message;
+            dispatch(actions.startFetchClientList())
+            clientManagementAPI.getFullClientData().then((CL)=>{
+                dispatch(actions.completeFetchClientList(CL.data));
+                dispatch(actions.closeSingleClientDialog())
+                dispatch(snackBarActions.openSnackBar(resText));
+            })
+        });
+    },
+    dialogDelete : function(){
+        var {dispatch, clientAttr} =this.props
+        clientManagementAPI.deleteClient(clientAttr.id).then((response)=>{
+            var resText = response.data.message;
+            dispatch(actions.startFetchClientList())
+            clientManagementAPI.getFullClientData().then((PDL)=>{
+                dispatch(actions.completeFetchClientList(PDL.data));
+                dispatch(actions.closeSingleClientDialog())
+                dispatch(snackBarActions.openSnackBar(resText));
+            })
+        })
     },
 
     render:function(){
@@ -94,9 +130,8 @@ var ClientDetail = React.createClass({
                         <b style={{textAlign:'center'}}><h3>Actions</h3></b>
                         <RaisedButton label="Previous Purchase Record" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn}/>
-                        <br/><br/>
-                        <RaisedButton label="Edit Client" fullWidth={true} style={style.dialogBtn}/>
-                        <RaisedButton label="Delete Client" fullWidth={true} style={style.dialogBtn}/>
+                        <RaisedButton label="Save changes" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogUpdate}/>
+                        <RaisedButton label="Delete Client" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogDelete}/>
                     </div>
                 </div>
             </Dialog>

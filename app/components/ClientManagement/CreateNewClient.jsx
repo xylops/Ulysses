@@ -13,7 +13,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField'
 
 //api
-var productDetailAPI = require('../../api/productDetailAPI')
+var clientManagementAPI = require('../../api/clientManagementAPI')
 
 var  CreateNewProduct = React.createClass({
     toggleDialog:function(){
@@ -22,7 +22,23 @@ var  CreateNewProduct = React.createClass({
     },
     handleSave : function(){
         var {dispatch} = this.props;
-        var ID = this.refs.ID.getValue()
+        var id = this.refs.id.getValue();
+        var name = this.refs.name.getValue();
+        var address = this.refs.address.getValue();
+        var phone = this.refs.phone.getValue();
+        var delieverytime = this.refs.delieverytime.getValue();
+
+        var newClient = [id, name, address, phone, delieverytime]
+
+        clientManagementAPI.createNewClient(newClient).then((response)=>{
+            var resText = response.data.message;
+            dispatch(actions.startFetchClientList())
+            clientManagementAPI.getFullClientData().then((CL)=>{
+                dispatch(actions.completeFetchClientList(CL.data));
+                dispatch(actions.toggleCreateNewClientDialog());
+                dispatch(snackBarActions.openSnackBar(resText));
+            })
+        });
 
     },
     render:function(){
@@ -57,8 +73,25 @@ var  CreateNewProduct = React.createClass({
                     <div className="text-center">
                         <TextField
                             floatingLabelText="Client ID"
-                            ref="ID"
+                            ref="id"
                         /><br/>
+                        <TextField
+                            floatingLabelText="Name"
+                            ref="name"
+                        /><br/>
+                        <TextField
+                            floatingLabelText="Address"
+                            ref="address"
+                        /><br/>
+                        <TextField
+                            floatingLabelText="Phone Number"
+                            ref="phone"
+                        /><br/>
+                        <TextField
+                            floatingLabelText="Delievery Time"
+                            ref="delieverytime"
+                        /><br/>
+
                     </div>
                 </Dialog>
 

@@ -33,8 +33,8 @@ var ClientList = React.createClass({
     render:function(){
         var {isFetching, clientList} = this.props;
 
-        // let filteredClientList = productList.filter((prod)=>{
-        //     return prod.ProductName.indexOf(productFilterText) !== -1;
+        // let filteredClientList = clientList.filter((client)=>{
+        //     return client.name.indexOf(productFilterText) !== -1;
         // });
 
         var renderClientList = ()=>{
