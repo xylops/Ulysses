@@ -27,7 +27,7 @@ var SingleClient = React.createClass({
                     <div className="column medium-2 hide-for-small-only"> {client.id} </div>
                     <div className="column medium-2 small-8"> {client.name} </div>
                     <div className="column medium-5 hide-for-small-only"> {client.address} </div>
-                    <div className="column medium-3 small-4"> {client.phone} </div>
+                    <div className="column medium-3 hide-for-small-only"> {client.phone} </div>
                 </RaisedButton>
             </div>
         )
