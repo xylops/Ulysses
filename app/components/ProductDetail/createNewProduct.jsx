@@ -27,13 +27,15 @@ var  CreateNewProduct = React.createClass({
         var Spec = this.refs.PSpec.getValue()
         var Price = this.refs.PPrice.getValue()
         var Unit = this.refs.PUnit.getValue()
+        var OwnBrand = this.refs.CB.checked;
 
             var newProduct = [
                 ProductID,
                 ProductName,
                 Spec,
                 Price,
-                Unit
+                Unit,
+                OwnBrand
             ]
             productDetailAPI.createNewProduct(newProduct).then((response)=>{
                 var resText = response.data.message;
@@ -51,6 +53,7 @@ var  CreateNewProduct = React.createClass({
         var {createNewDialog} = this.props;
 
         const newProduct = [
+
             <FlatButton
                 label="Close"
                 primary={true}
@@ -61,6 +64,7 @@ var  CreateNewProduct = React.createClass({
                 primary={true}
                 onTouchTap={this.handleSave}
             />,
+
         ];
 
 
@@ -78,6 +82,7 @@ var  CreateNewProduct = React.createClass({
                     onRequestClose={this.toggleDialog}
                     >
                     <div className="text-center">
+                        <span style={{color:'red'}}>WARNING Product ID and OwnBrand could <b>NOT</b> be change after save</span><br/>
                         <TextField
                             floatingLabelText="Product ID"
                             ref="PID"
@@ -98,6 +103,8 @@ var  CreateNewProduct = React.createClass({
                             floatingLabelText="Unit"
                             ref="PUnit"
                         /><br/><br/>
+                        <span style={{paddingTop:'20px'}}><input type="checkbox" ref="CB"/> Own Brand</span>
+                        <br/>
                     </div>
                 </Dialog>
 

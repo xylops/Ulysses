@@ -13,7 +13,7 @@ import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentDelete from 'material-ui/svg-icons/content/clear';
 import ContentSave from 'material-ui/svg-icons/content/move-to-inbox';
-
+import Checkbox from 'material-ui/Checkbox';
 
 //api
 var productDetailAPI = require('productDetailAPI')
@@ -23,11 +23,21 @@ const customContentStyle = {
   maxWidth: 'none',
 };
 
+const styles = {
+  checkbox: {
+    marginBottom: 16,
+  },
+};
+
 var singleProductDialog = React.createClass({
     //Redux handle
     handleClose:function(){
         var {dispatch} = this.props
         dispatch(actions.closeSingleProductDialog())
+    },
+    handleChange:function(){
+        var {SPA} =this.props
+        OB = !SPA.OwnBrand
     },
     dialogUpdate : function(){
         var {dispatch} = this.props
@@ -64,6 +74,7 @@ var singleProductDialog = React.createClass({
 
     render:function(){
         var {singleProductDialog, SPA} = this.props
+        var OB = SPA.OwnBrand
         const SPD = [
             <FlatButton
                 label="Close"
@@ -116,7 +127,14 @@ var singleProductDialog = React.createClass({
                         defaultValue={SPA.Unit}
                         fullWidth={true}
                         ref="Unit"
-                    /><br/>
+                    /><br/><br/>
+                    <Checkbox
+                        label="Own Brand"
+                        style={styles.checkbox}
+                        checked={SPA.OwnBrand}
+                        disabled={true}
+                    />
+                    <br/>
                 </div>
                 <div className="medium-6 small-12 column hide-for-small-only">
                     <br/>

@@ -36,3 +36,9 @@ export var updateProductFilterText = (text)=>{
         text
     }
 }
+
+export var toggleOwnBrand = () =>{
+    return {
+        type:'TOGGLE_OWN_BRAND',
+    }
+}

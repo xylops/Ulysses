@@ -14,6 +14,14 @@ router.post('/createNewProduct', function(req, res, next) {
     var Spec = req.query.newProduct[2];
     var Price = req.query.newProduct[3];
     var Unit = req.query.newProduct[4];
+    if(req.query.newProduct[5] === 'true'){
+        var OwnBrand = true;
+        console.log('set to true')
+    }else{
+        var OwnBrand = false;
+        console.log('set to false')
+    }
+
 
     // console.log(ProductID, ProductName, Spec, Price, Unit)
     console.log('create new product : ' + req.query.newProduct)
@@ -23,7 +31,8 @@ router.post('/createNewProduct', function(req, res, next) {
             ProductName,
             Spec,
             Price,
-            Unit
+            Unit,
+            OwnBrand
         }, function(err, data){
             res.json({message:'Item ' + ProductName + ' have been added to database'})
         }
@@ -59,7 +68,7 @@ router.post('/updateProduct', function(req, res, next){
                 ProductName : req.query.UpdatedProduct[1],
                 Spec : req.query.UpdatedProduct[2],
                 Price : req.query.UpdatedProduct[3],
-                Unit : req.query.UpdatedProduct[4]
+                Unit : req.query.UpdatedProduct[4],
             }
         }, function(err, data){
             res.json({message:"Product " + req.query.UpdatedProduct[1] + " have been Updated"})
