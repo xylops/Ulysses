@@ -6,6 +6,7 @@ var app = express();
 var routes = require('./route/api');
 var productDetail = require('./route/productDetail');
 var clientManagement = require('./route/ClientManagement')
+var inventoryManagement = require('./route/InventoryManagement')
 
 
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ app.use(express.static('public'));
 app.use('/', routes);
 app.use('/PD', productDetail);
 app.use('/CM', clientManagement)
+app.use('/IM', inventoryManagement)
 
 
 app.listen(PORT, function(){

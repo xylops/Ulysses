@@ -24,7 +24,7 @@ var main = React.createClass({
                         <Link to="IM/InStock"><RaisedButton label="In Stock" fullWidth={true} primary={true}/></Link>
                     </div>
                     <div className="column small-12 medium-6">
-                        <RaisedButton label="Full width" fullWidth={true} disabled={true}/>
+                        <RaisedButton label="Out Stock" fullWidth={true} disabled={true}/>
                     </div>
                 </div>
             </div>
