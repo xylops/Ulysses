@@ -19,6 +19,11 @@ export var toggleSingleProductDialog = (state = {open:false, SPA:{}}, action) =>
                 open:false,
                 SPA: {}
             }
+        case 'TOGGLE_OWN_BRAND':
+            return {
+                open:true,
+                SPA:action.newSPA
+            }
         default:
             return state;
     }

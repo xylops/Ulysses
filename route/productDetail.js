@@ -56,9 +56,14 @@ router.post('/deleteProduct', function(req, res, next){
 
 router.post('/updateProduct', function(req, res, next){
 
-    var input = {
-        ID: req.query.ID,
+    if(req.query.UpdatedProduct[5] === 'true'){
+        var OwnBrand = true;
+        console.log('set to true')
+    }else{
+        var OwnBrand = false;
+        console.log('set to false')
     }
+
     console.log( "Update Product : " + req.query.UpdatedProduct)
     db.collection('products').update(
         {
@@ -69,6 +74,7 @@ router.post('/updateProduct', function(req, res, next){
                 Spec : req.query.UpdatedProduct[2],
                 Price : req.query.UpdatedProduct[3],
                 Unit : req.query.UpdatedProduct[4],
+                OwnBrand : OwnBrand
             }
         }, function(err, data){
             res.json({message:"Product " + req.query.UpdatedProduct[1] + " have been Updated"})

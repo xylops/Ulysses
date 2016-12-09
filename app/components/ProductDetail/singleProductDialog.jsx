@@ -36,19 +36,21 @@ var singleProductDialog = React.createClass({
         dispatch(actions.closeSingleProductDialog())
     },
     handleChange:function(){
-        var {SPA} =this.props
-        OB = !SPA.OwnBrand
+        var {dispatch, SPA} = this.props
+        var newSPA = {...SPA, OwnBrand:!SPA.OwnBrand}
+        dispatch(actions.toggleOwnBrand(newSPA))
     },
     dialogUpdate : function(){
-        var {dispatch} = this.props
+        var {dispatch, SPA} = this.props
 
         var ProductID = this.refs.ProductID.getValue();
         var ProductName = this.refs.ProductName.getValue();
         var Spec = this.refs.Spec.getValue();
         var Price = this.refs.Price.getValue();
         var Unit = this.refs.Unit.getValue();
+        var OwnBrand = SPA.OwnBrand
 
-        var updatedProduct = [ProductID, ProductName, Spec, Price, Unit]
+        var updatedProduct = [ProductID, ProductName, Spec, Price, Unit, OwnBrand]
         productDetailAPI.updateProduct(updatedProduct).then((response)=>{
             var resText = response.data.message;
             dispatch(actions.startFetchPDL())
@@ -74,7 +76,6 @@ var singleProductDialog = React.createClass({
 
     render:function(){
         var {singleProductDialog, SPA} = this.props
-        var OB = SPA.OwnBrand
         const SPD = [
             <FlatButton
                 label="Close"
@@ -132,7 +133,7 @@ var singleProductDialog = React.createClass({
                         label="Own Brand"
                         style={styles.checkbox}
                         checked={SPA.OwnBrand}
-                        disabled={true}
+                        onClick={this.handleChange}
                     />
                     <br/>
                 </div>

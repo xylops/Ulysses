@@ -37,8 +37,9 @@ export var updateProductFilterText = (text)=>{
     }
 }
 
-export var toggleOwnBrand = () =>{
+export var toggleOwnBrand = (newSPA) =>{
     return {
         type:'TOGGLE_OWN_BRAND',
+        newSPA
     }
 }

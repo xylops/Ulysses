@@ -82,7 +82,7 @@ var  CreateNewProduct = React.createClass({
                     onRequestClose={this.toggleDialog}
                     >
                     <div className="text-center">
-                        <span style={{color:'red'}}>WARNING Product ID and OwnBrand could <b>NOT</b> be change after save</span><br/>
+                        <span style={{color:'red'}}>WARNING Product ID could <b>NOT</b> be change after saving</span><br/>
                         <TextField
                             floatingLabelText="Product ID"
                             ref="PID"
