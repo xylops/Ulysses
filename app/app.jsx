@@ -15,6 +15,7 @@ import ClientManagement from './components/ClientManagement/main';
 var InvoiceSystem = require('./components/InvoiceSystem/InvoiceSystem');
 import ProductDetail from './components/ProductDetail/main';
 import InventoryManagement from './components/InventoryManagement/main'
+import InStock from './components/InventoryManagement/InStock/main'
 
 
 // Redux Function
@@ -43,6 +44,7 @@ const App = () => (
                     <Route path="IS" component={InvoiceSystem}/>
                     <Route path="PD" component={ProductDetail}/>
                     <Route path="IM" component={InventoryManagement}/>
+                    <Route path="IM/InStock" component={InStock}/>
                     <IndexRoute component={HomePage}/>
                 </Route>
             </Router>
