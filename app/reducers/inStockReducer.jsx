@@ -14,3 +14,20 @@ export var fetchOwnBrandList = (state = {isFetching: false , OBL: []}, action) =
             return state
     }
 }
+
+export var ownBrandFilter = (state = {id: "" , name: ""}, action) => {
+    switch (action.type){
+        case 'UPDATE_OWNBRAND_ID_FILTER':
+            return{
+                id:action.id,
+                name:""
+            }
+        case 'UPDATE_OWNBRAND_NAME_FILTER':
+            return{
+                id:"",
+                name:action.pName
+            }
+        default:
+            return state
+    }
+}

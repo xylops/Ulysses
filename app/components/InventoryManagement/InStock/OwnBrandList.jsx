@@ -6,6 +6,9 @@ var actions = require('../../../actions/inStockAction')
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 
+//My component
+import OBFilter from './OBFilter'
+
 //API
 var InventoryManagementAPI = require('../../../api/InventoryManagementAPI')
 
@@ -32,12 +35,19 @@ var brandItem = React.createClass({
         })
     },
     render:function(){
-        var {ownBrandList, isFetching} = this.props
-        console.log(isFetching, ownBrandList)
+        var {ownBrandList, isFetching, filterID, filterName} = this.props
+
+        let filterOwnBrandList_ID = ownBrandList.filter((item)=>{
+            return item.ProductID.indexOf(filterID) !== -1;
+        });
+
+        let filterOwnBrandList_Name = filterOwnBrandList_ID.filter((item)=>{
+            return item.ProductName.indexOf(filterName) !== -1;
+        });
 
         var renderList = ()=> {
             if(!isFetching){
-                return ownBrandList.map((OBProduct)=>{
+                return filterOwnBrandList_Name.map((OBProduct)=>{
                     return(
                         <RaisedButton key={OBProduct.ProductID} fullWidth={true} style={style.tableRow}>
                             <div className="column small-4">
@@ -60,7 +70,7 @@ var brandItem = React.createClass({
 
         return(
             <div>
-                <h4 style={{textAlign:'center'}}>Own Brand Item</h4>
+                <OBFilter/>
                 <div style={style.brandList} className="OBLIST">
                     {renderList()}
                 </div>
@@ -73,6 +83,9 @@ var brandItem = React.createClass({
 export default connect((state)=>{
     return{
         isFetching: state.InventoryManagement.fetchOwnBrandList.isFetching,
-        ownBrandList: state.InventoryManagement.fetchOwnBrandList.OBL
+        ownBrandList: state.InventoryManagement.fetchOwnBrandList.OBL,
+        filterID: state.InventoryManagement.ownBrandFilter.id,
+        filterName: state.InventoryManagement.ownBrandFilter.name,
+
     }
 })(brandItem)

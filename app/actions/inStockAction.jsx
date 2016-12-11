@@ -10,3 +10,17 @@ export var completeFetchOwnBrandList = (OBL) =>{
         OBL
     }
 }
+
+export var ownBrandIDFilter = (id) =>{
+    return{
+        type:'UPDATE_OWNBRAND_ID_FILTER',
+        id
+    }
+}
+
+export var ownBrandNameFilter = (pName) =>{
+    return{
+        type:'UPDATE_OWNBRAND_NAME_FILTER',
+        pName
+    }
+}

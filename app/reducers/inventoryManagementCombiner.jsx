@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
-import {fetchOwnBrandList} from './InStockReducer'
+import {fetchOwnBrandList, ownBrandFilter} from './InStockReducer'
 
 
 export default combineReducers({
-    fetchOwnBrandList
+    fetchOwnBrandList,
+    ownBrandFilter
 })

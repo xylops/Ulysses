@@ -18,7 +18,7 @@ var main = React.createClass({
     render:function(){
         return(
             <div>
-                <h2 style={style.title}><b>In Stock</b></h2>
+                <h2 style={style.title}><b>Inventory Mangement</b></h2>
                 <div className="row">
                     <div className="column small-12 medium-6">
                         <Link to="IM/InStock"><RaisedButton label="In Stock" fullWidth={true} primary={true}/></Link>
