@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var productDetail = require('../modal/productDetail_modal.js')
+
 
 router.get('/getFullProductData', function(req, res, next) {
-    db.collection('products').find().sort({ProductID:1}).toArray(function(err, results) {
-        res.json(results)
+    // db.collection('products').find().sort({ProductID:1}).toArray(function(err, results) {
+    //     res.json(results)
+    // })
+    productDetail.find({}).sort({ProductID:1}).exec((err, result)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.json(result)
+        }
     })
 });
 

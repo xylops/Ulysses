@@ -1,13 +1,21 @@
 var express = require('express');
 var router = express.Router();
 const MongoClient = require('mongodb').MongoClient
+var mongoose = require('mongoose');
 
-MongoClient.connect('mongodb://xylops:xxxx@ds113608.mlab.com:13608/ulysses', (err, database) => {
+// MongoClient.connect('mongodb://xylops:xxxx@ds113608.mlab.com:13608/ulysses', (err, database) => {
+//     if (err) return console.log(err)
+//     db = database
+//     console.log('connected to db')
+// })
+
+var DB_URL = 'mongodb://xylops:xxxx@ds113608.mlab.com:13608/ulysses'
+mongoose.Promise = global.Promise;
+mongoose.connect(DB_URL, (err, database)=>{
     if (err) return console.log(err)
-    db = database
-    console.log('connected to db')
+    db = database;
+    console.log('connnect to db through mongoose')
 })
-
 
 // router.post('/insert', function(req, res, next){
 //     console.log(req.query)
