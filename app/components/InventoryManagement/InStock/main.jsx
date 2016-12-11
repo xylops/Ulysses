@@ -10,7 +10,7 @@ var InStock = React.createClass({
     render:function(){
         return(
             <div>
-                <TopSection/>
+                <br/>
                 <div className="row">
                     <div className="column small-12 medium-6">
                         <NewInStockList/>

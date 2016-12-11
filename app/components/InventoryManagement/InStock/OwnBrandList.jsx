@@ -75,7 +75,6 @@ var brandItem = React.createClass({
                     {renderList()}
                 </div>
             </div>
-
         )
     }
 })
@@ -86,6 +85,5 @@ export default connect((state)=>{
         ownBrandList: state.InventoryManagement.fetchOwnBrandList.OBL,
         filterID: state.InventoryManagement.ownBrandFilter.id,
         filterName: state.InventoryManagement.ownBrandFilter.name,
-
     }
 })(brandItem)
