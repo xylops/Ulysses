@@ -34,7 +34,7 @@ router.post('/createNewProduct', function(req, res, next) {
             res.json({message:'Item ' + newProduct.ProductName + ' have been added to database'})
         }
     })
-    
+
 });
 
 
@@ -76,5 +76,16 @@ router.post('/updateProduct', function(req, res, next){
 
 })
 
+
+router.get('/allProductLevel', function(req, res, next) {
+    productDetail.findOne({ProductID:'P701'}).populate('Inventory').exec((err, data)=>{
+        if(err){
+            console.log(err);
+        }else{
+            // res.json(data);
+            console.log(data)
+        }
+    })
+});
 
 module.exports = router;

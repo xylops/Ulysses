@@ -15,9 +15,7 @@ router.get('/getOwnBrandList', function(req, res, next) {
 });
 
 
-router.get('/allProductLevel', function(req, res, next) {
-    inventory.find({}).sort({id:1}).populate('productDetail').exec((err, data))
-});
+
 
 
 
