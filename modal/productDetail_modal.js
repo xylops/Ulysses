@@ -6,7 +6,8 @@ var productDetail = new Schema({
     ProductName:String,
     Spec:String,
     Price:String,
-    Unit:String
+    Unit:String,
+    OwnBrand:Boolean
 }, {collection:'products'});
 
 module.exports = mongoose.model('productDetail', productDetail)
