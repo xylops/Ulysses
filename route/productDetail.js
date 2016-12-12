@@ -4,6 +4,7 @@ var productDetail = require('../modal/productDetail_modal.js')
 
 
 router.get('/getFullProductData', function(req, res, next) {
+
     productDetail.find({}).sort({ProductID:1}).exec((err, result)=>{
         if(err){
             console.log(err)
@@ -11,6 +12,7 @@ router.get('/getFullProductData', function(req, res, next) {
             res.json(result)
         }
     })
+
 });
 
 router.post('/createNewProduct', function(req, res, next) {
@@ -32,6 +34,7 @@ router.post('/createNewProduct', function(req, res, next) {
             res.json({message:'Item ' + newProduct.ProductName + ' have been added to database'})
         }
     })
+    
 });
 
 
@@ -46,7 +49,6 @@ router.post('/deleteProduct', function(req, res, next){
             console.log('Product '+ req.query.ID +' has been Deleted')
             res.json({message:"Product "+  req.query.ID +" have been delete from database"})
         }
-
     })
 
 })

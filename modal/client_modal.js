@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var client = new Schema({
-    id:String,
-    name:String,
+    id:{type:String,unique:true, require:true},
+    name:{type:String, require:true},
     phone:String,
     address:String,
     Unit:String,
