@@ -4,6 +4,8 @@ import clientManagement from '../reducers/clientManagementCombiner'
 import productDetail from '../reducers/productDetailCombiner'
 import InventoryManagement from '../reducers/InventoryManagementCombiner'
 import snackBar from '../reducers/snackBarCombiner'
+import main from '../reducers/mainCombiner'
+
 
 
  export var configure = (initialState = {})=>{
@@ -11,7 +13,8 @@ import snackBar from '../reducers/snackBarCombiner'
         snackBar,
         productDetail,
         clientManagement,
-        InventoryManagement
+        InventoryManagement,
+        main,
      })
 
      var store = redux.createStore(reducers, initialState,redux.compose(

@@ -4,7 +4,7 @@ var {connect} = require('react-redux')
 var actions = require('../actions/snackBarActions')
 
 //my component
-var NavBar = require('Navbar')
+import NavBar from 'Navbar'
 
 //material-ui
 import Snackbar from 'material-ui/Snackbar';

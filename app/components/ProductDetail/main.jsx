@@ -1,8 +1,6 @@
 var React = require('react')
 var ReactDOM = require('react-dom');
 
-
-
 //material-ui
 import Divider from 'material-ui/Divider';
 

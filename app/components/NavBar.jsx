@@ -1,5 +1,7 @@
 var React = require('react');
 var {Link} = require('react-router');
+var {connect} = require('react-redux');
+
 //material-ui
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -46,17 +48,15 @@ var NavBar = React.createClass({
     handleClose:function(){
         this.setState({open:false});
     },
-    linkButton:function(){
-        alert('仆你個街')
-    },
     render:function(){
+        var {navbarText} = this.props;
         return (
             <div>
                 <AppBar
                     title="Ulysses"
                     style={style.appBar}
                     iconElementLeft={<IconButton onTouchTap={this.handleToggle}><NavigationOpen /></IconButton>}
-                    iconElementRight={<Link to="/" style={style.appBarLogo}>ERP Solution  </Link>}
+                    iconElementRight={<Link to="/" style={style.appBarLogo}>{navbarText}  </Link>}
                 />
                 <Drawer
                 docked={false}
@@ -90,4 +90,8 @@ var NavBar = React.createClass({
     }
 })
 
-module.exports = NavBar;
+export default connect((state)=>{
+    return {
+        navbarText: state.main.NavBarText
+    }
+})(NavBar)
