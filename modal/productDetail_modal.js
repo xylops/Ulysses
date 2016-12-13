@@ -8,7 +8,7 @@ var productDetailSchema = new Schema({
     Price:String,
     Unit:String,
     OwnBrand:Boolean,
-    Inventory:{ type: Schema.ObjectId, ref: 'inventory'}
+    Inventory:{ type: Schema.Types.ObjectId, ref: 'inventoryModel'}
 }, {collection:'products'});
 
-module.exports = mongoose.model('productDetail', productDetailSchema)
+module.exports = mongoose.model('productDetailModel', productDetailSchema)

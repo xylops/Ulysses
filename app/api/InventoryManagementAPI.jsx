@@ -7,3 +7,12 @@ module.exports = {
         })
     },
 }
+
+
+module.exports = {
+    getInventoryLevel:function(){
+        return axios.get('/IM/allProductLevel').then(function(res){
+            return res
+        })
+    },
+}

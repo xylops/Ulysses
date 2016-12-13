@@ -1,9 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+    var mongoose = require('mongoose');
+    var Schema = mongoose.Schema;
 
-var inventorySchema = new Schema({
-    product:{ type: Schema.ObjectId, ref: 'productDetail' },
-    stockLevel:Number
-}, {collection:'inventory'});
+    var inventorySchema = new Schema({
+        stockLevel:Number
+    }, {collection:'inventory'});
 
-module.exports = mongoose.model('inventory', inventorySchema)
+    module.exports = mongoose.model('inventoryModel', inventorySchema)

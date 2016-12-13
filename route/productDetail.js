@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var productDetail = require('../modal/productDetail_modal.js')
-
+var inventory = require('../modal/inventory_modal.js')
 
 router.get('/getFullProductData', function(req, res, next) {
-
     productDetail.find({}).sort({ProductID:1}).exec((err, result)=>{
         if(err){
             console.log(err)
@@ -12,7 +11,6 @@ router.get('/getFullProductData', function(req, res, next) {
             res.json(result)
         }
     })
-
 });
 
 router.post('/createNewProduct', function(req, res, next) {
@@ -30,15 +28,37 @@ router.post('/createNewProduct', function(req, res, next) {
         if(err){
             res.json({message:'Something is wrong : ' + err})
         }else{
-            console.log('New Product Created: ' + newProduct)
-            res.json({message:'Item ' + newProduct.ProductName + ' have been added to database'})
-        }
-    })
+            //when new prodduct is has been create
+            var newInventory = new inventory();
 
+            newInventory.stockLevel = 0;
+
+            newInventory.save((err, newInventory)=>{
+                if(!err){
+                    productDetail.findOneAndUpdate({ProductID:newProduct.ProductID},{
+                        $set:{
+                            Inventory : newInventory._id
+                        }
+                    }, function(err, data){
+                        // finish push a Inventory ID to PD
+                        console.log('New Product & inventory Created')
+                        res.json({message:'Item ' + newProduct.ProductName + ' have been added to database'})
+                    })
+                }//end if !err
+            })// end inventory save
+        }
+    })//end createNewProduct
 });
 
 
 router.post('/deleteProduct', function(req, res, next){
+    productDetail.findOne({ProductID:req.query.ID}, function(err, singleProduct){
+        inventory.findOneAndRemove({_id:singleProduct.Inventory}, (err, data)=>{
+            if(err){console.log(err)}else{
+                console.log('Inventory Delete')
+            }
+        })
+    })
 
     productDetail.findOneAndRemove({
         ProductID: req.query.ID
@@ -73,19 +93,8 @@ router.post('/updateProduct', function(req, res, next){
             res.json({message:"Product " + req.query.UpdatedProduct[1] + " have been Updated"})
         }
     })
-
 })
 
 
-router.get('/allProductLevel', function(req, res, next) {
-    productDetail.findOne({ProductID:'P701'}).populate('Inventory').exec((err, data)=>{
-        if(err){
-            console.log(err);
-        }else{
-            // res.json(data);
-            console.log(data)
-        }
-    })
-});
 
 module.exports = router;

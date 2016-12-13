@@ -14,9 +14,23 @@ router.get('/getOwnBrandList', function(req, res, next) {
     })
 });
 
-
-
-
-
+router.get('/allProductLevel', function(req, res, next) {
+    productDetail.find({}).populate('Inventory').exec(function(err, doc){
+        if(err){
+            console.log(err)
+        }else{
+            var json = [];
+            doc.forEach(function(elem){
+                json.push({
+                    _id: elem._id,
+                    productID:elem.ProductID,
+                    name: elem.ProductName,
+                    stockLevel: elem.Inventory.stockLevel
+                })
+            })
+            res.json (json);
+        }
+    })
+});
 
 module.exports = router;
