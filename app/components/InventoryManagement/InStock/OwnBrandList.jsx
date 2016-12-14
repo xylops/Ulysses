@@ -8,9 +8,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 //My component
 import OBFilter from './OBFilter'
+var axios = require('axios');
 
 //API
-var InventoryManagementAPI = require('../../../api/InventoryManagementAPI')
+var InventoryManagementAPI = require('InventoryManagementAPI')
 
 const style = {
     brandList:{
@@ -29,10 +30,14 @@ const style = {
 var brandItem = React.createClass({
     componentDidMount:function(){
         var {dispatch} =this.props;
-        dispatch(actions.startFetchOwnBrandList())
+        dispatch(actions.startFetchOwnBrandList());
+        // axios.get('/IM/getOwnBrandList').then(function(res){
+        //     dispatch(actions.completeFetchOwnBrandList(res.data));
+        // })
         InventoryManagementAPI.getOwnBrandList().then((OBL)=>{
             dispatch(actions.completeFetchOwnBrandList(OBL.data));
         })
+
     },
     render:function(){
         var {ownBrandList, isFetching, filterID, filterName} = this.props
