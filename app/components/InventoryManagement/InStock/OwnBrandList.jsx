@@ -4,11 +4,11 @@ var actions = require('../../../actions/inStockAction')
 
 //material-ui
 import CircularProgress from 'material-ui/CircularProgress';
-import RaisedButton from 'material-ui/RaisedButton';
 
 //My component
 import OBFilter from './OBFilter'
-var axios = require('axios');
+import SingleOBDialog from './singleOBDialog'
+import SingleOBProduct from './singleOBProduct'
 
 //API
 var InventoryManagementAPI = require('InventoryManagementAPI')
@@ -20,11 +20,6 @@ const style = {
         textAlign:'center',
         paddingTop: 'calc(20%)'
     },
-    tableRow:{
-        textAlign:'center',
-        marginLeft:'5px',
-        maxHeight:'36px'
-    }
 }
 
 var brandItem = React.createClass({
@@ -37,7 +32,6 @@ var brandItem = React.createClass({
         InventoryManagementAPI.getOwnBrandList().then((OBL)=>{
             dispatch(actions.completeFetchOwnBrandList(OBL.data));
         })
-
     },
     render:function(){
         var {ownBrandList, isFetching, filterID, filterName} = this.props
@@ -54,14 +48,7 @@ var brandItem = React.createClass({
             if(!isFetching){
                 return filterOwnBrandList_Name.map((OBProduct)=>{
                     return(
-                        <RaisedButton key={OBProduct.ProductID} fullWidth={true} style={style.tableRow}>
-                            <div className="column small-4">
-                                {OBProduct.ProductID}
-                            </div>
-                            <div className="column small-8">
-                                {OBProduct.ProductName}
-                            </div>
-                        </RaisedButton>
+                        <SingleOBProduct key={OBProduct._id} OBProduct={OBProduct}/>
                     )
                 })
             } else {
@@ -79,6 +66,7 @@ var brandItem = React.createClass({
                 <div style={style.brandList} className="OBLIST">
                     {renderList()}
                 </div>
+                <SingleOBDialog/>
             </div>
         )
     }
@@ -86,9 +74,9 @@ var brandItem = React.createClass({
 
 export default connect((state)=>{
     return{
-        isFetching: state.InventoryManagement.fetchOwnBrandList.isFetching,
-        ownBrandList: state.InventoryManagement.fetchOwnBrandList.OBL,
-        filterID: state.InventoryManagement.ownBrandFilter.id,
-        filterName: state.InventoryManagement.ownBrandFilter.name,
+        isFetching: state.InStock.fetchOwnBrandList.isFetching,
+        ownBrandList: state.InStock.fetchOwnBrandList.OBL,
+        filterID: state.InStock.ownBrandFilter.id,
+        filterName: state.InStock.ownBrandFilter.name,
     }
 })(brandItem)

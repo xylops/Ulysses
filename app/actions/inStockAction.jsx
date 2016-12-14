@@ -24,3 +24,37 @@ export var ownBrandNameFilter = (pName) =>{
         pName
     }
 }
+
+export var addNewItemToNewInstockList = (item) => {
+    return{
+        type:'INSERT_NEW_INSTOCK_LIST',
+        item
+    }
+}
+
+export var openSingleOBDialog = (id, name) =>{
+    return {
+        type:'OPEN_DIALOG',
+        id, name,
+    }
+}
+
+export var closeSingleOBDialog = () =>{
+    return {
+        type: 'CLOSE_DIALOG'
+    }
+}
+
+export var addNewItemToNewList = (item) => {
+    return {
+        type: 'INSERT_NEW_ITEM_TO_INSTOCK_LIST',
+        item
+    }
+}
+
+export var removeNewItemFromNewList = (number) =>{
+    return {
+        type: 'REMOVE_ITEM_FROM_INSTOCK_LIST',
+        number
+    }
+}

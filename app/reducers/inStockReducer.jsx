@@ -31,3 +31,38 @@ export var ownBrandFilter = (state = {id: "" , name: ""}, action) => {
             return state
     }
 }
+
+export var singleOBDialog = (state = {open:false,item:[], amountAdd:0}, action) => {
+    switch (action.type){
+        case 'OPEN_DIALOG':
+            return {
+                open:true,
+                item:[action.id, action.name],
+            }
+        case 'CLOSE_DIALOG':
+            return {
+                open:false,
+                item:[],
+            }
+        default:
+            return state;
+    }
+}
+
+export var newInStockList = (state = {newEntry:[]}, action)=>{
+    switch (action.type){
+        case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
+            return {
+                newEntry:[...state.newEntry, action.item]
+            };
+        case 'REMOVE_ITEM_FROM_INSTOCK_LIST':
+            return {
+                newEntry:[
+                    ...state.newEntry.slice(0, action.number),
+                    ...state.newEntry.slice(action.number + 1)
+                ]
+            }
+        default:
+            return state;
+    }
+}
