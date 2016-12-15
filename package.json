@@ -6,7 +6,7 @@
   "scripts": {
     "test": "karma start",
     "start": "node server.js",
-    "dev":"nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "Xylops",
   "license": "MIT",
@@ -44,6 +44,7 @@
     "node-uuid": "^1.4.7",
     "nodemon": "^1.11.0",
     "react-addons-test-utils": "^15.3.2",
+    "react-addons-update": "^15.4.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",

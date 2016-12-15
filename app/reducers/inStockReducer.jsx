@@ -1,3 +1,5 @@
+import update from 'react-addons-update';
+
 export var fetchOwnBrandList = (state = {isFetching: false , OBL: []}, action) => {
     switch (action.type){
         case 'START_OWN_BRAND_FETCH':
@@ -49,20 +51,28 @@ export var singleOBDialog = (state = {open:false,item:[], amountAdd:0}, action) 
     }
 }
 
-export var newInStockList = (state = {newEntry:[]}, action)=>{
-    switch (action.type){
-        case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
-            return {
-                newEntry:[...state.newEntry, action.item]
-            };
-        case 'REMOVE_ITEM_FROM_INSTOCK_LIST':
-            return {
-                newEntry:[
-                    ...state.newEntry.slice(0, action.number),
-                    ...state.newEntry.slice(action.number + 1)
-                ]
+        export var newInStockList = (state = {newEntry:[]}, action)=>{
+            switch (action.type){
+                case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
+                    return {
+                        newEntry:[...state.newEntry, action.item]
+                    };
+                case 'REMOVE_ITEM_FROM_INSTOCK_LIST':
+                    return {
+                        newEntry:[
+                            ...state.newEntry.slice(0, action.targetItemIndex),
+                            ...state.newEntry.slice(action.targetItemIndex + 1)
+                        ]
+                    }
+                case 'EDIT_ITEM_FROM_INSTOCK_LIST':
+                    return update(state,{
+                        newEntry:{
+                            [action.targetItemIndex]:{
+                                amount:{$set : action.amount}
+                            }
+                        }
+                    })
+                default:
+                    return state;
             }
-        default:
-            return state;
-    }
-}
+        }

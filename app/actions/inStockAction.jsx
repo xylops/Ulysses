@@ -52,9 +52,17 @@ export var addNewItemToNewList = (item) => {
     }
 }
 
-export var removeNewItemFromNewList = (number) =>{
+export var removeNewItemFromNewList = (targetItemIndex) =>{
     return {
         type: 'REMOVE_ITEM_FROM_INSTOCK_LIST',
-        number
+        targetItemIndex
+    }
+}
+
+export var editNewItemFromNewList = (targetItemIndex, amount) =>{
+    return {
+        type: 'EDIT_ITEM_FROM_INSTOCK_LIST',
+        targetItemIndex,
+        amount
     }
 }

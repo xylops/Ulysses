@@ -14,8 +14,16 @@ const style={
 }
 
 var newInstockItem = React.createClass({
-    handleEdit:function(item){
-        console.log('Edit ' + item.name)
+    handleEdit:function(e){
+        var {item, newStockList, dispatch} = this.props
+        console.log('Edit ' + e.target.value + ' from ' + item.name)
+        var temp = []
+        newStockList.forEach(function(elem){
+            temp.push(elem.id.indexOf(item.id));
+        })
+        var targetItem = temp.indexOf(0)
+        dispatch(actions.editNewItemFromNewList(targetItem, e.target.value))
+
     },
     handleRemove:function(item){
         var {dispatch , newStockList} = this.props
@@ -35,7 +43,7 @@ var newInstockItem = React.createClass({
                         {item.name}
                     </div>
                     <div className="column small-4" style={{textAlign:'center'}}>
-                        {item.amount}
+                        <input type="number" defaultValue={item.amount} onChange={this.handleEdit}/>
                     </div>
                     <div className="column small-2" onClick={()=>{
                             this.handleRemove(item)
