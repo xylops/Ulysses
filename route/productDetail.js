@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var productDetail = require('../modal/productDetail_modal.js')
-var inventory = require('../modal/inventory_modal.js')
+var productDetail = require('../modal/productDetail_model.js')
+var stockLevel = require('../modal/stockLevel_model.js')
 
 router.get('/getFullProductData', function(req, res, next) {
     productDetail.find({}).sort({ProductID:1}).exec((err, result)=>{
@@ -29,7 +29,7 @@ router.post('/createNewProduct', function(req, res, next) {
             res.json({message:'Something is wrong : ' + err})
         }else{
             //when new prodduct is has been create
-            var newInventory = new inventory();
+            var newInventory = new stockLevel();
 
             newInventory.stockLevel = 0;
 
@@ -41,11 +41,11 @@ router.post('/createNewProduct', function(req, res, next) {
                         }
                     }, function(err, data){
                         // finish push a Inventory ID to PD
-                        console.log('New Product & inventory Created')
+                        console.log('New Product & stockLevel Created')
                         res.json({message:'Item ' + newProduct.ProductName + ' have been added to database'})
                     })
                 }//end if !err
-            })// end inventory save
+            })// end stockLevel save
         }
     })//end createNewProduct
 });
@@ -53,7 +53,7 @@ router.post('/createNewProduct', function(req, res, next) {
 
 router.post('/deleteProduct', function(req, res, next){
     productDetail.findOne({ProductID:req.query.ID}, function(err, singleProduct){
-        inventory.findOneAndRemove({_id:singleProduct.Inventory}, (err, data)=>{
+        stockLevel.findOneAndRemove({_id:singleProduct.Inventory}, (err, data)=>{
             if(err){console.log(err)}else{
                 console.log('Inventory Delete')
             }

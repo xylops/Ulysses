@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var client = require('../modal/client_modal.js')
+var client = require('../modal/client_model.js')
 
 router.get('/getFullClientData', function(req, res, next) {
     client.find({}).sort({id:1}).exec((err, result)=>{

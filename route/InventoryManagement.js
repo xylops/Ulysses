@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var inventory = require('../modal/inventory_modal.js')
-var productDetail = require('../modal/productDetail_modal.js')
+var stockLevel = require('../modal/stockLevel_model.js')
+var productDetail = require('../modal/productDetail_model.js')
 
 
 router.get('/getOwnBrandList', function(req, res, next) {
@@ -40,7 +40,9 @@ router.post('/createInstockList', function(req, res, next) {
 
     instockList.forEach(function(item){
         var obj = JSON.parse(item);
-        console.log(obj.inventory + " " + obj.name + " " + obj.amount)
+        stockLevel.findOneAndUpdate({_id:obj.inventory},{$inc:{stockLevel:obj.amount}}, function(err, data){
+            res.json({message:'Instock List has been added to database'})
+        })
     })
 
     // var newClient = new client();
@@ -56,7 +58,7 @@ router.post('/createInstockList', function(req, res, next) {
     //         res.json({message:'Something is wrong : ' + err})
     //     }else{
     //         console.log('New Client Created: ' + newClient)
-            res.json({message:'Instock List has been added to database'})
+
     //     }
     // });
 });
