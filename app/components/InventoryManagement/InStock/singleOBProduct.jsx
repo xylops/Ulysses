@@ -14,16 +14,16 @@ const style = {
 }
 
 var singleOBProduct = React.createClass({
-    singleOBProduct:function(id, name){
+    singleOBProduct:function(id, name, inventory){
         var {dispatch} = this.props;
-        dispatch(actions.openSingleOBDialog(id, name))
+        dispatch(actions.openSingleOBDialog(id, name, inventory))
     },
     render:function(){
         var {OBProduct} = this.props
         return (
             <RaisedButton
                 onTouchTap={()=>{
-                    this.singleOBProduct(OBProduct._id, OBProduct.ProductName)
+                    this.singleOBProduct(OBProduct._id, OBProduct.ProductName, OBProduct.Inventory)
                 }}
                 fullWidth={true}
                 style={style.tableRow}>

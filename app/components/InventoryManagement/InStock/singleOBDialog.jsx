@@ -19,15 +19,27 @@ var singleOBDialog = React.createClass({
         dispatch(actions.closeSingleOBDialog());
     },
     handleSave:function(){
-        var {dispatch, item} = this.props;
-        var amount = this.refs.input.value;
-        var newItem = {
-            id: item[0],
-            name: item[1],
-            amount,
+        var {dispatch, item, newStockList} = this.props;
+        var temp = []
+        newStockList.forEach(function(elem){
+            if(elem.id.indexOf(item[0]) === 0){
+                temp.push('yes')
+            };
+        })
+        if(temp.length < 1){
+            var amount = this.refs.input.value;
+            var newItem = {
+                id: item[0],
+                name: item[1],
+                inventory:item[2],
+                amount,
+            }
+            dispatch(actions.addNewItemToNewList(newItem));
+            dispatch(actions.closeSingleOBDialog());
+        }else{
+            alert('item already exist in the list');
+            dispatch(actions.closeSingleOBDialog());
         }
-        dispatch(actions.addNewItemToNewList(newItem));
-        dispatch(actions.closeSingleOBDialog());
     },
     render:function(){
         var {open, item} = this.props;
@@ -64,7 +76,7 @@ var singleOBDialog = React.createClass({
 export default connect((state)=>{
     return{
         open:state.InStock.singleOBDialog.open,
-        item:state.InStock.singleOBDialog.item
-
+        item:state.InStock.singleOBDialog.item,
+        newStockList : state.InStock.newInStockList.newEntry
     }
 })(singleOBDialog);

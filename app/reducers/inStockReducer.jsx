@@ -39,7 +39,7 @@ export var singleOBDialog = (state = {open:false,item:[], amountAdd:0}, action) 
         case 'OPEN_DIALOG':
             return {
                 open:true,
-                item:[action.id, action.name],
+                item:[action.id, action.name, action.inventory],
             }
         case 'CLOSE_DIALOG':
             return {
@@ -51,28 +51,32 @@ export var singleOBDialog = (state = {open:false,item:[], amountAdd:0}, action) 
     }
 }
 
-        export var newInStockList = (state = {newEntry:[]}, action)=>{
-            switch (action.type){
-                case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
-                    return {
-                        newEntry:[...state.newEntry, action.item]
-                    };
-                case 'REMOVE_ITEM_FROM_INSTOCK_LIST':
-                    return {
-                        newEntry:[
-                            ...state.newEntry.slice(0, action.targetItemIndex),
-                            ...state.newEntry.slice(action.targetItemIndex + 1)
-                        ]
-                    }
-                case 'EDIT_ITEM_FROM_INSTOCK_LIST':
-                    return update(state,{
-                        newEntry:{
-                            [action.targetItemIndex]:{
-                                amount:{$set : action.amount}
-                            }
-                        }
-                    })
-                default:
-                    return state;
+export var newInStockList = (state = {newEntry:[]}, action)=>{
+    switch (action.type){
+        case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
+            return {
+                newEntry:[...state.newEntry, action.item]
+            };
+        case 'REMOVE_ITEM_FROM_INSTOCK_LIST':
+            return {
+                newEntry:[
+                    ...state.newEntry.slice(0, action.targetItemIndex),
+                    ...state.newEntry.slice(action.targetItemIndex + 1)
+                ]
             }
-        }
+        case 'EDIT_ITEM_FROM_INSTOCK_LIST':
+            return update(state,{
+                newEntry:{
+                    [action.targetItemIndex]:{
+                        amount:{$set : action.amount}
+                    }
+                }
+            })
+        case 'CLEAR_INSTOCK_LIST':
+            return {
+                newEntry : []
+            }
+        default:
+            return state;
+    }
+}

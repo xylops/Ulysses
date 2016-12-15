@@ -33,4 +33,33 @@ router.get('/allProductLevel', function(req, res, next) {
     })
 });
 
+router.post('/createInstockList', function(req, res, next) {
+
+    var instockList = req.query.list;
+    var date = req.query.date;
+
+    instockList.forEach(function(item){
+        var obj = JSON.parse(item);
+        console.log(obj.inventory + " " + obj.name + " " + obj.amount)
+    })
+
+    // var newClient = new client();
+    //
+    // newClient.id = req.query.newClient[0];
+    // newClient.name = req.query.newClient[1]
+    // newClient.address = req.query.newClient[2];
+    // newClient.phone = req.query.newClient[3];
+    // newClient.delieverytime = req.query.newClient[4];
+    //
+    // newClient.save((err, client)=>{
+    //     if(err){
+    //         res.json({message:'Something is wrong : ' + err})
+    //     }else{
+    //         console.log('New Client Created: ' + newClient)
+    //         res.json({message:'Client ' + req.query.newClient[1] + ' have been added to database'})
+    //     }
+    // });
+});
+
+
 module.exports = router;

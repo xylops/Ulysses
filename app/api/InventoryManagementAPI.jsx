@@ -7,12 +7,22 @@ module.exports = {
             return res
         })
     },
-}
-
-module.exports = {
     getOwnBrandList:function(){
         return axios.get('/IM/getOwnBrandList').then(function(res){
             return res;
         })
     },
+
+    createInstockList:function(list, date){
+        return axios({
+            method:'post',
+            url:'/IM/createInstockList',
+            params:{
+                list,
+                date
+            },
+            json:true
+        })
+    },
+
 }

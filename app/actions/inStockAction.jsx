@@ -32,10 +32,10 @@ export var addNewItemToNewInstockList = (item) => {
     }
 }
 
-export var openSingleOBDialog = (id, name) =>{
+export var openSingleOBDialog = (id, name, inventory) =>{
     return {
         type:'OPEN_DIALOG',
-        id, name,
+        id, name, inventory
     }
 }
 
@@ -64,5 +64,11 @@ export var editNewItemFromNewList = (targetItemIndex, amount) =>{
         type: 'EDIT_ITEM_FROM_INSTOCK_LIST',
         targetItemIndex,
         amount
+    }
+}
+
+export var clearInstockList = () =>{
+    return {
+        type: 'CLEAR_INSTOCK_LIST'
     }
 }
