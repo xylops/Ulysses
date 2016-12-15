@@ -1,6 +1,7 @@
 var React = require('react')
 var {connect} = require('react-redux')
 var actions = require('../../../actions/inStockAction')
+var snackBarActions = require('../../../actions/snackBarActions')
 var moment = require('moment')
 
 //material-ui
@@ -44,8 +45,9 @@ var NewInStockList = React.createClass({
     },
     handleSave : function(){
         var {dispatch, newStockList} = this.props;
-        InventoryManagementAPI.createInstockList(newStockList, this.state.date).then((res)=>{
-            console.log('done')
+        InventoryManagementAPI.createInstockList(newStockList, this.state.date).then((response)=>{
+            var resText = response.data.message;
+            dispatch(snackBarActions.openSnackBar(resText));
         })
         dispatch(actions.clearInstockList());
         this.setState({

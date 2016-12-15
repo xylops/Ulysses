@@ -56,7 +56,7 @@ router.post('/createInstockList', function(req, res, next) {
     //         res.json({message:'Something is wrong : ' + err})
     //     }else{
     //         console.log('New Client Created: ' + newClient)
-    //         res.json({message:'Client ' + req.query.newClient[1] + ' have been added to database'})
+            res.json({message:'Instock List has been added to database'})
     //     }
     // });
 });
