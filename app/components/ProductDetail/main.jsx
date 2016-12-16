@@ -1,5 +1,7 @@
 var React = require('react')
 var ReactDOM = require('react-dom');
+var {connect} = require('react-redux')
+var actions = require('../../actions/mainActions')
 
 //material-ui
 import Divider from 'material-ui/Divider';
@@ -10,6 +12,10 @@ import ProductList from './ProductList'
 
 
 var ProductDetail = React.createClass({
+    componentWillMount:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.changingNavBarText('Products Detail'))
+    },
     render:function(){
         return(
             <div>
@@ -22,4 +28,4 @@ var ProductDetail = React.createClass({
     }
 });
 
-module.exports = ProductDetail
+export default connect()(ProductDetail)

@@ -38,7 +38,6 @@ var newInstockItem = React.createClass({
             temp.push(elem.id.indexOf(item.id));
         })
         var targetItem = temp.indexOf(0)
-        console.log(item.id, date)
         InventoryManagementAPI.deleteInventoryRecord(item.id, date, item.inventory)
         dispatch(actions.removeNewItemFromNewList(targetItem))
     },

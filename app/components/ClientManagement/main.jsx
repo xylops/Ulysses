@@ -1,5 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var {connect} = require('react-redux')
+var actions = require('../../actions/mainActions')
 
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
@@ -17,6 +19,10 @@ const style = {
 };
 
 var ClientManagement = React.createClass({
+    componentWillMount:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.changingNavBarText('Client Mangement'))
+    },
     render:function(){
         return(
             <div>
@@ -30,4 +36,4 @@ var ClientManagement = React.createClass({
     }
 })
 
-module.exports = ClientManagement;
+export default connect()(ClientManagement)

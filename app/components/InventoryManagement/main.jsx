@@ -1,6 +1,7 @@
 var React = require('react')
 var {connect} = require('react-redux')
 var {Link} = require('react-router')
+var actions = require('../../actions/mainActions')
 
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
@@ -15,6 +16,10 @@ const style={
 }
 
 var main = React.createClass({
+    componentWillMount:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.changingNavBarText('Inventory Mangement'))
+    },
     render:function(){
         var currentLocation = this.props.location.pathname
         return(
