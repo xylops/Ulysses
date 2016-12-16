@@ -25,17 +25,10 @@ export var ownBrandNameFilter = (pName) =>{
     }
 }
 
-export var addNewItemToNewInstockList = (item) => {
-    return{
-        type:'INSERT_NEW_INSTOCK_LIST',
-        item
-    }
-}
-
-export var openSingleOBDialog = (id, name, inventory) =>{
+export var openSingleOBDialog = (id,productID, name, inventory) =>{
     return {
         type:'OPEN_DIALOG',
-        id, name, inventory
+        id, productID, name, inventory
     }
 }
 
@@ -70,5 +63,24 @@ export var editNewItemFromNewList = (targetItemIndex, amount) =>{
 export var clearInstockList = () =>{
     return {
         type: 'CLEAR_INSTOCK_LIST'
+    }
+}
+
+export var changeDate = (date) =>{
+    return {
+        type: 'CHANGE_DATE',
+        date
+    }
+}
+
+export var startFetchingDateList = () =>{
+    return {
+        type: 'START_FETCHING_DATE_LIST',
+    }
+}
+
+export var completeFetchingDateList = () =>{
+    return {
+        type: 'COMPLETE_FETCHING_DATE_LIST',
     }
 }

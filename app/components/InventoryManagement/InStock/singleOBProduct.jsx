@@ -14,19 +14,26 @@ const style = {
 }
 
 var singleOBProduct = React.createClass({
-    singleOBProduct:function(id, name, inventory){
+    singleOBProduct:function(id, productID, name, inventory){
         var {dispatch} = this.props;
-        dispatch(actions.openSingleOBDialog(id, name, inventory))
+        dispatch(actions.openSingleOBDialog(id,productID, name, inventory))
     },
     render:function(){
-        var {OBProduct} = this.props
+        var {OBProduct, date} = this.props
+        if(date === true){
+            var disable = true
+        }else{
+            var disable = false
+        }
         return (
             <RaisedButton
                 onTouchTap={()=>{
-                    this.singleOBProduct(OBProduct._id, OBProduct.ProductName, OBProduct.Inventory)
+                    this.singleOBProduct(OBProduct._id, OBProduct.ProductID, OBProduct.ProductName, OBProduct.Inventory)
                 }}
                 fullWidth={true}
-                style={style.tableRow}>
+                style={style.tableRow}
+                disabled={disable}
+                >
                 <div className="column small-4">
                     {OBProduct.ProductID}
                 </div>
@@ -38,4 +45,8 @@ var singleOBProduct = React.createClass({
     }
 })
 
-export default connect()(singleOBProduct)
+export default connect((state)=>{
+    return{
+        date : state.InStock.newInStockList.date,
+    }
+})(singleOBProduct)

@@ -12,7 +12,6 @@ module.exports = {
             return res;
         })
     },
-
     createInstockList:function(list, date){
         return axios({
             method:'post',
@@ -24,5 +23,14 @@ module.exports = {
             json:true
         })
     },
-
+    getDateInstockList: function(date){
+        return axios({
+            method:'post',
+            url:'/IM/getDateInstockList',
+            params:{
+                date
+            },
+            json:true
+        })
+    }
 }

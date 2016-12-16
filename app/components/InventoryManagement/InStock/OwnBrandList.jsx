@@ -14,8 +14,6 @@ import SingleOBProduct from './singleOBProduct'
 var InventoryManagementAPI = require('InventoryManagementAPI')
 
 const style = {
-    brandList:{
-    },
     isLoading:{
         textAlign:'center',
         paddingTop: 'calc(20%)'
@@ -26,9 +24,6 @@ var brandItem = React.createClass({
     componentDidMount:function(){
         var {dispatch} =this.props;
         dispatch(actions.startFetchOwnBrandList());
-        // axios.get('/IM/getOwnBrandList').then(function(res){
-        //     dispatch(actions.completeFetchOwnBrandList(res.data));
-        // })
         InventoryManagementAPI.getOwnBrandList().then((OBL)=>{
             dispatch(actions.completeFetchOwnBrandList(OBL.data));
         })
@@ -53,7 +48,7 @@ var brandItem = React.createClass({
                 })
             } else {
                 return (
-                    <div style={style}>
+                    <div style={style.isLoading}>
                         <CircularProgress size={80} thickness={5} />
                     </div>
                 )
@@ -63,7 +58,7 @@ var brandItem = React.createClass({
         return(
             <div>
                 <OBFilter/>
-                <div style={style.brandList} className="OBLIST">
+                <div className="OBLIST">
                     {renderList()}
                 </div>
                 <SingleOBDialog/>

@@ -32,6 +32,7 @@ var singleOBDialog = React.createClass({
                 id: item[0],
                 name: item[1],
                 inventory:item[2],
+                productID: item[3],
                 amount,
             }
             dispatch(actions.addNewItemToNewList(newItem));

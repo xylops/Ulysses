@@ -39,7 +39,7 @@ export var singleOBDialog = (state = {open:false,item:[], amountAdd:0}, action) 
         case 'OPEN_DIALOG':
             return {
                 open:true,
-                item:[action.id, action.name, action.inventory],
+                item:[action.id, action.name, action.inventory, action.productID,],
             }
         case 'CLOSE_DIALOG':
             return {
@@ -51,14 +51,16 @@ export var singleOBDialog = (state = {open:false,item:[], amountAdd:0}, action) 
     }
 }
 
-export var newInStockList = (state = {newEntry:[]}, action)=>{
+export var newInStockList = (state = {newEntry:[], date:true, fetchingDateList: false}, action)=>{
     switch (action.type){
         case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
             return {
+                ...state,
                 newEntry:[...state.newEntry, action.item]
             };
         case 'REMOVE_ITEM_FROM_INSTOCK_LIST':
             return {
+                ...state,
                 newEntry:[
                     ...state.newEntry.slice(0, action.targetItemIndex),
                     ...state.newEntry.slice(action.targetItemIndex + 1)
@@ -74,7 +76,23 @@ export var newInStockList = (state = {newEntry:[]}, action)=>{
             })
         case 'CLEAR_INSTOCK_LIST':
             return {
+                ...state,
                 newEntry : []
+            }
+        case 'CHANGE_DATE':
+            return{
+                ...state,
+                date:action.date
+            }
+        case 'START_FETCHING_DATE_LIST':
+            return {
+                ...state,
+                fetchingDateList: true
+            }
+        case 'COMPLETE_FETCHING_DATE_LIST':
+            return {
+                ...state,
+                fetchingDateList: false
             }
         default:
             return state;
