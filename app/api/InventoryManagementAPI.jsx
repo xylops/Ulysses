@@ -15,7 +15,7 @@ module.exports = {
     createInstockList:function(list, date){
         return axios({
             method:'post',
-            url:'/IM/createInstockList',
+            url:'/IM/createAndEditInstockList',
             params:{
                 list,
                 date
@@ -29,6 +29,18 @@ module.exports = {
             url:'/IM/getDateInstockList',
             params:{
                 date
+            },
+            json:true
+        })
+    },
+    deleteInventoryRecord: function(id, date, inventoryID){
+        return axios({
+            method:'post',
+            url:'/IM/deleteInventoryRecord',
+            params:{
+                id,
+                date,
+                inventoryID
             },
             json:true
         })

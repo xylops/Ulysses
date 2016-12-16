@@ -5,6 +5,9 @@ var actions = require('../../../actions/inStockAction')
 //material-ui
 import TextField from 'material-ui/TextField';
 
+//API
+var InventoryManagementAPI = require('InventoryManagementAPI')
+
 //style
 const style={
     main:{
@@ -29,12 +32,14 @@ var newInstockItem = React.createClass({
         dispatch(actions.editNewItemFromNewList(targetItem, e.target.value))
     },
     handleRemove:function(item){
-        var {dispatch , newStockList} = this.props
+        var {dispatch , newStockList, date} = this.props
         var temp = []
         newStockList.forEach(function(elem){
             temp.push(elem.id.indexOf(item.id));
         })
         var targetItem = temp.indexOf(0)
+        console.log(item.id, date)
+        InventoryManagementAPI.deleteInventoryRecord(item.id, date, item.inventory)
         dispatch(actions.removeNewItemFromNewList(targetItem))
     },
     render:function(){
@@ -61,6 +66,8 @@ var newInstockItem = React.createClass({
 
 export default connect((state)=>{
     return {
-        newStockList : state.InStock.newInStockList.newEntry
+        newStockList : state.InStock.newInStockList.newEntry,
+        date : state.InStock.newInStockList.date
+
     }
 })(newInstockItem)
