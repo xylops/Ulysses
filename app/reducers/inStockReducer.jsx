@@ -56,7 +56,6 @@ export var newInStockList = (state = {
     date:true,
     fetchingDateList: false,
     submitDialog:false,
-    advDialog:false
 }, action)=>{
     switch (action.type){
         case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
@@ -109,16 +108,6 @@ export var newInStockList = (state = {
             return {
                 ...state,
                 submitDialog:false
-            }
-        case 'OPEN_ADV_DIALOG':
-            return {
-                ...state,
-                advDialog:true
-            }
-        case 'CLOSE_ADV_DIALOG':
-            return {
-                ...state,
-                advDialog:false
             }
         default:
             return state;

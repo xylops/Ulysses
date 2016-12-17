@@ -8,15 +8,20 @@ import RaisedButton from 'material-ui/RaisedButton';
 //Style
 const style={
     input:{
-        height:'24px'
-    }
+        height:'24px',
+    },
 }
 
 var advanceDialog = React.createClass({
     getInitialState:function(){
         return{
             productName:'N/A',
-            product : {}
+            product : {},
+            validation:{
+                border:'2px solid grey',
+                borderRadius:'10px',
+                backgroundColor:'transparent'
+            }
         }
     },
     handleKeyPress:function(e){
@@ -32,7 +37,12 @@ var advanceDialog = React.createClass({
             dispatch(actions.addNewItemToNewList(newItem));
             this.setState({
                 productName:'N/A',
-                product:{}
+                product:{},
+                validation:{
+                    border:'2px solid grey',
+                    borderRadius:'10px',
+                    backgroundColor:'transparent'
+                }
             })
             ReactDOM.findDOMNode(this.refs.idInput).focus();
             this.refs.amountInput.value = ''
@@ -49,12 +59,22 @@ var advanceDialog = React.createClass({
         if(item.length === 1){
             this.setState({
                 productName: item[0].ProductName,
-                product:item[0]
+                product:item[0],
+                validation:{
+                    border:'2px solid green',
+                    borderRadius:'10px',
+                    backgroundColor:'rgba(1,230,1, 0.3)'
+                }
             })
         }else{
             this.setState({
                 productName: 'N/A',
-                product:{}
+                product:{},
+                validation:{
+                    border:'2px solid darkred',
+                    borderRadius:'10px',
+                    backgroundColor:'transparent'
+                }
             })
         }
     },
@@ -82,7 +102,7 @@ var advanceDialog = React.createClass({
                     <div className="column small-3">
                         <input type="text" ref='idInput' style={style.input} onChange={this.handleChange} disabled={disable}/>
                     </div>
-                    <div className="column small-6">
+                    <div className="column small-6" style={this.state.validation}>
                         {this.state.productName}
                     </div>
                     <div className="column small-3">

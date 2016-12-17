@@ -96,15 +96,3 @@ export var closeInStockDialog = () =>{
         type: 'CLOSE_SUBMIT_DIALOG',
     }
 }
-
-export var openAdvanceDialog = () =>{
-    return {
-        type: 'OPEN_ADV_DIALOG',
-    }
-}
-
-export var closeAdvanceDialog = () =>{
-    return {
-        type: 'CLOSE_ADV_DIALOG',
-    }
-}
