@@ -54,7 +54,7 @@ var advanceDialog = React.createClass({
         var value = this.refs.idInput.value;
         var id = value.toUpperCase()
         let item = ownBrandList.filter((elem)=>{
-            return elem.ProductID.indexOf(id) !== -1;
+            return elem.ProductID.indexOf(id) !== -1; 
         });
         if(item.length === 1){
             this.setState({

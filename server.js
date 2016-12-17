@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 
 var routes = require('./route/api');
-var productDetail = require('./route/ProductDetail');
+var productDetail = require('./route/productDetail');
 var clientManagement = require('./route/ClientManagement')
 var inventoryManagement = require('./route/InventoryManagement')
 
