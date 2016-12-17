@@ -70,11 +70,9 @@ router.post('/deleteProduct', function(req, res, next){
             res.json({message:"Product "+  req.query.ID +" have been delete from database"})
         }
     })
-
 })
 
 router.post('/updateProduct', function(req, res, next){
-
     productDetail.findOneAndUpdate({
         ProductID: req.query.UpdatedProduct[0]
     }, {

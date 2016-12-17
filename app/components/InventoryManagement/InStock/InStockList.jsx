@@ -7,14 +7,13 @@ var snackBarActions = require('../../../actions/snackBarActions')
 //material-ui
 import DatePicker from 'material-ui/DatePicker';
 import Paper from 'material-ui/Paper';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import LinearProgress from 'material-ui/LinearProgress';
 //API
 var InventoryManagementAPI = require('InventoryManagementAPI')
 //my component
 import InStockItem from './InStockItem'
+import InStockDialog from './InStockDialog'
 
 //style
 const style = {
@@ -22,38 +21,12 @@ const style = {
         width:'calc(100%)',
         paddingTop:'40px'
     },
-    dialog:{
-        textAlign:'center',
-        borderBottom: '1px solid black',
-        margin:'15px 40px'
-    },
     isLoading:{
         marginBottom:'20px'
     },
 }
 
 var NewInStockList = React.createClass({
-    getInitialState:function(){
-        return {
-            open:false,
-        }
-    },
-    handleOpen : function(){
-        this.setState({open: true});
-    },
-    handleClose : function() {
-        this.setState({open: false});
-    },
-    handleSave : function(){
-        var {dispatch, newStockList, date} = this.props;
-        InventoryManagementAPI.createInstockList(newStockList, date).then((response)=>{
-            var resText = response.data.message;
-            dispatch(snackBarActions.openSnackBar(resText));
-        })
-        dispatch(actions.clearInstockList());
-        dispatch(actions.changeDate(true))
-        this.setState({open: false});
-    },
     dateChange:function(e, date){
         var date = moment(date).format('DDMMYYYY');
         var {dispatch} = this.props;
@@ -97,36 +70,6 @@ var NewInStockList = React.createClass({
             }
 
         }
-        var confirmDialog = () =>{
-            if(newStockList.length >= 1){
-                return newStockList.map((item)=>{
-                    return(
-                        <div key={item.id} className="row"
-                            style={style.dialog}
-                        >
-                            <div className="column small-8">
-                                {item.name}
-                            </div>
-                            <div className="column small-4">
-                                {item.amount}
-                            </div>
-                        </div>
-                    )
-                })
-            }
-        }
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onTouchTap={this.handleClose}
-            />,
-            <FlatButton
-                label="Confirm!"
-                primary={true}
-                onTouchTap={this.handleSave}
-            />,
-        ];
         return(
             <div>
                 <div className="row">
@@ -140,15 +83,7 @@ var NewInStockList = React.createClass({
                 <Paper zDepth={2}>
                     {renderList()}
                 </Paper>
-                <Dialog
-                    title="CONFIRM?"
-                    actions={actions}
-                    modal={false}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
-                >
-                    {confirmDialog()}
-                </Dialog>
+                <InStockDialog/>
             </div>
 
         )
@@ -160,6 +95,5 @@ export default connect((state)=>{
         newStockList : state.InStock.newInStockList.newEntry,
         date : state.InStock.newInStockList.date,
         fetching : state.InStock.newInStockList.fetchingDateList,
-
     }
 })(NewInStockList)
