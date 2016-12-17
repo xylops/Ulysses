@@ -22,11 +22,12 @@ router.get('/allProductLevel', function(req, res, next) {
         }else{
             var json = [];
             doc.forEach(function(elem){
+                console.log(elem)
                 json.push({
                     _id: elem._id,
                     productID:elem.ProductID,
                     name: elem.ProductName,
-                    stockLevel: elem.Inventory.stockLevel
+                    stockLevel: elem.Inventory
                 })
             })
             res.json (json);
@@ -100,7 +101,6 @@ router.post('/deleteInventoryRecord', function(req, res, next) {
     var id = req.query.id
     var inventory = req.query.inventoryID
     inventoryRecord.find({Date:date,  RealPID: id}, function(err, data){
-
         if(data.length > 0){
             var removeItem = -data[0].StockLevelChanges
             console.log(inventory)
@@ -126,5 +126,7 @@ router.post('/getDateInstockList', function(req, res, next) {
         res.json(dataList)
     })
 });
+
+
 
 module.exports = router;

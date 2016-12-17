@@ -7,13 +7,14 @@ var snackBarActions = require('../../../actions/snackBarActions')
 //material-ui
 import DatePicker from 'material-ui/DatePicker';
 import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
 import LinearProgress from 'material-ui/LinearProgress';
+import RaisedButton from 'material-ui/RaisedButton';
 //API
 var InventoryManagementAPI = require('InventoryManagementAPI')
 //my component
 import InStockItem from './InStockItem'
 import InStockDialog from './InStockDialog'
+import AdvanceDialog from './InStockAdvance'
 
 //style
 const style = {
@@ -27,6 +28,11 @@ const style = {
 }
 
 var NewInStockList = React.createClass({
+    componentWillUnmount:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.clearInstockList())
+        dispatch(actions.changeDate(true))
+    },
     dateChange:function(e, date){
         var date = moment(date).format('DDMMYYYY');
         var {dispatch} = this.props;
@@ -68,24 +74,26 @@ var NewInStockList = React.createClass({
             } else if (newStockList.length === 0){
                 return <h3 style={{textAlign:'center'}}>Add New Product</h3>
             }
-
         }
         return(
             <div>
                 <div className="row">
-                    <div className="column small-6 medium-8">
+                    <div className="column small-6 medium-7">
                         <DatePicker hintText="Date" mode="landscape" onChange={this.dateChange} ref='datepicker'/><br/>
                     </div>
-                    <div className="column small-6 medium-4">
-                        <RaisedButton label="SUBMIT" primary={true} onTouchTap={this.handleOpen}/>
+                    <div className="column small-6 medium-5">
+                        <RaisedButton label="SUBMIT" primary={true} onTouchTap={()=>{
+                                dispatch(actions.openInStockDialog());
+                            }}/>
                     </div>
                 </div>
                 <Paper zDepth={2}>
                     {renderList()}
                 </Paper>
                 <InStockDialog/>
+                <hr/>
+                <AdvanceDialog/>
             </div>
-
         )
     }
 })

@@ -51,7 +51,13 @@ export var singleOBDialog = (state = {open:false,item:[], amountAdd:0}, action) 
     }
 }
 
-export var newInStockList = (state = {newEntry:[], date:true, fetchingDateList: false}, action)=>{
+export var newInStockList = (state = {
+    newEntry:[],
+    date:true,
+    fetchingDateList: false,
+    submitDialog:false,
+    advDialog:false
+}, action)=>{
     switch (action.type){
         case 'INSERT_NEW_ITEM_TO_INSTOCK_LIST':
             return {
@@ -93,6 +99,26 @@ export var newInStockList = (state = {newEntry:[], date:true, fetchingDateList: 
             return {
                 ...state,
                 fetchingDateList: false
+            }
+        case 'OPEN_SUBMIT_DIALOG':
+            return {
+                ...state,
+                submitDialog:true
+            }
+        case 'CLOSE_SUBMIT_DIALOG':
+            return {
+                ...state,
+                submitDialog:false
+            }
+        case 'OPEN_ADV_DIALOG':
+            return {
+                ...state,
+                advDialog:true
+            }
+        case 'CLOSE_ADV_DIALOG':
+            return {
+                ...state,
+                advDialog:false
             }
         default:
             return state;

@@ -18,16 +18,9 @@ const style={
 }
 
 var InStockDialog = React.createClass({
-    getInitialState:function(){
-        return {
-            open:false,
-        }
-    },
-    handleOpen : function(){
-        this.setState({open: true});
-    },
     handleClose : function() {
-        this.setState({open: false});
+        var {dispatch} = this.props;
+        dispatch(actions.closeInStockDialog())
     },
     handleSave : function(){
         var {dispatch, newStockList, date} = this.props;
@@ -37,10 +30,10 @@ var InStockDialog = React.createClass({
         })
         dispatch(actions.clearInstockList());
         dispatch(actions.changeDate(true))
-        this.setState({open: false});
+        dispatch(actions.closeInStockDialog())
     },
     render:function(){
-        var {dispatch, newStockList, date} = this.props
+        var {dispatch, newStockList, date, dialog} = this.props
         const actions = [
             <FlatButton
                 label="Cancel"
@@ -76,7 +69,7 @@ var InStockDialog = React.createClass({
                 title="CONFIRM?"
                 actions={actions}
                 modal={false}
-                open={this.state.open}
+                open={dialog}
                 onRequestClose={this.handleClose}
             >
                 {confirmDialog()}
@@ -89,5 +82,6 @@ export default connect((state)=>{
     return {
         newStockList : state.InStock.newInStockList.newEntry,
         date : state.InStock.newInStockList.date,
+        dialog: state.InStock.newInStockList.submitDialog,
     }
 })(InStockDialog)
