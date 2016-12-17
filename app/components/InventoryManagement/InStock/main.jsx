@@ -1,10 +1,11 @@
 var React = require('react')
+//Redux
 var {connect} = require('react-redux')
 var actions = require('../../../actions/mainActions')
 //material-ui
 import TopSection from './TopSection'
 import OwnBrandList from './OwnBrandList';
-import NewInStockList from './NewInStockList'
+import NewInStockList from './InStockList'
 
 var InStock = React.createClass({
     componentWillMount:function(){

@@ -1,10 +1,8 @@
 var React = require('react')
-
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../actions/clientManagementActions');
 var snackBarActions = require('../../actions/snackBarActions')
-
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -17,8 +15,7 @@ import ContentSave from 'material-ui/svg-icons/content/move-to-inbox';
 import PreviousPurchase from 'material-ui/svg-icons/action/receipt';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 //api
-var clientManagementAPI = require('../../api/clientManagementAPI')
-
+var clientManagementAPI = require('../../api/ClientManagementAPI')
 //Style
 const style = {
     dialog:{

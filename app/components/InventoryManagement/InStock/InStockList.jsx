@@ -1,9 +1,9 @@
 var React = require('react')
+var moment = require('moment')
+//Redux
 var {connect} = require('react-redux')
 var actions = require('../../../actions/inStockAction')
 var snackBarActions = require('../../../actions/snackBarActions')
-var moment = require('moment')
-
 //material-ui
 import DatePicker from 'material-ui/DatePicker';
 import Paper from 'material-ui/Paper';
@@ -11,12 +11,10 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import LinearProgress from 'material-ui/LinearProgress';
-
 //API
 var InventoryManagementAPI = require('InventoryManagementAPI')
-
 //my component
-import NewInstockItem from './newInstockItem'
+import InStockItem from './InStockItem'
 
 //style
 const style = {
@@ -91,7 +89,7 @@ var NewInStockList = React.createClass({
             } else if(newStockList.length !== 0){
                 return newStockList.map((item)=>{
                     return(
-                        <NewInstockItem key={item.id} item={item}/>
+                        <InStockItem key={item.id} item={item}/>
                     )
                 })
             } else if (newStockList.length === 0){

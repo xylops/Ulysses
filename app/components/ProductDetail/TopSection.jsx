@@ -1,14 +1,12 @@
 var React = require('react');
+//Redux
 var {connect} = require('react-redux')
 var actions = require('../../actions/productDetailActions');
-
-
 //material-ui
 import TextField from 'material-ui/TextField'
-
 //Component
 import CreateNewProduct from './CreateNewProduct'
-
+//Style
 const style={
     whole:{
         paddingTop:'15px',
@@ -32,7 +30,6 @@ var TopSection = React.createClass({
         var text = this.refs.filterText.getValue();
         dispatch(actions.updateProductFilterText(text))
     },
-
     render:function(){
         return(
             <div className="row" style={style.whole}>

@@ -1,17 +1,13 @@
 var React = require('react')
 var {connect} = require('react-redux');
 var actions = require('../../actions/productDetailActions');
-
 //material-ui
 import CircularProgress from 'material-ui/CircularProgress';
-
 //api
-var productDetailAPI = require('productDetailAPI')
-
+var productDetailAPI = require('ProductDetailAPI')
 //Component
 import SingleProduct from './SingleProduct'
 import SingleProductDialog from './SingleProductDialog'
-
 //Style
 const style = {
     textAlign:'center',

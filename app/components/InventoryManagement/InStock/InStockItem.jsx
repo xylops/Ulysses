@@ -1,13 +1,11 @@
 var React = require('react')
+//Redux
 var {connect} = require('react-redux');
 var actions = require('../../../actions/inStockAction')
-
 //material-ui
 import TextField from 'material-ui/TextField';
-
 //API
 var InventoryManagementAPI = require('InventoryManagementAPI')
-
 //style
 const style={
     main:{

@@ -1,19 +1,16 @@
 var React = require('react')
-
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../actions/productDetailActions');
 var snackBarActions = require('../../actions/snackBarActions')
-
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-
 //api
-var productDetailAPI = require('../../api/productDetailAPI')
+var productDetailAPI = require('ProductDetailAPI')
 
 var  CreateNewProduct = React.createClass({
     toggleDialog:function(){

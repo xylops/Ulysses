@@ -1,19 +1,14 @@
 var React = require('react');
-
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../actions/clientManagementActions')
-
 //material-ui
 import CircularProgress from 'material-ui/CircularProgress';
-
 //api
-var clientManagementAPI = require('clientManagementAPI')
-
+var clientManagementAPI = require('ClientManagementAPI')
 //my Component
 import SingleClient from './SingleClient';
 import ClientDetail from './ClientDetail';
-
 //Style
 const style = {
     textAlign:'center',

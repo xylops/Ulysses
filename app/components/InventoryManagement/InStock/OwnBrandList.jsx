@@ -1,18 +1,16 @@
 var React = require('react')
+//Redux
 var {connect} = require('react-redux')
 var actions = require('../../../actions/inStockAction')
-
 //material-ui
 import CircularProgress from 'material-ui/CircularProgress';
-
-//My component
-import OBFilter from './OBFilter'
-import SingleOBDialog from './singleOBDialog'
-import SingleOBProduct from './singleOBProduct'
-
 //API
 var InventoryManagementAPI = require('InventoryManagementAPI')
-
+//My component
+import OBFilter from './OwnBrandFilter'
+import SingleOBDialog from './OwnBrandDialog'
+import SingleOBProduct from './OwnBrandProduct'
+//style
 const style = {
     isLoading:{
         textAlign:'center',

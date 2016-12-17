@@ -1,13 +1,10 @@
 var React = require('react');
-
 //Redux
 var {connect} = require('react-redux')
 var actions = require('../../actions/productDetailActions');
-
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
-
-
+//Style
 const style={
     tableRow:{
         textAlign:'center',

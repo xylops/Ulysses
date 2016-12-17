@@ -1,11 +1,10 @@
 var React = require('react')
 var ReactDOM = require('react-dom');
+//Redux
 var {connect} = require('react-redux')
 var actions = require('../../actions/mainActions')
-
 //material-ui
 import Divider from 'material-ui/Divider';
-
 //Component
 import TopSection from './TopSection'
 import ProductList from './ProductList'

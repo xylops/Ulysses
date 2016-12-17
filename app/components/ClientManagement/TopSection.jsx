@@ -1,13 +1,11 @@
 var React = require('react');
 var {connect} = require('react-redux')
 var actions = require('../../actions/clientManagementActions')
-
 //material-ui
 import TextField from 'material-ui/TextField'
-
 //Component
 import CreateNewClient from './CreateNewClient'
-
+//style
 const style={
     whole:{
         paddingTop:'15px',

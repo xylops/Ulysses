@@ -1,11 +1,10 @@
 var React = require('react')
+//Redux
 var {connect} = require('react-redux');
 var actions = require('../../../actions/inStockAction')
-
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
 //style
 const style = {
     fontSize:'50px',

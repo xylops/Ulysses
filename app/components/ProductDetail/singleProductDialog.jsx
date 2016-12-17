@@ -1,10 +1,8 @@
 var React = require('react')
-
 //redux
 var {connect} = require('react-redux')
 var actions = require('../../actions/productDetailActions');
 var snackBarActions = require('../../actions/snackBarActions')
-
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -14,15 +12,13 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentDelete from 'material-ui/svg-icons/content/clear';
 import ContentSave from 'material-ui/svg-icons/content/move-to-inbox';
 import Checkbox from 'material-ui/Checkbox';
-
 //api
-var productDetailAPI = require('productDetailAPI')
-
+var productDetailAPI = require('ProductDetailAPI')
+//style
 const customContentStyle = {
   width: '80%',
   maxWidth: 'none',
 };
-
 const styles = {
   checkbox: {
     marginBottom: 16,
