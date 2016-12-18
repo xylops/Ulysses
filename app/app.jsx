@@ -12,7 +12,7 @@ injectTapEventPlugin();
 import Ulysses from 'Ulysses';
 import HomePage from 'HomePage';
 import ClientManagement from './components/ClientManagement/main';
-var InvoiceSystem = require('./components/InvoiceSystem/InvoiceSystem');
+import InvoiceSystem from './components/InvoiceSystem/main';
 import ProductDetail from './components/ProductDetail/main';
 import InventoryManagement from './components/InventoryManagement/main'
 import InStock from './components/InventoryManagement/InStock/main'
