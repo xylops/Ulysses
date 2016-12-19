@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var client = require('../modal/client_model.js')
+var invoice = require('../modal/invoice_model.js')
 
-router.post('/findClient', function(req, res, next) {
-    var filter = JSON.parse(req.query.searchFilter)
-    console.log(filter)
-    client.find(filter, function(err, cli){
-        res.json(cli)
-        console.log(cli)
+router.post('/checkInvoicePerDay', function(req, res, next) {
+    var date = req.query.date
+    invoice.find({date:date}, function(err, data){
+        res.json({numberOfInvoice:data.length})
+        console.log(data.length)
     })
 });
 

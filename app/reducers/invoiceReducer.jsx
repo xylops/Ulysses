@@ -1,6 +1,10 @@
 import update from 'react-addons-update';
 
-export var invoiceClient = (state ={client:{}}, action) => {
+export var createInvoice = (state ={
+    client:{},
+    date:'',
+    invoiceID:''
+}, action) => {
     switch (action.type){
         case 'ADD_CLIENT':
             return{
@@ -11,6 +15,16 @@ export var invoiceClient = (state ={client:{}}, action) => {
             return{
                 ...state,
                 client:{}
+            }
+        case 'ADD_DATE':
+            return{
+                ...state,
+                date:action.date
+            }
+        case 'ADD_INVOICE_ID':
+            return{
+                ...state,
+                invoiceID:action.invoiceID
             }
         default:
             return state

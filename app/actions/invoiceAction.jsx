@@ -22,3 +22,17 @@ export var closeDialog = () =>{
         type:'CLOSE_DIALOG'
     }
 }
+
+export var addDate = (date) =>{
+    return {
+        type:'ADD_DATE',
+        date
+    }
+}
+
+export var addInvoiceID = (invoiceID) =>{
+    return {
+        type:'ADD_INVOICE_ID',
+        invoiceID
+    }
+}

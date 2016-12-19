@@ -1,12 +1,12 @@
 var axios = require('axios');
 
 module.exports = {
-    findClient:function(searchFilter){
+    checkInvoicePerDay:function(date){
         return axios({
             method:'post',
-            url:'/IV/findClient',
+            url:'/IV/checkInvoicePerDay',
             data:{
-                searchFilter
+                date
             },
             json:true
         })

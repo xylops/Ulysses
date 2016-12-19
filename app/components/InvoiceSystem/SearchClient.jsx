@@ -90,6 +90,6 @@ var SearchClient = React.createClass({
 
 export default connect((state)=>{
     return {
-        client: state.invoice.invoiceClient.client
+        client: state.invoice.createInvoice.client
     }
 })(SearchClient)

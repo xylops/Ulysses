@@ -25,7 +25,7 @@ var store = require('configureStore').configure();
 
 store.subscribe(() => {
     var state = store.getState();
-    console.log('New state', state.InStock);
+    console.log('New state', state.invoice);
 });
 console.log(store.getState())
 
