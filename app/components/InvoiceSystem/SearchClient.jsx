@@ -1,8 +1,15 @@
 var React = require('react');
+//redux
+var {connect} = require('react-redux')
+var actions = require('../../actions/invoiceAction');
 //material-ui
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
+import RaisedButton from 'material-ui/RaisedButton';
+//my component
+import SearchClientDialog from './SearchClientDialog'
+//api
+var clientManagementAPI = require('ClientManagementAPI')
 
 const style = {
     form:{
@@ -11,50 +18,78 @@ const style = {
     },
     formText:{
         textAlign:'right',
-        marginTop:10
+    },
+    searchBtn:{
+        float:'right'
     }
 };
 
-var ISS = React.createClass({
+var SearchClient = React.createClass({
     render:function(){
-        var renderButton = ()=>{
-            
+        var {client, dispatch} = this.props
+        var renderSearch = ()=>{
+            if(Object.keys(client).length === 0){
+                return (
+                    <div>
+                        <RaisedButton label="Search Client" primary={true} fullWidth={true} onTouchTap={()=>{
+                                dispatch(actions.openDialog())
+                            }}/>
+                    </div>
+                )
+            }else{
+                return (
+                    <div>
+                        <div className="row">
+                            <div className="column medium-4" >
+                                <h5 style={style.formText}>Name: </h5>
+                            </div>
+                            <div className="column medium-8">
+                                {client.name}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="column medium-4" style={{textAlign:'right'}}>
+                                <h5 style={style.formText}> Client ID: </h5>
+                            </div>
+                            <div className="column medium-8">
+                                {client.id}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="column medium-4" style={{textAlign:'right'}}>
+                                <h5 style={style.formText}> Address: </h5>
+                            </div>
+                            <div className="column medium-8">
+                                {client.address}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="column medium-4" style={{textAlign:'right'}}>
+                                <h5 style={style.formText}> Phone: </h5>
+                            </div>
+                            <div className="column medium-8">
+                                {client.phone}
+                            </div>
+                        </div>
+                        <RaisedButton label="Change Client" primary={true} fullWidth={true} onTouchTap={()=>{
+                                dispatch(actions.openDialog())
+                            }}/>
+                    </div>
+                )
+            }
         }
         return(
             <div>
-                <div className="row">
-                    <div className="column medium-4" >
-                        <h5 style={style.formText}>Name: </h5>
-                    </div>
-                    <div className="column medium-8">
-                        <TextField hintText="Client Name" fullWidth={true}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="column medium-4" style={{textAlign:'right'}}>
-                        <h5 style={style.formText}> Client ID: </h5>
-                    </div>
-                    <div className="column medium-8">
-                        <TextField hintText="Client ID" fullWidth={true}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="column medium-4" style={{textAlign:'right'}}>
-                        <h5 style={style.formText}> Address: </h5>
-                    </div>
-                    <div className="column medium-8">
-                        <TextField
-                            hintText="Address will be automatically generate if the correct client is select"
-                            multiLine={true}
-                            rows={2}
-                            fullWidth={true}
-                        /><br />
-                    </div>
-                </div>
+                {renderSearch()}
+                <SearchClientDialog/>
             </div>
 
         )
     }
 })
 
-module.exports = ISS;
+export default connect((state)=>{
+    return {
+        client: state.invoice.invoiceClient.client
+    }
+})(SearchClient)

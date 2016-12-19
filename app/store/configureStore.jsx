@@ -3,6 +3,7 @@ var thunk = require('redux-thunk').default;
 import clientManagement from '../reducers/clientManagementCombiner'
 import productDetail from '../reducers/productDetailCombiner'
 import InStock from '../reducers/inStockCombiner'
+import invoice from '../reducers/invoiceCombiner'
 import snackBar from '../reducers/snackBarCombiner'
 import main from '../reducers/mainCombiner'
 
@@ -14,6 +15,7 @@ import main from '../reducers/mainCombiner'
         productDetail,
         clientManagement,
         InStock,
+        invoice,
         main,
      })
 
