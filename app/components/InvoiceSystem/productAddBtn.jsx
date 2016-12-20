@@ -35,9 +35,9 @@ var productAddBtn = React.createClass({
     handleClose:function(){
         var {dispatch} = this.props
         dispatch(actions.closeAddItemDialog())
-        dispatch(actions.updateItem(undefined))
+        dispatch(actions.updateDialogItem(undefined))
         dispatch(actions.addItemDialogSearchText(''))
-
+        dispatch(actions.updateAmount(null))
     },
     handleSearchTextChange:function(){
         var {dispatch} = this.props
@@ -46,13 +46,13 @@ var productAddBtn = React.createClass({
     handleItemClick:function(product){
         var {dispatch, item} = this.props
         if(item){
-            dispatch(actions.updateItem(undefined))
+            dispatch(actions.updateDialogItem(undefined))
             dispatch(actions.updateAmount(null));
             setTimeout(()=>{
-                dispatch(actions.updateItem(product));
+                dispatch(actions.updateDialogItem(product));
             }, 50)
         }else{
-            dispatch(actions.updateItem(product));
+            dispatch(actions.updateDialogItem(product));
         }
     },
     calculateAmount:function(){
@@ -62,7 +62,6 @@ var productAddBtn = React.createClass({
         var discount = this.refs.discount.getValue();
 
         if(quantity !== '' && price !== ''){
-            console.log('calculating')
             if(discount !== ''){
                 var amount = quantity * price * (1 - discount)
                 dispatch(actions.updateAmount(amount));
@@ -70,7 +69,6 @@ var productAddBtn = React.createClass({
                 var amount = quantity * price
                 dispatch(actions.updateAmount(amount));
             }
-
         }
     },
     handleSave:function(){
@@ -84,10 +82,13 @@ var productAddBtn = React.createClass({
         var quantity = this.refs.quantity.getValue();
         var amount = amount;
 
-        var newItem = [
-            id,productID, productName, spec, price, discount, quantity, amount
-        ]
-        console.log(newItem)
+        var newItem = {id,productID, productName, spec, price, discount, quantity, amount}
+
+        dispatch(actions.addItem(newItem));
+        dispatch(actions.closeAddItemDialog());
+        dispatch(actions.updateDialogItem(undefined));
+        dispatch(actions.addItemDialogSearchText(''))
+        dispatch(actions.updateAmount(null));
     },
     render:function(){
         var {dispatch, productList, open, searchText, item, amount} = this.props
@@ -153,7 +154,7 @@ var productAddBtn = React.createClass({
                             ref = "price"
                         /><br />
                         <TextField
-                            hintText="e.g. 0.05"
+                            hintText="e.g. 0.05 = 5% OFF"
                             floatingLabelText="Discount"
                             onChange={this.calculateAmount}
                             type="number"

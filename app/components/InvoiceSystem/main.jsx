@@ -10,8 +10,8 @@ var productDetailAPI = require('ProductDetailAPI')
 
 //my component
 import SearchClient from './SearchClient';
-import InvoiceDetail from './InvoiceDetail'
-var InvoiceSystemProduct = require('./InvoiceSystemProduct')
+import InvoiceDetail from './InvoiceDetail';
+import ProductSection from './ProductSection';
 
 
 const style={
@@ -54,7 +54,7 @@ var InvoiceSystem = React.createClass({
                     </div>
                 </div>
                 <hr style={{borderColor:'white'}}/>
-                <InvoiceSystemProduct/>
+                <ProductSection/>
             </div>
         )
     }

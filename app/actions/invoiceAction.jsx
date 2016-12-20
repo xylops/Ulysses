@@ -56,9 +56,9 @@ export var addItemDialogSearchText = (text) => {
     }
 }
 
-export var updateItem = (item) => {
+export var updateDialogItem = (item) => {
     return {
-        type : 'UPDATE_ITEM',
+        type : 'UPDATE_DIALOG_ITEM',
         item
     }
 }
@@ -67,5 +67,12 @@ export var updateAmount = (amount) => {
     return {
         type : 'UPDATE_AMOUNT',
         amount
+    }
+}
+
+export var addItem = (item) => {
+    return {
+        type : 'ADD_ITEM',
+        item
     }
 }

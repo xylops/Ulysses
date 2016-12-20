@@ -3,7 +3,8 @@ import update from 'react-addons-update';
 export var createInvoice = (state ={
     client:{},
     date:'',
-    invoiceID:''
+    invoiceID:'',
+    item:[]
 }, action) => {
     switch (action.type){
         case 'ADD_CLIENT':
@@ -25,6 +26,11 @@ export var createInvoice = (state ={
             return{
                 ...state,
                 invoiceID:action.invoiceID
+            }
+        case 'ADD_ITEM':
+            return {
+                ...state,
+                item:[...state.item, action.item]
             }
         default:
             return state
@@ -65,7 +71,7 @@ export var addItemDialog = (state = {dialog:false, searchText:'', item:undefined
                 ...state,
                 searchText: action.text
             }
-        case 'UPDATE_ITEM':
+        case 'UPDATE_DIALOG_ITEM':
             return{
                 ...state,
                 item:action.item
