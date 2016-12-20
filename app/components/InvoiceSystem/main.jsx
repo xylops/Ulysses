@@ -2,9 +2,12 @@ var React = require('react');
 //redux
 var {connect} = require('react-redux');
 var clientAction = require('../../actions/clientManagementActions')
+var productActions = require('../../actions/productDetailActions');
 //material-ui
 //API
 var clientManagementAPI = require('ClientManagementAPI')
+var productDetailAPI = require('ProductDetailAPI')
+
 //my component
 import SearchClient from './SearchClient';
 import InvoiceDetail from './InvoiceDetail'
@@ -24,11 +27,19 @@ const style={
 var InvoiceSystem = React.createClass({
     componentWillMount:function(){
         var {dispatch} = this.props;
+        //adding client list
         dispatch(clientAction.startFetchClientList())
         clientManagementAPI.getFullClientData().then((CL)=>{
             dispatch(clientAction.completeFetchClientList(CL.data));
         })
         dispatch(clientAction.updateClientFilterText(""))
+        //add product list
+        dispatch(productActions.startFetchPDL())
+        productDetailAPI.getFullProductData().then((PDL)=>{
+            dispatch(productActions.completeFetchPDL(PDL.data));
+        })
+        dispatch(productActions.updateProductFilterText(""))
+
     },
     render:function(){
         return(

@@ -36,3 +36,36 @@ export var addInvoiceID = (invoiceID) =>{
         invoiceID
     }
 }
+
+export var openAddItemDialog = () =>{
+    return{
+        type:'OPEN_ADD_ITEM_DIALOG'
+    }
+}
+
+export var closeAddItemDialog = () =>{
+    return{
+        type:'CLOSE_ADD_ITEM_DIALOG'
+    }
+}
+
+export var addItemDialogSearchText = (text) => {
+    return {
+        type : 'UPDATE_ADD_ITEM_SEARCH_TEXT',
+        text
+    }
+}
+
+export var updateItem = (item) => {
+    return {
+        type : 'UPDATE_ITEM',
+        item
+    }
+}
+
+export var updateAmount = (amount) => {
+    return {
+        type : 'UPDATE_AMOUNT',
+        amount
+    }
+}

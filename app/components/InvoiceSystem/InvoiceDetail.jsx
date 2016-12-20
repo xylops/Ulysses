@@ -43,18 +43,18 @@ var InvoiceDetail = React.createClass({
             <div>
                 <div className="row">
                     <div className="column medium-4" style={{textAlign:'right'}}>
-                        <h5 style={style.formText}> Invoice Number: </h5>
-                    </div>
-                    <div className="column medium-8">
-                        {invoiceID}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="column medium-4" style={{textAlign:'right'}}>
                         <h5 style={style.dateInput}> Date of Creation </h5>
                     </div>
                     <div className="column medium-8">
                          <DatePicker hintText="Landscape Dialog" mode="landscape" fullWidth={true} onChange={this.handleChange}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column medium-4" style={{textAlign:'right'}}>
+                        <h5 style={style.formText}> Invoice Number: </h5>
+                    </div>
+                    <div className="column medium-8">
+                        {invoiceID}
                     </div>
                 </div>
             </div>

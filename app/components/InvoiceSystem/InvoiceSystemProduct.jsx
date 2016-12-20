@@ -1,5 +1,8 @@
 var React = require('react');
-
+//redux
+var {connect} = require('react-redux');
+//my component
+import ProductAddBtn from './productAddBtn';
 
 const style = {
     paper:{
@@ -18,6 +21,8 @@ var ISP = React.createClass({
                 <div className="column medium-2 hide-for-small-only">Unit Price</div>
                 <div className="column medium-1">Discount</div>
                 <div className="column medium-2">Amount</div>
+                <br/><hr/><br/>
+                <ProductAddBtn/>
             </div>
 
         )
