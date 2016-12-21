@@ -4,6 +4,7 @@ var {connect} = require('react-redux');
 //my component
 import ProductAddBtn from './productAddBtn';
 import AdvanceProductAdd from './AdvanceProductAdd';
+import ItemList from './ItemList';
 
 const style = {
     paper:{
@@ -17,7 +18,8 @@ var ISP = React.createClass({
             <div className="row" style={style.paper}>
                 <AdvanceProductAdd/>
                 <br/>
-
+                <ItemList/>
+                <br/>
                 <ProductAddBtn/>
             </div>
 

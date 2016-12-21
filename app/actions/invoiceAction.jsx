@@ -76,3 +76,40 @@ export var addItem = (item) => {
         item
     }
 }
+
+export var deleteItem = (targetItemIndex) => {
+    return {
+        type : 'DELETE_LIST_ITEM',
+        targetItemIndex
+    }
+}
+
+///-------------AdvanceProductAdd
+
+export var updateAdvanceName = (name) => {
+    return {
+        type : 'UPDATE_ADVANCE_INVOICE_NAME',
+        name
+    }
+}
+
+export var updateAdvanceSpec = (spec) => {
+    return {
+        type : 'UPDATE_ADVANCE_INVOICE_SPEC',
+        spec
+    }
+}
+
+export var updateAdvancePrice = (price) => {
+    return {
+        type : 'UPDATE_ADVANCE_INVOICE_PRICE',
+        price
+    }
+}
+
+export var updateAdvanceAmount = (amount) => {
+    return {
+        type : 'UPDATE_ADVANCE_INVOICE_AMOUNT',
+        amount
+    }
+}

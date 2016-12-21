@@ -74,15 +74,15 @@ var productAddBtn = React.createClass({
     handleSave:function(){
         var {dispatch, item, amount} = this.props;
         var id = item._id
-        var productID = item.ProductID;
-        var productName = item.ProductName
-        var spec = this.refs.spec.getValue();
-        var price = this.refs.price.getValue();
+        var ProductID = item.ProductID;
+        var ProductName = item.ProductName
+        var Spec = this.refs.spec.getValue();
+        var Price = this.refs.price.getValue();
         var discount = this.refs.price.getValue();
         var quantity = this.refs.quantity.getValue();
         var amount = amount;
 
-        var newItem = {id,productID, productName, spec, price, discount, quantity, amount}
+        var newItem = {id,ProductID, ProductName, Spec, Price, discount, quantity, amount}
 
         dispatch(actions.addItem(newItem));
         dispatch(actions.closeAddItemDialog());
