@@ -25,9 +25,14 @@ const style ={
         overflowX:'hidden'
     }
 }
-//dialog action
 
 var productAddBtn = React.createClass({
+    componentDidMount:function(){
+
+    },
+    componentWillUnmount:function(){
+
+    },
     handleOpen:function(){
         var {dispatch} = this.props
         dispatch(actions.openAddItemDialog())
@@ -113,7 +118,6 @@ var productAddBtn = React.createClass({
                         }}>
                         <div className="column medium-4 hide-for-small-only"> {product.ProductID} </div>
                         <div className="column medium-8 small-12"> {product.ProductName} </div>
-
                     </RaisedButton>
                 )
             })

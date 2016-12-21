@@ -27,6 +27,7 @@ var SingleItemDialog = React.createClass({
                     {item.ProductName}
                 </div>
                 <div className="column small-2">
+                    {item.Spec}
                 </div>
                 <div className="column small-1">
                     {item.quantity}
