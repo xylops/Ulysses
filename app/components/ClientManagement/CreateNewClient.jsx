@@ -24,8 +24,9 @@ var  CreateNewProduct = React.createClass({
         var address = this.refs.address.getValue();
         var phone = this.refs.phone.getValue();
         var delieverytime = this.refs.delieverytime.getValue();
+        var paymentMethod = this.refs.paymentMethod.getValue()
 
-        var newClient = [id, name, address, phone, delieverytime]
+        var newClient = [id, name, address, phone, delieverytime, paymentMethod]
 
         clientManagementAPI.createNewClient(newClient).then((response)=>{
             var resText = response.data.message;
@@ -68,26 +69,41 @@ var  CreateNewProduct = React.createClass({
                     onRequestClose={this.toggleDialog}
                     >
                     <div className="text-center">
-                        <TextField
-                            floatingLabelText="Client ID"
-                            ref="id"
-                        /><br/>
-                        <TextField
-                            floatingLabelText="Name"
-                            ref="name"
-                        /><br/>
-                        <TextField
-                            floatingLabelText="Address"
-                            ref="address"
-                        /><br/>
-                        <TextField
-                            floatingLabelText="Phone Number"
-                            ref="phone"
-                        /><br/>
-                        <TextField
-                            floatingLabelText="Delievery Time"
-                            ref="delieverytime"
-                        /><br/>
+                        <div className="row">
+                            <div className="column small-12 medium-6">
+                                <TextField
+                                    floatingLabelText="Client ID"
+                                    ref="id"
+                                /><br/>
+                                <TextField
+                                    floatingLabelText="Name"
+                                    ref="name"
+                                /><br/>
+                                <TextField
+                                    floatingLabelText="Address"
+                                    ref="address"
+                                /><br/>
+                                <TextField
+                                    floatingLabelText="Phone Number"
+                                    ref="phone"
+                                /><br/>
+                            </div>
+                            <div className="column small-12 medium-6">
+                                <TextField
+                                    floatingLabelText="Delievery Time"
+                                    ref="delieverytime"
+                                /><br/>
+                                <TextField
+                                    hintText="Payment Method"
+                                    floatingLabelText="Payment Method"
+                                    multiLine={true}
+                                    rows={2}
+                                    ref="paymentMethod"
+                                /><br />
+                            </div>
+                        </div>
+
+
                     </div>
                 </Dialog>
 

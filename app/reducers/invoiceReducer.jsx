@@ -93,31 +93,3 @@ export var addItemDialog = (state = {dialog:false, searchText:'', item:undefined
             return state
     }
 }
-
-export var advanceProductAdd = (state = {name:'', spec:'', price:'', amount:''}, action) =>{
-    switch(action.type){
-        case 'UPDATE_ADVANCE_INVOICE_NAME':
-            return {
-                ...state,
-                name:action.name
-            }
-        case 'UPDATE_ADVANCE_INVOICE_SPEC':
-            return {
-                ...state,
-                spec:action.spec
-            }
-        case 'UPDATE_ADVANCE_INVOICE_PRICE':
-            return {
-                ...state,
-                price:action.price
-            }
-        case 'UPDATE_ADVANCE_INVOICE_AMOUNT':
-            return {
-                ...state,
-                amount : action.amount
-            }
-
-        default:
-            return state
-    }
-}

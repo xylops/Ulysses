@@ -41,9 +41,9 @@ var ClientDetail = React.createClass({
         var address = this.refs.address.getValue();
         var phone = this.refs.phone.getValue();
         var delieverytime = this.refs.delieverytime.getValue();
+        var paymentMethod = this.refs.paymentMethod.getValue();
 
-        var updatedClient = [id, name, address, phone, delieverytime]
-        console.log(updatedClient)
+        var updatedClient = [id, name, address, phone, delieverytime, paymentMethod]
         clientManagementAPI.updateClient(updatedClient).then((response)=>{
             var resText = response.data.message;
             dispatch(actions.startFetchClientList())
@@ -128,7 +128,14 @@ var ClientDetail = React.createClass({
                         /><br/>
                     </div>
                     <div className="column medium-4 hide-for-small-only">
-                        <b style={{textAlign:'center'}}><h3>Actions</h3></b>
+                        <TextField
+                            hintText="Payment Method"
+                            floatingLabelText="Payment Method "
+                            defaultValue={clientAttr.remark}
+                            multiLine={true}
+                            fullWidth={true}
+                            ref="paymentMethod"
+                        /><br />
                         <RaisedButton label="Previous Purchase Record" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="Save changes" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogUpdate}/>

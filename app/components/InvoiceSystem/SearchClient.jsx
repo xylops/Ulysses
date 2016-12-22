@@ -14,7 +14,6 @@ var clientManagementAPI = require('ClientManagementAPI')
 const style = {
     form:{
         width:'100%',
-        margin:30
     },
     formText:{
         textAlign:'right',
@@ -49,14 +48,6 @@ var SearchClient = React.createClass({
                         </div>
                         <div className="row">
                             <div className="column medium-4" style={{textAlign:'right'}}>
-                                <h5 style={style.formText}> Client ID: </h5>
-                            </div>
-                            <div className="column medium-8">
-                                {client.id}
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="column medium-4" style={{textAlign:'right'}}>
                                 <h5 style={style.formText}> Address: </h5>
                             </div>
                             <div className="column medium-8">
@@ -69,6 +60,22 @@ var SearchClient = React.createClass({
                             </div>
                             <div className="column medium-8">
                                 {client.phone}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="column medium-4" style={{textAlign:'right'}}>
+                                <h5 style={style.formText}> DelieveryTime: </h5>
+                            </div>
+                            <div className="column medium-8">
+                                {client.delieverytime}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="column medium-4" style={{textAlign:'right'}}>
+                                <h5 style={style.formText}> Remark: </h5>
+                            </div>
+                            <div className="column medium-8">
+                                {client.remark}
                             </div>
                         </div>
                         <RaisedButton label="Change Client" primary={true} fullWidth={true} onTouchTap={()=>{

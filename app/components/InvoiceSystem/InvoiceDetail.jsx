@@ -4,8 +4,8 @@ var moment = require('moment')
 var {connect} = require('react-redux')
 var actions = require('../../actions/invoiceAction');
 ///material-ui
-import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
+import RaisedButton from 'material-ui/RaisedButton';
+
 //api
 var invoiceAPI = require('invoiceAPI')
 
@@ -16,14 +16,13 @@ const style={
     },
     dateInput :{
         textAlign:'right',
-        marginTop:10
     }
 
 }
 var InvoiceDetail = React.createClass({
-    handleChange:function(e, date){
+    componentDidMount:function(){
         var {dispatch} = this.props
-        var date = moment(date).format('YYYYMMDD');
+        var date = moment().format('YYYYMMDD');
         dispatch(actions.addDate(date))
         invoiceAPI.checkInvoicePerDay(date).then((response)=>{
             var numberOfInvoice = response.data.numberOfInvoice;
@@ -37,8 +36,13 @@ var InvoiceDetail = React.createClass({
             dispatch(actions.addInvoiceID(invoiceID))
         })
     },
+    handleSave:function(){
+        var {invoice} = this.props
+        invoiceAPI.createNewInvoice(invoice)
+    },
     render:function(){
-        var {invoiceID} = this.props
+        var {invoiceID, date} = this.props
+        var formateDate = moment(date).format('DD/MM/YYYY')
         return(
             <div>
                 <div className="row">
@@ -46,7 +50,7 @@ var InvoiceDetail = React.createClass({
                         <h5 style={style.dateInput}> Date of Creation </h5>
                     </div>
                     <div className="column medium-8">
-                         <DatePicker hintText="Landscape Dialog" mode="landscape" fullWidth={true} onChange={this.handleChange}/>
+                         {formateDate}
                     </div>
                 </div>
                 <div className="row">
@@ -57,6 +61,9 @@ var InvoiceDetail = React.createClass({
                         {invoiceID}
                     </div>
                 </div>
+                <RaisedButton label="Top 10 Purchase Item" fullWidth={true} style={{marginTop:'16px'}}/>
+                <RaisedButton label="Clear all field" fullWidth={true} secondary={true} style={{marginTop:'10px'}}/>
+                <RaisedButton label="Submit Invoice" fullWidth={true} primary={true} style={{marginTop:'10px'}} onTouchTap={this.handleSave}/>
             </div>
         )
     }
@@ -64,6 +71,8 @@ var InvoiceDetail = React.createClass({
 
 export default connect((state)=>{
     return {
-        invoiceID : state.invoice.createInvoice.invoiceID
+        invoiceID : state.invoice.createInvoice.invoiceID,
+        date:state.invoice.createInvoice.date,
+        invoice: state.invoice.createInvoice
     }
 })(InvoiceDetail)

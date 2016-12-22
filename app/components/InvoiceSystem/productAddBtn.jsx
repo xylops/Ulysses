@@ -27,12 +27,6 @@ const style ={
 }
 
 var productAddBtn = React.createClass({
-    componentDidMount:function(){
-
-    },
-    componentWillUnmount:function(){
-
-    },
     handleOpen:function(){
         var {dispatch} = this.props
         dispatch(actions.openAddItemDialog())
@@ -68,7 +62,7 @@ var productAddBtn = React.createClass({
 
         if(quantity !== '' && price !== ''){
             if(discount !== ''){
-                var amount = quantity * price * (1 - discount)
+                var amount = quantity * price * ((100 - discount)*0.01)
                 dispatch(actions.updateAmount(amount));
             }else{
                 var amount = quantity * price
@@ -83,17 +77,20 @@ var productAddBtn = React.createClass({
         var ProductName = item.ProductName
         var Spec = this.refs.spec.getValue();
         var Price = this.refs.price.getValue();
-        var discount = this.refs.price.getValue();
+        var discount = this.refs.discount.getValue() + '%';
         var quantity = this.refs.quantity.getValue();
         var amount = amount;
+        if(id && ProductID && Price && quantity && amount > 0){
+            var newItem = {id,ProductID, ProductName, Spec, Price, discount, quantity, amount}
 
-        var newItem = {id,ProductID, ProductName, Spec, Price, discount, quantity, amount}
-
-        dispatch(actions.addItem(newItem));
-        dispatch(actions.closeAddItemDialog());
-        dispatch(actions.updateDialogItem(undefined));
-        dispatch(actions.addItemDialogSearchText(''))
-        dispatch(actions.updateAmount(null));
+            dispatch(actions.addItem(newItem));
+            dispatch(actions.closeAddItemDialog());
+            dispatch(actions.updateDialogItem(undefined));
+            dispatch(actions.addItemDialogSearchText(''))
+            dispatch(actions.updateAmount(null));
+        }else{
+            alert('Something is missing or incorrect in the field below')
+        }
     },
     render:function(){
         var {dispatch, productList, open, searchText, item, amount} = this.props

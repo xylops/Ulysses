@@ -5,10 +5,20 @@ module.exports = {
         return axios({
             method:'post',
             url:'/IV/checkInvoicePerDay',
-            data:{
+            params:{
                 date
             },
             json:true
+        })
+    },
+    createNewInvoice:function(invoice){
+        return axios({
+            method:'post',
+            url:'/IV/createNewInvoice',
+            params:{
+                invoice
+            },
+            // json:true
         })
     },
 }

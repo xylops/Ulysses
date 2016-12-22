@@ -1,11 +1,6 @@
 var React = require('react');
 //redux
 var {connect} = require('react-redux');
-var actions = require('../../actions/invoiceAction');
-//material-ui
-import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import Done from 'material-ui/svg-icons/action/done';
 //my style
 const style ={
     textAlign:'center'

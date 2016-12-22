@@ -21,6 +21,7 @@ router.post('/createNewClient', function(req, res, next) {
     newClient.address = req.query.newClient[2];
     newClient.phone = req.query.newClient[3];
     newClient.delieverytime = req.query.newClient[4];
+    newClient.remark = req.query.newClient[5]
 
     newClient.save((err, client)=>{
         if(err){
@@ -57,7 +58,8 @@ router.post('/updateClient', function(req, res, next){
             name : req.query.UpdatedClient[1],
             address : req.query.UpdatedClient[2],
             phone : req.query.UpdatedClient[3],
-            delieverytime : req.query.UpdatedClient[4]
+            delieverytime : req.query.UpdatedClient[4],
+            remark : req.query.UpdatedClient[5]
         }
     },{upsert : true}, (err, data)=>{
         if(err){
