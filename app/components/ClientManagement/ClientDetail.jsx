@@ -128,14 +128,7 @@ var ClientDetail = React.createClass({
                         /><br/>
                     </div>
                     <div className="column medium-4 hide-for-small-only">
-                        <TextField
-                            hintText="Payment Method"
-                            floatingLabelText="Payment Method "
-                            defaultValue={clientAttr.remark}
-                            multiLine={true}
-                            fullWidth={true}
-                            ref="paymentMethod"
-                        /><br />
+                        
                         <RaisedButton label="Previous Purchase Record" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="Save changes" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogUpdate}/>

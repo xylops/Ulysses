@@ -6,7 +6,6 @@ var client = new Schema({
     name:{type:String, require:true},
     phone:String,
     address:String,
-    Unit:String,
     delievreytime:String,
     paymentMethod:{type:String, default:'null'}
 }, {collection:'client'});
