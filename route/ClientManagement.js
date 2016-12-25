@@ -50,7 +50,7 @@ router.post('/deleteClient', function(req, res, next){
 })
 
 router.post('/updateClient', function(req, res, next){
-
+    console.log(res.query.UpdatedClient)
     client.findOneAndUpdate({
         id: req.query.UpdatedClient[0],
     }, {
@@ -59,7 +59,7 @@ router.post('/updateClient', function(req, res, next){
             address : req.query.UpdatedClient[2],
             phone : req.query.UpdatedClient[3],
             delieverytime : req.query.UpdatedClient[4],
-            remark : req.query.UpdatedClient[5]
+            paymentMethod : req.query.UpdatedClient[5]
         }
     },{upsert : true}, (err, data)=>{
         if(err){

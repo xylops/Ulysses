@@ -27,7 +27,7 @@ var ProductList = React.createClass({
         var {isFetching, productList, productFilterText} = this.props;
 
         let filteredProductList = productList.filter((prod)=>{
-            return prod.ProductName.indexOf(productFilterText) !== -1;
+            return (prod.ProductName.indexOf(productFilterText) !== -1  || prod.ProductID.indexOf(productFilterText) !== -1);
         });
 
         var renderList = ()=> {

@@ -28,7 +28,7 @@ var ClientList = React.createClass({
     render:function(){
         var {isFetching, clientList, clientFilterText} = this.props;
         let filteredClientList = clientList.filter((client)=>{
-            return client.name.indexOf(clientFilterText) !== -1;
+            return (client.name.indexOf(clientFilterText) !== -1 || client.id.indexOf(clientFilterText) !== -1 || client.phone.indexOf(clientFilterText) !== -1);
         });
 
         var renderClientList = ()=>{
