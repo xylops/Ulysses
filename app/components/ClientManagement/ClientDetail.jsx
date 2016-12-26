@@ -87,7 +87,7 @@ var ClientDetail = React.createClass({
 
     render:function(){
         var {clientAttr, open} = this.props;
-        console.log(clientAttr.location)
+        console.log(clientAttr.delieverytime)
 
         const actions = [
             <FlatButton

@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var client = new Schema({
     id:{type:String,unique:true, require:true},
     name:{type:String, require:true},
-    phone:String,
-    address:String,
-    delievreytime:String,
+    phone:{type:String, default:'null'},
+    address:{type:String, default:'null'},
+    delieverytime:{type:String, default:'null'},
     paymentMethod:{type:String, default:'null'},
     location:{type:String, default:'N/A'},
     purchaseRecord:String
