@@ -52,6 +52,15 @@ export var createInvoice = (state ={
                     ...state.item.slice(action.targetItemIndex + 1)
                 ]
             }
+        case 'CLEAR_INVOICE':
+            return {
+                client:{},
+                date:'',
+                invoiceID:'',
+                remark:'',
+                total:0,
+                item:[]
+            }
         default:
             return state
     }

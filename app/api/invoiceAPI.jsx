@@ -18,7 +18,7 @@ module.exports = {
             params:{
                 invoice
             },
-            // json:true
+            json:true
         })
     },
 }

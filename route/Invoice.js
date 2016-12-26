@@ -12,14 +12,25 @@ router.post('/checkInvoicePerDay', function(req, res, next) {
 });
 
 router.post('/createNewInvoice', function(req, res, next) {
-    console.log(req.query.invoice)
     var invoice = JSON.parse(req.query.invoice);
     var newInvoiceRecord = new invoiceRecord()
 
     newInvoiceRecord.invoiceID = invoice.invoiceID;
     newInvoiceRecord.clientID = invoice.client._id
     newInvoiceRecord.date = invoice.date
-    console.log(newInvoiceRecord)
+    newInvoiceRecord.purchaseItem = invoice.item
+    newInvoiceRecord.totalAmount = invoice.total
+    newInvoiceRecord.remark = invoice.remark
+
+    newInvoiceRecord.save((err, record)=>{
+        if(err){
+            res.json({message:'Something is wrong : ' + err})
+        }else{
+            console.log('record created')
+            res.json({message:'New Invoice Record has been added to database'})
+        }
+    })
+
 });
 
 

@@ -97,3 +97,9 @@ export var deleteItem = (targetItemIndex) => {
         targetItemIndex
     }
 }
+
+export var clearInvoice = () => {
+    return {
+        type : 'CLEAR_INVOICE'
+    }
+}

@@ -3,12 +3,12 @@ var moment = require('moment')
 //redux
 var {connect} = require('react-redux')
 var actions = require('../../actions/invoiceAction');
+var snackBarActions = require('../../actions/snackBarActions')
 ///material-ui
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 //api
 var invoiceAPI = require('invoiceAPI')
-
 //style
 const style={
     formText:{
@@ -42,11 +42,32 @@ var InvoiceDetail = React.createClass({
         dispatch(actions.updateRemark(text));
     },
     handleSave:function(){
-        var {invoice} = this.props
-        invoiceAPI.createNewInvoice(invoice)
+        var {dispatch, invoice} = this.props
+        if(invoice.client.id !== undefined && invoice.item.length > 0){
+            invoiceAPI.createNewInvoice(invoice).then((res)=>{
+                var resText = res.data.message;
+                dispatch(snackBarActions.openSnackBar(resText));
+                dispatch(actions.clearInvoice());
+                dispatch(actions.updateRemark(''));
+                //reload compoentWillMount logic for date and invoice number
+                var date = moment().format('YYYYMMDD');
+                dispatch(actions.addDate(date))
+                invoiceAPI.checkInvoicePerDay(date).then((response)=>{
+                    var numberOfInvoice = response.data.numberOfInvoice;
+                    if(numberOfInvoice < 10){
+                        var invoiceID = date + '00' + Number(numberOfInvoice+1)
+                    }else if (numberOfInvoice < 100 && numberOfInvoice > 9){
+                        var invoiceID = date + '0' + Number(numberOfInvoice+1)
+                    }else{
+                        var invoiceID = date + Number(numberOfInvoice+1)
+                    }
+                    dispatch(actions.addInvoiceID(invoiceID))
+                })
+            })
+        }
     },
     render:function(){
-        var {invoiceID, date} = this.props
+        var {invoiceID, date, remark} = this.props
         var formateDate = moment(date).format('DD/MM/YYYY')
         return(
             <div>
@@ -75,6 +96,7 @@ var InvoiceDetail = React.createClass({
                             hintText="Remark"
                             multiLine={true}
                             fullWidth={true}
+                            value={remark}
                             onChange={this.handleRemarkChange}
                             ref="remark"
                         /><br />
@@ -101,6 +123,8 @@ export default connect((state)=>{
     return {
         invoiceID : state.invoice.createInvoice.invoiceID,
         date:state.invoice.createInvoice.date,
-        invoice: state.invoice.createInvoice
+        invoice: state.invoice.createInvoice,
+        remark : state.invoice.createInvoice.remark,
+
     }
 })(InvoiceDetail)
