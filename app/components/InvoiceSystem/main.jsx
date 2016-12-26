@@ -42,6 +42,7 @@ var InvoiceSystem = React.createClass({
 
     },
     render:function(){
+        var {total} = this.props
         return(
             <div>
                 <br/>
@@ -55,9 +56,15 @@ var InvoiceSystem = React.createClass({
                 </div>
                 <hr style={{borderColor:'white'}}/>
                 <ProductSection/>
+                <hr/>
+                <h5 style={{textAlign:'right',paddingRight:'40px'}}> Total Amount : $ {total}</h5>
             </div>
         )
     }
 })
 
-export default connect()(InvoiceSystem)
+export default connect((state)=>{
+    return {
+        total: state.invoice.createInvoice.total
+    }
+})(InvoiceSystem)

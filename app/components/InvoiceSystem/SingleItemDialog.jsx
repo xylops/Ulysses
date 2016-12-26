@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 var SingleItemDialog = React.createClass({
     handleDelete:function(item){
-        var {dispatch, list} = this.props
+        var {dispatch, list, item, total} = this.props
         var temp = []
         list.forEach(function(elem){
             temp.push(elem.id.indexOf(item.id));
@@ -15,6 +15,8 @@ var SingleItemDialog = React.createClass({
         var targetItem = temp.indexOf(0)
         console.log(targetItem)
         dispatch(actions.deleteItem(targetItem))
+        var newTotal = total - item.amount
+        dispatch(actions.updateTotal(newTotal));
     },
     render:function(){
         var {item} = this.props;
@@ -54,5 +56,6 @@ var SingleItemDialog = React.createClass({
 export default connect((state)=>{
     return {
         list: state.invoice.createInvoice.item,
+        total: state.invoice.createInvoice.total
     }
 })(SingleItemDialog);

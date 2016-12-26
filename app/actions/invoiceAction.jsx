@@ -77,6 +77,12 @@ export var updateRemark = (text) => {
     }
 }
 
+export var updateTotal = (total) => {
+    return {
+        type : 'UPDATE_INVOICE_TOTAL',
+        total
+    }
+}
 
 export var addItem = (item) => {
     return {

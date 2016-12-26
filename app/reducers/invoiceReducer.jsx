@@ -5,6 +5,7 @@ export var createInvoice = (state ={
     date:'',
     invoiceID:'',
     remark:'',
+    total:0,
     item:[]
 }, action) => {
     switch (action.type){
@@ -32,6 +33,11 @@ export var createInvoice = (state ={
             return {
                 ...state,
                 remark:action.text
+            }
+        case 'UPDATE_INVOICE_TOTAL':
+            return {
+                ...state,
+                total:action.total
             }
         case 'ADD_ITEM':
             return {

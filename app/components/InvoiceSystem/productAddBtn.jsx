@@ -71,7 +71,7 @@ var productAddBtn = React.createClass({
         }
     },
     handleSave:function(){
-        var {dispatch, item, amount} = this.props;
+        var {dispatch, item, amount, total} = this.props;
         var id = item._id
         var ProductID = item.ProductID;
         var ProductName = item.ProductName
@@ -93,6 +93,10 @@ var productAddBtn = React.createClass({
             dispatch(actions.updateDialogItem(undefined));
             dispatch(actions.addItemDialogSearchText(''))
             dispatch(actions.updateAmount(null));
+
+            var newTotal = total + amount
+            dispatch(actions.updateTotal(newTotal));
+
         }else{
             alert('Something is missing or incorrect in the field below')
         }
@@ -223,6 +227,7 @@ export default connect((state)=>{
         open: state.invoice.addItemDialog.dialog,
         searchText: state.invoice.addItemDialog.searchText,
         item : state.invoice.addItemDialog.item,
-        amount : state.invoice.addItemDialog.itemAmount
+        amount : state.invoice.addItemDialog.itemAmount,
+        total : state.invoice.createInvoice.total
     }
 })(productAddBtn);
