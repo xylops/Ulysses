@@ -21,7 +21,8 @@ router.post('/createNewClient', function(req, res, next) {
     newClient.address = req.query.newClient[2];
     newClient.phone = req.query.newClient[3];
     newClient.delieverytime = req.query.newClient[4];
-    newClient.remark = req.query.newClient[5]
+    newClient.location = req.query.newClient[5];
+    newClient.paymentMethod = req.query.newClient[6]
 
     newClient.save((err, client)=>{
         if(err){
@@ -50,7 +51,6 @@ router.post('/deleteClient', function(req, res, next){
 })
 
 router.post('/updateClient', function(req, res, next){
-    console.log(res.query.UpdatedClient)
     client.findOneAndUpdate({
         id: req.query.UpdatedClient[0],
     }, {
@@ -59,7 +59,8 @@ router.post('/updateClient', function(req, res, next){
             address : req.query.UpdatedClient[2],
             phone : req.query.UpdatedClient[3],
             delieverytime : req.query.UpdatedClient[4],
-            paymentMethod : req.query.UpdatedClient[5]
+            location : req.query.UpdatedClient[5],
+            paymentMethod : req.query.UpdatedClient[6]
         }
     },{upsert : true}, (err, data)=>{
         if(err){

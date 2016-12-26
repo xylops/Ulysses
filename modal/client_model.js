@@ -7,7 +7,9 @@ var client = new Schema({
     phone:String,
     address:String,
     delievreytime:String,
-    paymentMethod:{type:String, default:'null'}
+    paymentMethod:{type:String, default:'null'},
+    location:{type:String, default:'N/A'},
+    purchaseRecord:String
 }, {collection:'client'});
 
 module.exports = mongoose.model('client', client)

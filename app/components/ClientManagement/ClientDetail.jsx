@@ -18,10 +18,12 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 //api
 var clientManagementAPI = require('../../api/ClientManagementAPI')
+//my component
+var Location = require('./Location')
 //Style
 const style = {
     dialog:{
-        width: '80%',
+        width: '60%',
         maxWidth: 'none',
     },
     dialogBtn:{
@@ -30,31 +32,36 @@ const style = {
 }
 
 var ClientDetail = React.createClass({
-    getInitialState:function(){
-        return ({
-            value: 0
-        })
+    handleLocationChange:function(locationC){
+        var {clientAttr, dispatch} = this.props
+        clientAttr.location = locationC
+        dispatch(actions.updateSingleClient(clientAttr))
+        dispatch(actions.closeSingleClientDialog());
+        dispatch(actions.openSingleClientDialog(clientAttr))
     },
-    handleChange: function (event, index, value){
-        this.setState({
-            value
-        })
+    handlePaymentChange:function(event, index, value){
+        var {clientAttr, dispatch} = this.props
+        clientAttr.paymentMethod = value
+        dispatch(actions.updateSingleClient(clientAttr))
+        dispatch(actions.closeSingleClientDialog());
+        dispatch(actions.openSingleClientDialog(clientAttr))
     },
     handleClose:function(){
         var {dispatch} = this.props;
         dispatch(actions.closeSingleClientDialog());
     },
     dialogUpdate : function(){
-        var {dispatch} = this.props
+        var {dispatch, clientAttr} = this.props
 
         var id = this.refs.id.getValue();
         var name = this.refs.name.getValue();
         var address = this.refs.address.getValue();
         var phone = this.refs.phone.getValue();
         var delieverytime = this.refs.delieverytime.getValue();
-        var paymentMethod = this.refs.paymentMethod.getValue();
+        var location = clientAttr.location
+        var paymentMethod = clientAttr.paymentMethod
 
-        var updatedClient = [id, name, address, phone, delieverytime, paymentMethod]
+        var updatedClient = [id, name, address, phone, delieverytime, location, paymentMethod]
         clientManagementAPI.updateClient(updatedClient).then((response)=>{
             var resText = response.data.message;
             dispatch(actions.startFetchClientList())
@@ -80,6 +87,7 @@ var ClientDetail = React.createClass({
 
     render:function(){
         var {clientAttr, open} = this.props;
+        console.log(clientAttr.location)
 
         const actions = [
             <FlatButton
@@ -100,7 +108,7 @@ var ClientDetail = React.createClass({
                 autoScrollBodyContent={true}
             >
                 <div className="row">
-                    <div className="column small-10 medium-8">
+                    <div className="column small-10 medium-7">
                         <TextField
                             id="text-field-default"
                             floatingLabelText="ID"
@@ -118,13 +126,6 @@ var ClientDetail = React.createClass({
                         /><br/>
                         <TextField
                             id="text-field-default"
-                            floatingLabelText="Address"
-                            fullWidth={true}
-                            defaultValue={clientAttr.address}
-                            ref="address"
-                        /><br/>
-                        <TextField
-                            id="text-field-default"
                             floatingLabelText="Phone Number"
                             defaultValue={clientAttr.phone}
                             fullWidth={true}
@@ -132,22 +133,31 @@ var ClientDetail = React.createClass({
                         /><br/>
                         <TextField
                             id="text-field-default"
+                            floatingLabelText="Address"
+                            fullWidth={true}
+                            defaultValue={clientAttr.address}
+                            ref="address"
+                        /><br/>
+                        <Location handleLocationChange={this.handleLocationChange} location={clientAttr.location}/>
+                    </div>
+                    <div className="column medium-5 hide-for-small-only">
+                        <TextField
+                            id="text-field-default"
                             floatingLabelText="Delievery Time"
                             defaultValue={clientAttr.delieverytime}
                             fullWidth={true}
                             ref="delieverytime"
                         /><br/>
-                    </div>
-                    <div className="column medium-4 hide-for-small-only">
                         <SelectField
                             floatingLabelText="PayMent Method"
-                            value={this.state.value}
-                            onChange={this.handleChange}
+                            value={clientAttr.paymentMethod}
+                            onChange={this.handlePaymentChange}
+                            fullWidth={true}
                         >
-                            <MenuItem value={1} primaryText="N/A" />
-                            <MenuItem value={2} primaryText="30 Days" />
-                            <MenuItem value={3} primaryText="C.O.D" />
-                            <MenuItem value={4} primaryText="PayPal" />
+                            <MenuItem value={null} primaryText="" />
+                            <MenuItem value={'C.O.D'} primaryText="C.O.D" />
+                            <MenuItem value={'30Days'} primaryText="30 Days" />
+                            <MenuItem value={'PAYPAL'} primaryText="PayPal" />
                         </SelectField>
                         <RaisedButton label="Previous Purchase Record" fullWidth={true} style={style.dialogBtn}/>
                         <RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn}/>

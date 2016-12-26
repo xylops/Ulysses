@@ -36,3 +36,10 @@ export var updateClientFilterText = (text)=>{
         text
     }
 }
+
+export var updateSingleClient = (client)=>{
+    return {
+        type:'UPDATE_SINGLE_CLIENT',
+        client
+    }
+}

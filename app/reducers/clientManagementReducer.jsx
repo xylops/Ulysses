@@ -1,3 +1,5 @@
+import update from 'react-addons-update';
+
 export var createNewClientDialog = (state = false, action)=>{
     switch (action.type){
         case 'TOGGLE_CREATE_NEW_CLIENT_DIALOG':
@@ -36,6 +38,11 @@ export var toggleSingleClientDialog = (state = {open:false, singleClientAttr:{}}
                 open:false,
                 singleClientAttr: {}
             }
+        case 'UPDATE_SINGLE_CLIENT':
+            return {
+                ...state,
+                singleClientAttr: action.client
+            };
         default:
             return state;
     }

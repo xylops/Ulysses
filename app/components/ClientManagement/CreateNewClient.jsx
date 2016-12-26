@@ -20,7 +20,8 @@ var Location = require('./Location')
 var  CreateNewProduct = React.createClass({
     getInitialState:function(){
         return ({
-            value:null
+            value:null,
+            locationC:'Set Location'
         })
     },
     handleChange:function(event, index, value){
@@ -28,12 +29,19 @@ var  CreateNewProduct = React.createClass({
             value
         })
     },
-    handleLocationChange:function(location){
-        console.log(location)
+    handleLocationChange:function(locationC){
+        this.setState({
+            locationC
+        })
     },
     toggleDialog:function(){
         var {dispatch} = this.props;
         dispatch(actions.toggleCreateNewClientDialog())
+        if(this.state.location !== 'Location'){
+            this.setState({
+                locationC:'Set Location'
+            })
+        }
     },
     handleSave : function(){
         var {dispatch} = this.props;
@@ -42,20 +50,22 @@ var  CreateNewProduct = React.createClass({
         var address = this.refs.address.getValue();
         var phone = this.refs.phone.getValue();
         var delieverytime = this.refs.delieverytime.getValue();
-        var paymentMethod = this.state.value
+        var paymentMethod = this.state.value;
+        var location = this.state.locationC
 
-        var newClient = [id, name, address, phone, delieverytime, paymentMethod]
+        var newClient = [id, name, address, phone, delieverytime, paymentMethod, location]
         console.log(newClient)
-        // clientManagementAPI.createNewClient(newClient).then((response)=>{
-        //     var resText = response.data.message;
-        //     dispatch(actions.startFetchClientList())
-        //     clientManagementAPI.getFullClientData().then((CL)=>{
-        //         dispatch(actions.completeFetchClientList(CL.data));
-        //         dispatch(actions.toggleCreateNewClientDialog());
-        //         dispatch(snackBarActions.openSnackBar(resText));
-        //     })
-        // });
-
+        if(id && name){
+            clientManagementAPI.createNewClient(newClient).then((response)=>{
+                var resText = response.data.message;
+                dispatch(actions.startFetchClientList())
+                clientManagementAPI.getFullClientData().then((CL)=>{
+                    dispatch(actions.completeFetchClientList(CL.data));
+                    dispatch(actions.toggleCreateNewClientDialog());
+                    dispatch(snackBarActions.openSnackBar(resText));
+                })
+            });
+        }
     },
     render:function(){
         //Redux function
@@ -92,41 +102,44 @@ var  CreateNewProduct = React.createClass({
                                 <TextField
                                     floatingLabelText="Client ID"
                                     ref="id"
+                                    fullWidth={true}
                                 /><br/>
                                 <TextField
                                     floatingLabelText="Name"
                                     ref="name"
-                                /><br/>
-                                <TextField
-                                    floatingLabelText="Delievery Time"
-                                    ref="delieverytime"
+                                    fullWidth={true}
                                 /><br/>
                                 <TextField
                                     floatingLabelText="Phone Number"
                                     ref="phone"
+                                    fullWidth={true}
                                 /><br/>
-                            </div>
-                            <div className="column small-12 medium-6">
-                                <TextField
-                                    floatingLabelText="Address"
-                                    ref="address"
-                                /><br/>
-                                <Location handleLocationChange={this.handleLocationChange}/>
                                 <SelectField
                                     floatingLabelText="PayMent Method"
                                     value={this.state.value}
                                     onChange={this.handleChange}
+                                    fullWidth={true}
                                 >
-
                                     <MenuItem value={null} primaryText="" />
-                                    <MenuItem className="column small-4" value={1} primaryText="C.O.D" />
-                                    <MenuItem className="column small-4" value={2} primaryText="30 Days" />
-                                    <MenuItem className="column small-4" value={3} primaryText="PayPal" />
+                                    <MenuItem value={'C.O.D'} primaryText="C.O.D" />
+                                    <MenuItem value={'30Days'} primaryText="30 Days" />
+                                    <MenuItem value={'PAYPAL'} primaryText="PayPal" />
                                 </SelectField>
                             </div>
+                            <div className="column small-12 medium-6">
+                                <TextField
+                                    floatingLabelText="Delievery Time"
+                                    ref="delieverytime"
+                                    fullWidth={true}
+                                /><br/>
+                                <TextField
+                                    floatingLabelText="Address"
+                                    ref="address"
+                                    fullWidth={true}
+                                /><br/><br/>
+                                <Location handleLocationChange={this.handleLocationChange} location={this.state.locationC}/>
+                            </div>
                         </div>
-
-
                     </div>
                 </Dialog>
 
