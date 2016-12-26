@@ -77,7 +77,12 @@ var productAddBtn = React.createClass({
         var ProductName = item.ProductName
         var Spec = this.refs.spec.getValue();
         var Price = this.refs.price.getValue();
-        var discount = this.refs.discount.getValue() + '%';
+        var discount = this.refs.discount.getValue();
+        if(discount == ''){
+            var discount = '0.0%';
+        }else{
+            var discount = this.refs.discount.getValue() + '%';
+        }
         var quantity = this.refs.quantity.getValue();
         var amount = amount;
         if(id && ProductID && Price && quantity && amount > 0){

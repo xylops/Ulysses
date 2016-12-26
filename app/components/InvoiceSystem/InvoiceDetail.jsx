@@ -5,7 +5,7 @@ var {connect} = require('react-redux')
 var actions = require('../../actions/invoiceAction');
 ///material-ui
 import RaisedButton from 'material-ui/RaisedButton';
-
+import TextField from 'material-ui/TextField';
 //api
 var invoiceAPI = require('invoiceAPI')
 
@@ -36,6 +36,11 @@ var InvoiceDetail = React.createClass({
             dispatch(actions.addInvoiceID(invoiceID))
         })
     },
+    handleRemarkChange:function(){
+        var {dispatch} = this.props
+        var text = this.refs.remark.getValue();
+        dispatch(actions.updateRemark(text));
+    },
     handleSave:function(){
         var {invoice} = this.props
         invoiceAPI.createNewInvoice(invoice)
@@ -47,7 +52,7 @@ var InvoiceDetail = React.createClass({
             <div>
                 <div className="row">
                     <div className="column medium-4" style={{textAlign:'right'}}>
-                        <h5 style={style.dateInput}> Date of Creation </h5>
+                        <h5 style={style.dateInput}> Date: </h5>
                     </div>
                     <div className="column medium-8">
                          {formateDate}
@@ -55,15 +60,38 @@ var InvoiceDetail = React.createClass({
                 </div>
                 <div className="row">
                     <div className="column medium-4" style={{textAlign:'right'}}>
-                        <h5 style={style.formText}> Invoice Number: </h5>
+                        <h5 style={style.formText}> Invoice ID: </h5>
                     </div>
                     <div className="column medium-8">
                         {invoiceID}
                     </div>
                 </div>
-                <RaisedButton label="Top 10 Purchase Item" fullWidth={true} style={{marginTop:'16px'}}/>
-                <RaisedButton label="Clear all field" fullWidth={true} secondary={true} style={{marginTop:'10px'}}/>
-                <RaisedButton label="Submit Invoice" fullWidth={true} primary={true} style={{marginTop:'10px'}} onTouchTap={this.handleSave}/>
+                <div className="row">
+                    <div className="column medium-4" style={{textAlign:'right'}}>
+                        <h5 style={style.formText}> Remarks: </h5>
+                    </div>
+                    <div className="column medium-8">
+                        <TextField
+                            hintText="Remark"
+                            multiLine={true}
+                            fullWidth={true}
+                            onChange={this.handleRemarkChange}
+                            ref="remark"
+                        /><br />
+                    </div>
+                </div>
+
+                <div className="row" style={{paddingTop:'26px'}}>
+                    <div className="column medium-4">
+                        <RaisedButton label="Top 10 Item" fullWidth={true} />
+                    </div>
+                    <div className="column medium-4">
+                        <RaisedButton label="Clear all field" fullWidth={true} secondary={true}/>
+                    </div>
+                    <div className="column medium-4">
+                        <RaisedButton label="Submit Invoice" fullWidth={true} primary={true} onTouchTap={this.handleSave}/>
+                    </div>
+                </div>
             </div>
         )
     }

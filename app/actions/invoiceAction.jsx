@@ -70,6 +70,14 @@ export var updateAmount = (amount) => {
     }
 }
 
+export var updateRemark = (text) => {
+    return {
+        type : 'UPDATE_REMARK',
+        text
+    }
+}
+
+
 export var addItem = (item) => {
     return {
         type : 'ADD_ITEM',

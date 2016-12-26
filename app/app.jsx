@@ -43,7 +43,7 @@ const App = () => (
                     <Route path="CM" component={ClientManagement}/>
                     <Route path="IS" component={InvoiceSystem}/>
                     <Route path="PD" component={ProductDetail}/>
-                    <Route path="IM" component={InventoryManagement}/>
+                    <Route path="IM" component={InStock}/>
                     <Route path="IM/InStock" component={InStock}/>
                     <IndexRoute component={HomePage}/>
                 </Route>

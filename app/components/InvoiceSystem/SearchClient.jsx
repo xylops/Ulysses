@@ -70,6 +70,14 @@ var SearchClient = React.createClass({
                                 {client.delieverytime}
                             </div>
                         </div>
+                        <div className="row">
+                            <div className="column medium-4" style={{textAlign:'right'}}>
+                                <h5 style={style.formText}> Payment Method: </h5>
+                            </div>
+                            <div className="column medium-8">
+                                {client.paymentMethod}
+                            </div>
+                        </div>
                         <RaisedButton label="Change Client" primary={true} fullWidth={true} onTouchTap={()=>{
                                 dispatch(actions.openDialog())
                             }}/>
