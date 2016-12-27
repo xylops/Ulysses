@@ -36,10 +36,33 @@ var InvoiceDetail = React.createClass({
             dispatch(actions.addInvoiceID(invoiceID))
         })
     },
+    componentWillUnmount:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.clearInvoice());
+        dispatch(actions.updateRemark(''));
+    },
     handleRemarkChange:function(){
         var {dispatch} = this.props
         var text = this.refs.remark.getValue();
         dispatch(actions.updateRemark(text));
+    },
+    handleClear:function(){
+        var {dispatch} = this.props
+        dispatch(actions.clearInvoice());
+        dispatch(actions.updateRemark(''));
+        var date = moment().format('YYYYMMDD');
+        dispatch(actions.addDate(date))
+        invoiceAPI.checkInvoicePerDay(date).then((response)=>{
+            var numberOfInvoice = response.data.numberOfInvoice;
+            if(numberOfInvoice < 10){
+                var invoiceID = date + '00' + Number(numberOfInvoice+1)
+            }else if (numberOfInvoice < 100 && numberOfInvoice > 9){
+                var invoiceID = date + '0' + Number(numberOfInvoice+1)
+            }else{
+                var invoiceID = date + Number(numberOfInvoice+1)
+            }
+            dispatch(actions.addInvoiceID(invoiceID))
+        })
     },
     handleSave:function(){
         var {dispatch, invoice} = this.props
@@ -64,6 +87,8 @@ var InvoiceDetail = React.createClass({
                     dispatch(actions.addInvoiceID(invoiceID))
                 })
             })
+        }else{
+            alert('Client and item is REQUIRE for creating new Invoice Record')
         }
     },
     render:function(){
@@ -108,7 +133,7 @@ var InvoiceDetail = React.createClass({
                         <RaisedButton label="Top 10 Item" fullWidth={true} />
                     </div>
                     <div className="column medium-4">
-                        <RaisedButton label="Clear all field" fullWidth={true} secondary={true}/>
+                        <RaisedButton label="Clear all field" fullWidth={true} secondary={true} onTouchTap={this.handleClear}/>
                     </div>
                     <div className="column medium-4">
                         <RaisedButton label="Submit Invoice" fullWidth={true} primary={true} onTouchTap={this.handleSave}/>

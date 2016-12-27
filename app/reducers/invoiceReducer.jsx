@@ -6,7 +6,8 @@ export var createInvoice = (state ={
     invoiceID:'',
     remark:'',
     total:0,
-    item:[]
+    item:[],
+    status:''
 }, action) => {
     switch (action.type){
         case 'ADD_CLIENT':

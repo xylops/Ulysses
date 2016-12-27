@@ -1,8 +1,10 @@
 var React = require('react')
+var {Link} = require('react-router');
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../actions/clientManagementActions');
 var snackBarActions = require('../../actions/snackBarActions')
+var invoiceActions = require('../../actions/invoiceAction')
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -46,6 +48,10 @@ var ClientDetail = React.createClass({
         dispatch(actions.closeSingleClientDialog());
         dispatch(actions.openSingleClientDialog(clientAttr))
     },
+    handleNewPurchase:function(){
+        var {dispatch, clientAttr} = this.props;
+        dispatch(invoiceActions.addInvoiceClient(clientAttr))
+    },
     handleClose:function(){
         var {dispatch} = this.props;
         dispatch(actions.closeSingleClientDialog());
@@ -87,7 +93,6 @@ var ClientDetail = React.createClass({
 
     render:function(){
         var {clientAttr, open} = this.props;
-        console.log(clientAttr.delieverytime)
 
         const actions = [
             <FlatButton
@@ -160,7 +165,7 @@ var ClientDetail = React.createClass({
                             <MenuItem value={'PAYPAL'} primaryText="PayPal" />
                         </SelectField>
                         <RaisedButton label="Previous Purchase Record" fullWidth={true} style={style.dialogBtn}/>
-                        <RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn}/>
+                        <Link to="/IS"><RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn} onTouchTap={this.handleNewPurchase}/></Link>
                         <RaisedButton label="Save changes" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogUpdate}/>
                         <RaisedButton label="Delete Client" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogDelete}/>
                     </div>

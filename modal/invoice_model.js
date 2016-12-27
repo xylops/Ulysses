@@ -7,7 +7,8 @@ var invoice = new Schema({
     purchaseItem: [],
     totalAmount: {type:Number, require:true},
     date:{type:String, require:true},
-    remark:{type:String}
+    remark:{type:String},
+    status:{type:String}
 }, {collection:'invoice'});
 
 module.exports = mongoose.model('invoice', invoice)
