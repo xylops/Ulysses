@@ -16,6 +16,7 @@ import InvoiceSystem from './components/InvoiceSystem/main';
 import ProductDetail from './components/ProductDetail/main';
 import InventoryManagement from './components/InventoryManagement/main'
 import InStock from './components/InventoryManagement/InStock/main'
+import Logistic from './components/Logistic/main'
 
 
 // Redux Function
