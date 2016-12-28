@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var moment = require('moment')
+// var moment = require('moment')
 var client = require('../modal/client_model.js')
 var invoiceRecord = require('../modal/invoice_model.js')
 
@@ -35,7 +35,7 @@ router.post('/createNewInvoice', function(req, res, next) {
             });
 
             doc.pipe (writeStream = fs.createWriteStream('public/node.pdf'))
-            doc.image('public/GloryInvoice.png', 0, 0, {width:612})
+            // doc.image('public/GloryInvoice.png', 0, 0, {width:612})
 
             //client Info
             doc.font('fonts/SHARP.ttf')
@@ -61,10 +61,10 @@ router.post('/createNewInvoice', function(req, res, next) {
             doc.font('fonts/SHARP.ttf')
                 .fontSize(10)
                 .text(invoice.client.id, 510, 165, {width: 95, align: 'center'})
-            var date = moment(invoice.date).format('DD/MM/YYYY')
+            // var date = moment(invoice.date).format('DD/MM/YYYY')
             doc.font('fonts/SHARP.ttf')
                 .fontSize(10)
-                .text(date, 510, 188, {width: 95, align: 'center'})
+                .text(invoice.date, 510, 188, {width: 95, align: 'center'})
             doc.font('fonts/SHARP.ttf')
                 .fontSize(10)
                 .text('$ ' + invoice.total, 520, 465, {width: 70, align: 'center'})
