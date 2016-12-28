@@ -66,11 +66,11 @@ var InvoiceDetail = React.createClass({
     },
     handleSave:function(){
         var {dispatch, invoice} = this.props
+        var newWindow = window.open()  //call window.open before ajax call to prevent window block
         if(invoice.client.id !== undefined && invoice.item.length > 0){
             invoiceAPI.createNewInvoice(invoice).then((res)=>{
                 // var resText = res.data.message;
-                var link = res.data.link
-                window.open(link,'_blank');
+                newWindow.location = res.data.link
                 // dispatch(snackBarActions.openSnackBar(resText));
                 // dispatch(actions.clearInvoice());
                 // dispatch(actions.updateRemark(''));

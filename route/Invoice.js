@@ -18,7 +18,7 @@ router.post('/checkInvoicePerDay', function(req, res, next) {
 router.post('/createNewInvoice', function(req, res, next) {
     var invoice = JSON.parse(req.query.invoice);
     var newInvoiceRecord = new invoiceRecord()
-
+    console.log(invoice)
     newInvoiceRecord.invoiceID = invoice.invoiceID;
     newInvoiceRecord.clientID = invoice.client._id
     newInvoiceRecord.date = invoice.date
@@ -104,6 +104,7 @@ router.post('/createNewInvoice', function(req, res, next) {
             })
 
             doc.end();
+
             writeStream.on('finish', function(){
                  res.json({link:'http://localhost:3000/node.pdf', message:'New Invoice Record has been added to database'})
             })
