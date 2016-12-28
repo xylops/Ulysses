@@ -68,10 +68,12 @@ var InvoiceDetail = React.createClass({
         var {dispatch, invoice} = this.props
         if(invoice.client.id !== undefined && invoice.item.length > 0){
             invoiceAPI.createNewInvoice(invoice).then((res)=>{
-                var resText = res.data.message;
-                dispatch(snackBarActions.openSnackBar(resText));
-                dispatch(actions.clearInvoice());
-                dispatch(actions.updateRemark(''));
+                // var resText = res.data.message;
+                var link = res.data.link
+                window.open(link,'_blank');
+                // dispatch(snackBarActions.openSnackBar(resText));
+                // dispatch(actions.clearInvoice());
+                // dispatch(actions.updateRemark(''));
                 //reload compoentWillMount logic for date and invoice number
                 var date = moment().format('YYYYMMDD');
                 dispatch(actions.addDate(date))
