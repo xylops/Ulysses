@@ -48,7 +48,7 @@ var HomePage = React.createClass({
                         <Link to="/CM" ><RaisedButton label="Client Managemnet"  primary={true} fullWidth={true} /></Link>
                     </div>
                     <div className="column medium-3" style={style.navBtn}>
-                        <Link to="/IS" ><RaisedButton label="Invoice System" secondary={true} fullWidth={true} /></Link>
+                        <Link to="/IV" ><RaisedButton label="Invoice System" secondary={true} fullWidth={true} /></Link>
                     </div>
                     <div className="column medium-3" style={style.navBtn}>
                         <Link to="/IM" ><RaisedButton label="Inventory Management" primary={true} fullWidth={true} /></Link>

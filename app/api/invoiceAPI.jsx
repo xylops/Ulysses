@@ -21,4 +21,9 @@ module.exports = {
             json:true
         })
     },
+    getAllInvoice:function(){
+        return axios.get('/IV/getAllInvoice').then(function(res){
+            return res
+        })
+    }
 }

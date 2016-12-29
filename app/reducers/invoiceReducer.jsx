@@ -1,5 +1,15 @@
 import update from 'react-addons-update';
 
+export var allInvoice = (state = [], action) =>{
+    switch(action.type){
+        case 'ADD_ALL_INVOICE':
+            return action.invoiceList
+        default:
+            return state
+    }
+}
+
+
 export var createInvoice = (state ={
     client:{},
     date:'',
@@ -7,7 +17,7 @@ export var createInvoice = (state ={
     remark:'',
     total:0,
     item:[],
-    status:''
+    status:'未處理'
 }, action) => {
     switch (action.type){
         case 'ADD_CLIENT':
@@ -60,7 +70,8 @@ export var createInvoice = (state ={
                 invoiceID:'',
                 remark:'',
                 total:0,
-                item:[]
+                item:[],
+                invoice:'未處理'
             }
         default:
             return state

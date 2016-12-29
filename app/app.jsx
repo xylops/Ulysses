@@ -12,6 +12,7 @@ injectTapEventPlugin();
 import Ulysses from 'Ulysses';
 import HomePage from 'HomePage';
 import ClientManagement from './components/ClientManagement/main';
+import CreateInvoice from './components/InvoiceSystem/createInvoice/main';
 import InvoiceSystem from './components/InvoiceSystem/main';
 import ProductDetail from './components/ProductDetail/main';
 import InventoryManagement from './components/InventoryManagement/main'
@@ -42,10 +43,10 @@ const App = () => (
             <Router history={hashHistory}>
                 <Route path="/" component={Ulysses}>
                     <Route path="CM" component={ClientManagement}/>
-                    <Route path="IS" component={InvoiceSystem}/>
+                    <Route path="IS" component={CreateInvoice}/>
+                    <Route path="IV" component={InvoiceSystem}/>
                     <Route path="PD" component={ProductDetail}/>
                     <Route path="IM" component={InStock}/>
-                    <Route path="IM/InStock" component={InStock}/>
                     <IndexRoute component={HomePage}/>
                 </Route>
             </Router>

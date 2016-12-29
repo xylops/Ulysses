@@ -1,3 +1,10 @@
+export var addInvoiceList = (invoiceList) =>{
+    return{
+        type:'ADD_ALL_INVOICE',
+        invoiceList
+    }
+}
+
 export var addInvoiceClient = (client) =>{
     return{
         type:'ADD_CLIENT',

@@ -7,6 +7,17 @@ var invoiceRecord = require('../modal/invoice_model.js')
 PDFDocument = require ('pdfkit')
 var fs = require('fs')
 
+router.get('/getAllInvoice', function(req, res, next) {
+    invoiceRecord.find({}).populate('clientID').sort({invoiceID:-1}).exec((err, result)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.json(result)
+        }
+    })
+});
+
+
 router.post('/checkInvoicePerDay', function(req, res, next) {
     var date = req.query.date
     invoiceRecord.find({date:date}, function(err, data){
@@ -25,11 +36,12 @@ router.post('/createNewInvoice', function(req, res, next) {
     newInvoiceRecord.purchaseItem = invoice.item
     newInvoiceRecord.totalAmount = invoice.total
     newInvoiceRecord.remark = invoice.remark
-    //
-    // newInvoiceRecord.save((err, record)=>{
-    //     if(err){
-    //         res.json({message:'Something is wrong : ' + err})
-    //     }else{
+    newInvoiceRecord.status = invoice.status
+
+    newInvoiceRecord.save((err, record)=>{
+        if(err){
+            res.json({message:'Something is wrong : ' + err})
+        }else{
             doc = new PDFDocument({
               size: [612, 573]
             });
@@ -108,8 +120,8 @@ router.post('/createNewInvoice', function(req, res, next) {
             writeStream.on('finish', function(){
                  res.json({link:'http://localhost:3000/node.pdf', message:'New Invoice Record has been added to database'})
             })
-    //     }
-    // })
+        }
+    })
 
 
 });
