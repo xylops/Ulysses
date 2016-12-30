@@ -34,7 +34,7 @@ router.post('/createNewInvoice', function(req, res, next) {
     newInvoiceRecord.client = invoice.client._id
     newInvoiceRecord.date = invoice.date
     newInvoiceRecord.item = invoice.item
-    newInvoiceRecord.totalAmount = invoice.total
+    newInvoiceRecord.total = invoice.total
     newInvoiceRecord.remark = invoice.remark
     newInvoiceRecord.status = invoice.status
 
@@ -42,9 +42,23 @@ router.post('/createNewInvoice', function(req, res, next) {
         if(err){
             res.json({message:'Something is wrong : ' + err})
         }else{
-            res.json({message:'New Invoice Record has been added to database'})
+            client.findOneAndUpdate({
+                id: invoice.client.id,
+            }, {
+                $push: {
+                    purchaseRecord:record._id
+                }
+            },{upsert : true}, (err, data)=>{
+                if(err){
+                    res.json('Something is wrong '+ err)
+                }else{
+                    res.json({message:'New Invoice Record has been added to database'})
+                }
+            })
+
         }
     })
+
 
 
 });

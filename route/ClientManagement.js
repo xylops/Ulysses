@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var client = require('../modal/client_model.js')
+var invoice = require ('../modal/invoice_model')
 
 router.get('/getFullClientData', function(req, res, next) {
-    client.find({}).sort({id:1}).exec((err, result)=>{
+    client.find({}).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
         if(err){
             console.log(err);
         }else{

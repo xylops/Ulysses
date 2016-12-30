@@ -9,7 +9,7 @@ var client = new Schema({
     delieverytime:{type:String, default:'null'},
     paymentMethod:{type:String, default:'null'},
     location:{type:String, default:'N/A'},
-    purchaseRecord:String
+    purchaseRecord:[{ type: Schema.Types.ObjectId, ref: 'invoice'}]
 }, {collection:'client'});
 
 module.exports = mongoose.model('client', client)

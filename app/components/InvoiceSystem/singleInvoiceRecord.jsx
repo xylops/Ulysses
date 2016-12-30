@@ -67,7 +67,7 @@ var SingleInvoiceRecord = React.createClass({
         var renderItemList = () =>{
             return record.item.map((item)=>{
                 return(
-                    <div key={item.id} style={style.dialogItem}>
+                    <div className="row" key={item.id} style={style.dialogItem}>
                         <div className="column medium-2 hide-for-small-only" style={style}>
                             {item.ProductID}
                         </div>

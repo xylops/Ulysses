@@ -22,6 +22,7 @@ import MenuItem from 'material-ui/MenuItem';
 var clientManagementAPI = require('../../api/ClientManagementAPI')
 //my component
 var Location = require('./Location')
+import PurchaseRecordDialog from './purchaseRecordDialog'
 //Style
 const style = {
     dialog:{
@@ -164,7 +165,7 @@ var ClientDetail = React.createClass({
                             <MenuItem value={'30Days'} primaryText="30 Days" />
                             <MenuItem value={'PAYPAL'} primaryText="PayPal" />
                         </SelectField>
-                        <RaisedButton label="Previous Purchase Record" fullWidth={true} style={style.dialogBtn}/>
+                        <PurchaseRecordDialog/>
                         <Link to="/IS"><RaisedButton label="New Purchase" fullWidth={true} style={style.dialogBtn} onTouchTap={this.handleNewPurchase}/></Link>
                         <RaisedButton label="Save changes" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogUpdate}/>
                         <RaisedButton label="Delete Client" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogDelete}/>
