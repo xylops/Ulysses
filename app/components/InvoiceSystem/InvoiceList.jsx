@@ -39,8 +39,11 @@ var InvoiceList = React.createClass({
                     <div className="column medium-2">
                         Area
                     </div>
-                    <div className="column medium-5">
+                    <div className="column medium-4">
                         Address
+                    </div>
+                    <div className="column medium-1">
+                        Status
                     </div>
                 </div>
                 <hr/>

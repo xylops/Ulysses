@@ -7,6 +7,8 @@ var actions = require('../../actions/invoiceAction');
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+//api
+var invoiceAPI = require('invoiceAPI');
 //style
 const style ={
     btn:{
@@ -38,6 +40,18 @@ var SingleInvoiceRecord = React.createClass({
             open:false
         })
     },
+    handlePrint:function(){
+        var {record} = this.props;
+        var newWindow = window.open()
+        var invoice = record
+        invoiceAPI.printInvoice(invoice).then((res)=>{
+            newWindow.location = res.data.link
+        })
+    },
+    handleVoid:function(){
+        var {record} = this.props;
+        console.log(record.invoiceID, record.client.id)
+    },
     render:function(){
         var {record} = this.props
         var date = moment(record.date).format('DD/MM/YYYY');
@@ -51,7 +65,7 @@ var SingleInvoiceRecord = React.createClass({
         ];
 
         var renderItemList = () =>{
-            return record.purchaseItem.map((item)=>{
+            return record.item.map((item)=>{
                 return(
                     <div key={item.id} style={style.dialogItem}>
                         <div className="column medium-2 hide-for-small-only" style={style}>
@@ -90,13 +104,16 @@ var SingleInvoiceRecord = React.createClass({
                         {date}
                     </div>
                     <div className="column medium-1">
-                        {record.totalAmount}
+                        {record.total}
                     </div>
                     <div className="column medium-2">
-                        {record.clientID.location}
+                        {record.client.location}
                     </div>
-                    <div className="column medium-5">
-                        {record.clientID.address}
+                    <div className="column medium-4">
+                        {record.client.address}
+                    </div>
+                    <div className="column medium-1">
+                        {record.status}
                     </div>
                 </RaisedButton>
                 <Dialog
@@ -108,30 +125,34 @@ var SingleInvoiceRecord = React.createClass({
                     contentStyle={customContentStyle}
                 >
                     <div className="row">
-                        <div className="column small-2 medium-6">
+                        <div className="column small-12 medium-6">
                             <b><u>Client Detail</u></b><br/><br/>
                             <div className="column small-4">Name: </div>
-                            <div className="column small-8">{record.clientID.name}</div>
+                            <div className="column small-8">{record.client.name}</div>
                             <div className="column small-4">Address: </div>
-                            <div className="column small-8">{record.clientID.address}</div>
+                            <div className="column small-8">{record.client.address}</div>
                             <div className="column small-4">Phone: </div>
-                            <div className="column small-8">{record.clientID.phone}</div>
+                            <div className="column small-8">{record.client.phone}</div>
 
                             <div className="column small-4">Payment: </div>
-                            <div className="column small-8">{record.clientID.paymentMethod}</div>
+                            <div className="column small-8">{record.client.paymentMethod}</div>
                         </div>
-                        <div className="column small-2 medium-6">
+                        <div className="column small-12 medium-4">
                             <b><u>Invoice Detail</u></b><br/><br/>
                             <div className="column small-4">Invoice ID: </div>
                             <div className="column small-8">{record.invoiceID}</div>
                             <div className="column small-4">Date: </div>
                             <div className="column small-8">{date}</div>
                             <div className="column small-4">Location: </div>
-                            <div className="column small-8">{record.clientID.location}</div>
+                            <div className="column small-8">{record.client.location}</div>
                             <div className="column small-4">Total: </div>
-                            <div className="column small-8">$ {record.totalAmount}</div>
+                            <div className="column small-8">$ {record.total}</div>
                             <div className="column small-4">Remark: </div>
                             <div className="column small-8">{record.remark}</div>
+                        </div>
+                        <div className="column small-12 medium-2">
+                            <RaisedButton label="Void Invoice" onTouchTap={this.handleVoid} fullWidth={true} secondary={true} />
+                            <RaisedButton label="Reprint Invoice" onTouchTap={this.handlePrint} fullWidth={true} primary={true} style={{marginTop:'5px'}}/>
                         </div>
                     </div>
                     <hr/>

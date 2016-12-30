@@ -70,23 +70,26 @@ var InvoiceDetail = React.createClass({
         if(invoice.client.id !== undefined && invoice.item.length > 0){
             invoiceAPI.createNewInvoice(invoice).then((res)=>{
                 var resText = res.data.message;
-                newWindow.location = res.data.link
                 dispatch(snackBarActions.openSnackBar(resText));
-                dispatch(actions.clearInvoice());
-                dispatch(actions.updateRemark(''));
-                // reload compoentWillMount logic for date and invoice number
-                var date = moment().format('YYYYMMDD');
-                dispatch(actions.addDate(date))
-                invoiceAPI.checkInvoicePerDay(date).then((response)=>{
-                    var numberOfInvoice = response.data.numberOfInvoice;
-                    if(numberOfInvoice < 10){
-                        var invoiceID = date + '00' + Number(numberOfInvoice+1)
-                    }else if (numberOfInvoice < 100 && numberOfInvoice > 9){
-                        var invoiceID = date + '0' + Number(numberOfInvoice+1)
-                    }else{
-                        var invoiceID = date + Number(numberOfInvoice+1)
-                    }
-                    dispatch(actions.addInvoiceID(invoiceID))
+                //print invoice
+                invoiceAPI.printInvoice(invoice).then((res)=>{
+                    newWindow.location = res.data.link
+                    dispatch(actions.clearInvoice());
+                    dispatch(actions.updateRemark(''));
+                    // reload compoentWillMount logic for date and invoice number
+                    var date = moment().format('YYYYMMDD');
+                    dispatch(actions.addDate(date))
+                    invoiceAPI.checkInvoicePerDay(date).then((response)=>{
+                        var numberOfInvoice = response.data.numberOfInvoice;
+                        if(numberOfInvoice < 10){
+                            var invoiceID = date + '00' + Number(numberOfInvoice+1)
+                        }else if (numberOfInvoice < 100 && numberOfInvoice > 9){
+                            var invoiceID = date + '0' + Number(numberOfInvoice+1)
+                        }else{
+                            var invoiceID = date + Number(numberOfInvoice+1)
+                        }
+                        dispatch(actions.addInvoiceID(invoiceID))
+                    })
                 })
             })
         }else{

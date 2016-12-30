@@ -21,6 +21,27 @@ module.exports = {
             json:true
         })
     },
+    printInvoice:function(invoice){
+        return axios({
+            method:'post',
+            url:'/IV/printInvoice',
+            params:{
+                invoice
+            },
+            json:true
+        })
+    },
+    voidInvoice:function(invoiceID, clientID){
+        return axios({
+            method:'post',
+            url:'/IV/printInvoice',
+            params:{
+                invoiceID,
+                clientID
+            },
+            json:true
+        })
+    },
     getAllInvoice:function(){
         return axios.get('/IV/getAllInvoice').then(function(res){
             return res
