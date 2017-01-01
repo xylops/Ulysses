@@ -1,5 +1,6 @@
 var React = require('react');
 var moment = require('moment')
+var Slider = require('react-slick')
 //redux
 var {connect} = require('react-redux')
 //material-ui
@@ -10,13 +11,22 @@ import RaisedButton from 'material-ui/RaisedButton';
 const customContentStyle = {
   width: '60%',
   maxWidth: 'none',
-  minHeight:'80%'
 };
-
+var settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+};
+const style ={
+    textAlign:'center'
+}
 var purchaseRecord = React.createClass({
     getInitialState:function(){
         return({
-            open:false
+            open:false,
+            itemRecord :[],
+            recordID:'null'
         })
     },
     handleOpen:function(){
@@ -29,14 +39,39 @@ var purchaseRecord = React.createClass({
             open:false
         })
     },
+    handleNext:function(record){
+        this.refs.slider.slickGoTo(1)
+        this.setState({
+            itemRecord: record.item,
+            recordID:record.invoiceID
+        })
+    },
+    handlePrevious:function(){
+        this.refs.slider.slickGoTo(0)
+        this.setState({
+            itemRecord: [],
+            recordID:'null'
+        })
+    },
     render:function(){
         var {purchaseRecord} = this.props
         var renderList = () =>{
-            if(purchaseRecord !== undefined){
+            if(purchaseRecord === undefined){
+                //do nothing
+            }else if(purchaseRecord.length === 0){
+                return (
+                    <div>
+                        <br/>
+                        <h4 style={{textAlign:'center'}}>There are no Previous Purchase Record</h4>
+                    </div>
+                )
+            }else{
                 return purchaseRecord.map((record)=>{
                     var date = moment(record.date).format('DD/MM/YYYY')
                     return (
-                        <RaisedButton className="row" key={record._id} style={{textAlign:'center', marginTop:'5px'}} fullWidth={true}>
+                        <RaisedButton key={record._id} style={{textAlign:'center', maxHeight:'36px',marginLeft:'5px', width:'98%'}} onTouchTap={()=>{
+                                this.handleNext(record)
+                            }}>
                             <div className="column medium-3">
                                 {record.invoiceID}
                             </div>
@@ -54,17 +89,43 @@ var purchaseRecord = React.createClass({
                 })
             }
         }
+        var renderItemList = () =>{
+            if(this.state.itemRecord.length > 0){
+                return this.state.itemRecord.map((singleItem)=>{
+                    return (
+                        <div key={singleItem.ProductID}>
+                            <div className="column medium-2 hide-for-small-only" style={style}>
+                                {singleItem.ProductID}
+                            </div>
+                            <div className="column medium-3" style={style}>
+                                {singleItem.ProductName}
+                            </div>
+                            <div className="column medium-2" style={style}>
+                                {singleItem.Spec}
+                            </div>
+                            <div className="column medium-1" style={style}>
+                                {singleItem.quantity}
+                            </div>
+                            <div className="column medium-1" style={style}>
+                                {singleItem.Price}
+                            </div>
+                            <div className="column medium-1" style={style}>
+                                {singleItem.discount}
+                            </div>
+                            <div className="column medium-1" style={style}>
+                                {singleItem.amount}
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        }
         const actions = [
             <FlatButton
-                label="Cancel"
+                label="Close"
                 primary={true}
                 onTouchTap={this.handleClose}
-            />,
-            <FlatButton
-                label="Submit"
-                primary={true}
-                onTouchTap={this.handleClose}
-            />,
+            />
         ];
         return(
             <div>
@@ -77,22 +138,58 @@ var purchaseRecord = React.createClass({
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    <div className="row" style={{textAlign:'center'}}>
-                        <div className="column medium-3">
-                            Invoice ID
-                        </div>
-                        <div className="column medium-3">
-                            Date
-                        </div>
-                        <div className="column medium-3">
-                            Total Amount
-                        </div>
-                        <div className="column medium-3">
-                            Current Status
-                        </div>
+                    <div style={{minHeight:'500px'}}>
+                        <Slider {...settings} ref="slider">
+                            <div>
+                                <div className="row" style={{textAlign:'center'}}>
+                                    <div className="column medium-3">
+                                        Invoice ID
+                                    </div>
+                                    <div className="column medium-3">
+                                        Date
+                                    </div>
+                                    <div className="column medium-3">
+                                        Total Amount
+                                    </div>
+                                    <div className="column medium-3">
+                                        Current Status
+                                    </div>
+                                </div>
+                                <hr/>
+                                {renderList()}
+                            </div>
+                            <div>
+                                <FlatButton label="back" secondary={true} onTouchTap={this.handlePrevious}/>
+                                <h5 style={{textAlign:'center'}}>Item Purchased - {this.state.recordID}</h5>
+                                <br/>
+                                <div className="row" style={{marginLeft:'0px', textAlign:'center'}}>
+                                    <div className="column medium-2 hide-for-small-only" style={style}>
+                                        <h7>Product ID</h7>
+                                    </div>
+                                    <div className="column medium-3" style={style}>
+                                        <h7>Product Name</h7>
+                                    </div>
+                                    <div className="column medium-2" style={style}>
+                                        <h7>Spec</h7>
+                                    </div>
+                                    <div className="column medium-1" style={style}>
+                                        <h7>Quantity</h7>
+                                    </div>
+                                    <div className="column medium-1" style={style}>
+                                        <h7>Price</h7>
+                                    </div>
+                                    <div className="column medium-1" style={style}>
+                                        <h7>Discount</h7>
+                                    </div>
+                                    <div className="column medium-1" style={style}>
+                                        <h7>Amount</h7>
+                                    </div>
+                                </div>
+                                <hr/>
+                                {renderItemList()}
+                            </div>
+                        </Slider>
                     </div>
-                    <hr/>
-                    {renderList()}
                 </Dialog>
             </div>
         )

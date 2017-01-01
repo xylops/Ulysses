@@ -31,13 +31,12 @@ module.exports = {
             json:true
         })
     },
-    voidInvoice:function(invoiceID, clientID){
+    voidInvoice:function(invoiceID){
         return axios({
             method:'post',
-            url:'/IV/printInvoice',
+            url:'/IV/voidInvoice',
             params:{
-                invoiceID,
-                clientID
+                invoiceID
             },
             json:true
         })

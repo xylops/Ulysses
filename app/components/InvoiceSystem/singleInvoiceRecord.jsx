@@ -3,6 +3,7 @@ var moment = require('moment');
 //Redux
 var {connect}  = require('react-redux')
 var actions = require('../../actions/invoiceAction');
+var snackBarActions = require('../../actions/snackBarActions')
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -49,8 +50,17 @@ var SingleInvoiceRecord = React.createClass({
         })
     },
     handleVoid:function(){
-        var {record} = this.props;
-        console.log(record.invoiceID, record.client.id)
+        var {record, dispatch} = this.props;
+        invoiceAPI.voidInvoice(record.invoiceID).then((res)=>{
+            var resText = res.data.message;
+            dispatch(snackBarActions.openSnackBar(resText));
+            this.setState({
+                open:false
+            })
+            invoiceAPI.getAllInvoice().then((res)=>{
+                dispatch(actions.addInvoiceList(res.data))
+            })
+        })
     },
     render:function(){
         var {record} = this.props
