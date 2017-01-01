@@ -170,24 +170,6 @@ var ClientDetail = React.createClass({
                         <RaisedButton label="Save changes" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogUpdate}/>
                         <RaisedButton label="Delete Client" fullWidth={true} style={style.dialogBtn} onTouchTap={this.dialogDelete}/>
                     </div>
-                    <div className="column small-2 show-for-small-only">
-                        <br/>
-                        <FloatingActionButton onTouchTap={this.toggleDialog} mini={true}>
-                            <PreviousPurchase/>
-                        </FloatingActionButton>
-                        <br/>
-                        <FloatingActionButton onTouchTap={this.toggleDialog} mini={true} style={{marginTop:'10px'}}>
-                            <ContentAdd/>
-                        </FloatingActionButton>
-                        <br/>
-                        <FloatingActionButton onTouchTap={this.dialogUpdate} mini={true} style={{marginTop:'10px'}}>
-                            <ContentSave/>
-                        </FloatingActionButton>
-                        <br/>
-                        <FloatingActionButton onTouchTap={this.dialogDelete} mini={true} secondary={true} style={{marginTop:'10px'}}>
-                            <ContentDelete/>
-                        </FloatingActionButton>
-                    </div>
                 </div>
             </Dialog>
         )

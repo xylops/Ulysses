@@ -20,7 +20,7 @@ const style = {
         display: 'inline-block',
     },
     animation:{
-        transition: 'all .5s ease-in'
+        transition: 'all .3s ease-in'
     }
 }
 
