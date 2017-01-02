@@ -16,3 +16,20 @@ export var fetchNonProcessInvoice = (state = {isFetching: false , NPI: []}, acti
             return state
     }
 }
+
+export var singleInvoiceDialog = (state = {open: false, invoice:undefined }, action) => {
+    switch (action.type){
+        case 'OPEN_LOGISTIC_INVOICE_DIALOG':
+            return{
+                open:true,
+                invoice:action.invoice
+            }
+        case 'CLOSE_LOGISTIC_INVOICE_DIALOG':
+            return{
+                open:false,
+                invoice:undefined
+            }
+        default:
+            return state
+    }
+}

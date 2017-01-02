@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
-import {fetchNonProcessInvoice} from './logisticReducer'
+import {fetchNonProcessInvoice,singleInvoiceDialog} from './logisticReducer'
 
 
 export default combineReducers({
-    fetchNonProcessInvoice
+    fetchNonProcessInvoice,
+    singleInvoiceDialog
 })

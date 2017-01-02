@@ -1,6 +1,8 @@
 var React = require('react');
 var moment = require('moment');
+//redux
 var {connect} = require('react-redux')
+var actions = require('../../../actions/logisticActions')
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -9,13 +11,26 @@ import FlatButton from 'material-ui/FlatButton';
 import InvoiceSection from './InvoiceSection'
 
 var SingleInvoice = React.createClass({
+    handleMouseDown:function(invoice){
+        var {dispatch} = this.props;
+        dispatch(actions.openLogisticInvoiceDialog(invoice));
+    },
+    handleMouseUp:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.closeLogisticInvoiceDialog());
+    },
     render:function(){
         var {invoice} = this.props
         var date = moment(invoice.date).format('DD/MM/YYYY')
         return (
             <div className="row">
                 <div className="column small-10">
-                    <RaisedButton fullWidth={true} style={{maxHeight:'36px', martinTop:'5px', textAlign:'center'}}>
+                    <RaisedButton
+                        fullWidth={true}
+                        style={{maxHeight:'36px', martinTop:'5px', textAlign:'center'}}
+                        onMouseDown={()=>{this.handleMouseDown(invoice)}}
+                        onMouseUp={this.handleMouseUp}
+                    >
                         <div className="column small-4">
                             {invoice.invoiceID}
                         </div>

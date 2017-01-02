@@ -10,3 +10,16 @@ export var completeNonProcessInvoice = (NPI) =>{
         NPI
     }
 }
+
+export var openLogisticInvoiceDialog = (invoice) =>{
+    return{
+        type:'OPEN_LOGISTIC_INVOICE_DIALOG',
+        invoice
+    }
+}
+export var closeLogisticInvoiceDialog = () =>{
+    return{
+        type:'CLOSE_LOGISTIC_INVOICE_DIALOG',
+
+    }
+}
