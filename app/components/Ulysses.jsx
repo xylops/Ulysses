@@ -20,7 +20,7 @@ var Ulysses = React.createClass({
             <div>
                 <NavBar/>
                 <div className="row">
-                    <div className='Column small-11 small-centered medium-12'>
+                    <div className='Column small-12 small-centered medium-12'>
                         {this.props.children}
                     </div>
                     <Snackbar

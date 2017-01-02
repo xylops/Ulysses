@@ -18,6 +18,7 @@ import ProductDetail from './components/ProductDetail/main';
 import InventoryManagement from './components/InventoryManagement/main'
 import InStock from './components/InventoryManagement/InStock/main'
 import Logistic from './components/Logistic/main'
+import SortInvoice from './components/Logistic/sortInvoice/main'
 
 
 // Redux Function
@@ -47,6 +48,8 @@ const App = () => (
                     <Route path="IV" component={InvoiceSystem}/>
                     <Route path="PD" component={ProductDetail}/>
                     <Route path="IM" component={InStock}/>
+                    <Route path="LG" component={SortInvoice}/>
+                    <Route path="LGSI" component={SortInvoice}/>
                     <IndexRoute component={HomePage}/>
                 </Route>
             </Router>

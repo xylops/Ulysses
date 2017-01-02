@@ -22,8 +22,8 @@ router.post('/createNewClient', function(req, res, next) {
     newClient.address = req.query.newClient[2];
     newClient.phone = req.query.newClient[3];
     newClient.delieverytime = req.query.newClient[4];
-    newClient.location = req.query.newClient[5];
-    newClient.paymentMethod = req.query.newClient[6]
+    newClient.paymentMethod = req.query.newClient[5]
+    newClient.location = req.query.newClient[6];
 
     newClient.save((err, client)=>{
         if(err){
