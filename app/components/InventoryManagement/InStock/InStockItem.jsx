@@ -63,8 +63,8 @@ var newInstockItem = React.createClass({
 
 export default connect((state)=>{
     return {
-        newStockList : state.InStock.newInStockList.newEntry,
-        date : state.InStock.newInStockList.date
+        newStockList : state.inStock.newInStockList.newEntry,
+        date : state.inStock.newInStockList.date
 
     }
 })(newInstockItem)

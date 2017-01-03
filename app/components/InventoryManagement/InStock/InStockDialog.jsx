@@ -80,8 +80,8 @@ var InStockDialog = React.createClass({
 
 export default connect((state)=>{
     return {
-        newStockList : state.InStock.newInStockList.newEntry,
-        date : state.InStock.newInStockList.date,
-        dialog: state.InStock.newInStockList.submitDialog,
+        newStockList : state.inStock.newInStockList.newEntry,
+        date : state.inStock.newInStockList.date,
+        dialog: state.inStock.newInStockList.submitDialog,
     }
 })(InStockDialog)

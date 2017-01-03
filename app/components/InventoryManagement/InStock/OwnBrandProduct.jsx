@@ -47,6 +47,6 @@ var singleOBProduct = React.createClass({
 
 export default connect((state)=>{
     return{
-        date : state.InStock.newInStockList.date,
+        date : state.inStock.newInStockList.date,
     }
 })(singleOBProduct)

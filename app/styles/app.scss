@@ -14,9 +14,26 @@
 [type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea {
     box-shadow: none !important;
 }
-// 
+//
 // .OBLIST{
 //     max-height:500px;
 //     overflow-y:scroll;
 //     overflow-x:hidden;
 // }
+.pageSlider-enter {
+    opacity: 0;
+}
+
+.pageSlider-enter.pageSlider-enter-active {
+    opacity:1;
+    transition: opacity 500ms ease-in-out
+}
+
+.pageSlider-leave {
+   opacity:0;
+}
+
+.pageSlider-leave.pageSlider-leave-active {
+    opacity:0;
+    transition: opacity 500ms ease-in-out
+}

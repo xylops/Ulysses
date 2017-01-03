@@ -75,8 +75,8 @@ var singleOBDialog = React.createClass({
 
 export default connect((state)=>{
     return{
-        open:state.InStock.singleOBDialog.open,
-        item:state.InStock.singleOBDialog.item,
-        newStockList : state.InStock.newInStockList.newEntry
+        open:state.inStock.singleOBDialog.open,
+        item:state.inStock.singleOBDialog.item,
+        newStockList : state.inStock.newInStockList.newEntry
     }
 })(singleOBDialog);

@@ -11,13 +11,9 @@ import FlatButton from 'material-ui/FlatButton';
 import InvoiceSection from './InvoiceSection'
 
 var SingleInvoice = React.createClass({
-    handleMouseDown:function(invoice){
+    handleOpenDialog:function(invoice){
         var {dispatch} = this.props;
         dispatch(actions.openLogisticInvoiceDialog(invoice));
-    },
-    handleMouseUp:function(){
-        var {dispatch} = this.props;
-        dispatch(actions.closeLogisticInvoiceDialog());
     },
     render:function(){
         var {invoice} = this.props
@@ -28,8 +24,7 @@ var SingleInvoice = React.createClass({
                     <RaisedButton
                         fullWidth={true}
                         style={{maxHeight:'36px', martinTop:'5px', textAlign:'center'}}
-                        onMouseDown={()=>{this.handleMouseDown(invoice)}}
-                        onMouseUp={this.handleMouseUp}
+                        onTouchTap={()=>{this.handleOpenDialog(invoice)}}
                     >
                         <div className="column small-4">
                             {invoice.invoiceID}
@@ -49,7 +44,6 @@ var SingleInvoice = React.createClass({
                     <FlatButton label=">>" primary={true}/>
                 </div>
             </div>
-
         )
     }
 })

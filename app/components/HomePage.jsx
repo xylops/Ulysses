@@ -41,8 +41,9 @@ var HomePage = React.createClass({
     },
     render:function(){
         var {searchText} = this.props
+        var windowHeight = $(window).height() - 64
         return(
-            <div style={{marginTop:'50px'}}>
+            <div style={{marginTop:'50px', height:windowHeight}}>
                 <div className="row">
                     <div className="column medium-3" style={style.navBtn}>
                         <Link to="/CM" ><RaisedButton label="Client Managemnet"  primary={true} fullWidth={true} /></Link>

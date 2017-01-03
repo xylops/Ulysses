@@ -18,6 +18,7 @@ const style = {
 };
 
 var ClientManagement = React.createClass({
+
     componentWillMount:function(){
         var {dispatch} = this.props;
         dispatch(actions.changingNavBarText('Client Mangement'))

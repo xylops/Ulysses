@@ -67,9 +67,9 @@ var brandItem = React.createClass({
 
 export default connect((state)=>{
     return{
-        isFetching: state.InStock.fetchOwnBrandList.isFetching,
-        ownBrandList: state.InStock.fetchOwnBrandList.OBL,
-        filterID: state.InStock.ownBrandFilter.id,
-        filterName: state.InStock.ownBrandFilter.name,
+        isFetching: state.inStock.fetchOwnBrandList.isFetching,
+        ownBrandList: state.inStock.fetchOwnBrandList.OBL,
+        filterID: state.inStock.ownBrandFilter.id,
+        filterName: state.inStock.ownBrandFilter.name,
     }
 })(brandItem)

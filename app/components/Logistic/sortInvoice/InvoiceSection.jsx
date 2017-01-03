@@ -42,14 +42,11 @@ var InvoicSection = React.createClass({
         } else{
             var filter = this.state.location
         }
+
         let filterNPI = NPI.filter((record)=>{
             return (record.client.location.indexOf(filter) !== -1);
         });
-        if(dialogOpen){
-            var text = '11111'
-        }else{
-            var text = '22222'
-        }
+        
         var renderInvoice = () =>{
             if(fetching){
                 return (
@@ -65,6 +62,7 @@ var InvoicSection = React.createClass({
                 })
             }
         }
+
         return (
             <div>
                 <div className="row">
@@ -85,7 +83,6 @@ var InvoicSection = React.createClass({
                 <hr/>
                 <div>
                     {renderInvoice()}
-                    {text}
                 </div>
             </div>
 

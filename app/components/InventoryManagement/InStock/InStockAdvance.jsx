@@ -54,7 +54,7 @@ var advanceDialog = React.createClass({
         var value = this.refs.idInput.value;
         var id = value.toUpperCase()
         let item = ownBrandList.filter((elem)=>{
-            return elem.ProductID.indexOf(id) !== -1; 
+            return elem.ProductID.indexOf(id) !== -1;
         });
         if(item.length === 1){
             this.setState({
@@ -117,8 +117,8 @@ var advanceDialog = React.createClass({
 
 export default connect ((state)=>{
     return {
-        newStockList : state.InStock.newInStockList.newEntry,
-        date : state.InStock.newInStockList.date,
-        ownBrandList : state.InStock.fetchOwnBrandList.OBL
+        newStockList : state.inStock.newInStockList.newEntry,
+        date : state.inStock.newInStockList.date,
+        ownBrandList : state.inStock.fetchOwnBrandList.OBL
     }
 })(advanceDialog);
