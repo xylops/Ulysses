@@ -6,6 +6,7 @@ var actions = require('../../../actions/logisticActions');
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 //api
 var logisticAPI = require('LogisticAPI')
 //myCompoent
@@ -25,6 +26,10 @@ var InvoicSection = React.createClass({
             dispatch(actions.completeNonProcessInvoice(res.data))
         });
     },
+    handleClose:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.closeLogisticInvoiceDialog());
+    },
     getInitialState:function(){
         return ({
             location:'N/A'
@@ -36,7 +41,7 @@ var InvoicSection = React.createClass({
         })
     },
     render:function(){
-        var {NPI, fetching, dialogOpen} = this.props
+        var {NPI, fetching, dialogOpen, invoice} = this.props
         if(this.state.location === 'N/A'){
             var filter = ''
         } else{
@@ -46,8 +51,8 @@ var InvoicSection = React.createClass({
         let filterNPI = NPI.filter((record)=>{
             return (record.client.location.indexOf(filter) !== -1);
         });
-        
-        var renderInvoice = () =>{
+
+        var renderInvoiceList = () =>{
             if(fetching){
                 return (
                     <div style={style}>
@@ -62,6 +67,53 @@ var InvoicSection = React.createClass({
                 })
             }
         }
+        var renderClientInfo = () =>{
+            if(invoice !== undefined){
+                return (
+                    <div className="row">
+                        <div className="column small-2">
+                            Address:
+                        </div>
+                        <div className="column small-10" style={{textAlign:'left'}}>
+                            {invoice.client.address}
+                        </div>
+                    </div>
+                )
+            }
+        }
+        var renderDialogItem = () =>{
+            if(invoice !== undefined){
+                return invoice.item.map((item)=>{
+                    return (
+                        <div key={item.ProductID} className="row" style={{textAlign:'center'}}>
+                            <div className="column small-4">
+                                {item.ProductID}
+                            </div>
+                            <div className="column small-4">
+                                {item.ProductName}
+                            </div>
+                            <div className="column small-4">
+                                {item.quantity}
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        }
+
+        const actions = [
+            <RaisedButton
+                label="Cancel"
+                style={{width:'50%'}}
+                onTouchTap={this.handleClose}
+            />,
+            <RaisedButton
+                label="Submit"
+                primary={true}
+                style={{width:'50%'}}
+                onTouchTap={this.handleClose}
+            />,
+        ];
 
         return (
             <div>
@@ -82,7 +134,31 @@ var InvoicSection = React.createClass({
                 </div>
                 <hr/>
                 <div>
-                    {renderInvoice()}
+                    {renderInvoiceList()}
+                    <Dialog
+                        title="Invoice Detail"
+                        actions={actions}
+                        modal={false}
+                        open={dialogOpen}
+                        onRequestClose={this.handleClose}
+                    >
+                        {renderClientInfo()}
+                        <br/>
+                        <br/>
+                        <div className="row" style={{textAlign:'center'}}>
+                            <div className="column small-4">
+                                ProductID
+                            </div>
+                            <div className="column small-4">
+                                ProductName
+                            </div>
+                            <div className="column small-4">
+                                Quanitity
+                            </div>
+                        </div>
+                        <hr/>
+                        {renderDialogItem()}
+                    </Dialog>
                 </div>
             </div>
 
@@ -94,7 +170,7 @@ export default connect((state)=>{
     return{
         fetching : state.logistic.fetchNonProcessInvoice.isFetching,
         NPI : state.logistic.fetchNonProcessInvoice.NPI,
-        dialogOpen : state.logistic.singleInvoiceDialog.open
-
+        dialogOpen : state.logistic.singleInvoiceDialog.open,
+        invoice: state.logistic.singleInvoiceDialog.invoice
     }
 })(InvoicSection)
