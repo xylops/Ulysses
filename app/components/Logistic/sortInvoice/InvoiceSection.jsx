@@ -23,7 +23,14 @@ var InvoicSection = React.createClass({
         var {dispatch} = this.props
         dispatch(actions.startNonProcessInvoice())
         logisticAPI.getNonProcessInvoice().then((res)=>{
-            dispatch(actions.completeNonProcessInvoice(res.data))
+            var tempArray = []
+            res.data.forEach((record)=>{
+                record = {
+                    ...record, show: 0
+                }
+                tempArray.push(record)
+            })
+            dispatch(actions.completeNonProcessInvoice(tempArray))
         });
     },
     handleClose:function(){
@@ -48,9 +55,15 @@ var InvoicSection = React.createClass({
             var filter = this.state.location
         }
 
-        let filterNPI = NPI.filter((record)=>{
-            return (record.client.location.indexOf(filter) !== -1);
+        let arr = NPI.filter((record)=>{
+            return ( record.show === 0 );
         });
+
+        let filterNPI = arr.filter((record)=>{
+            return ( record.client.location.indexOf(filter) !== -1);
+        });
+
+        // || record.client.location.indexOf(filter) !== -1
 
         var renderInvoiceList = () =>{
             if(fetching){
@@ -117,7 +130,7 @@ var InvoicSection = React.createClass({
 
         return (
             <div>
-                <div className="row">
+                <div className="row" style={{minHeight:'102px'}}>
                     <div className="column small-6 medium-2">
                         <h5>Area :</h5>
                     </div>

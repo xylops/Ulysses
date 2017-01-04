@@ -12,6 +12,14 @@ export var fetchNonProcessInvoice = (state = {isFetching: false , NPI: []}, acti
                 isFetching:false,
                 NPI: action.NPI
             }
+        case 'TOGGLE_NONPROCESS_INVOICE_RECORD_SHOW':
+            return update(state,{
+                NPI:{
+                    [action.targetItemIndex]:{
+                        show:{$set:action.toggle}
+                    }
+                }
+            })
         default:
             return state
     }
@@ -28,6 +36,28 @@ export var singleInvoiceDialog = (state = {open: false, invoice:undefined }, act
             return{
                 open:false,
                 invoice:undefined
+            }
+        default:
+            return state
+    }
+}
+
+export var createLogesticRecord = (state = {
+    date:'',
+    logisticID:'',
+    licencePlate:'',
+}, action) => {
+    switch (action.type){
+        case 'ADD_NEW_LOGISTIC_ID_DATE':
+            return{
+                ...state,
+                date:action.date,
+                logisticID:action.id
+            }
+        case 'ADD_NEW_LOGISTIC_PLATE':
+            return{
+                ...state,
+                licencePlate:action.plate
             }
         default:
             return state

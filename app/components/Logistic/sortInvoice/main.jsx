@@ -4,25 +4,19 @@ var {connect} = require('react-redux')
 import RaisedButton from 'material-ui/RaisedButton';
 //myCompoent
 import InvoiceSection from './InvoiceSection'
+import Record from './Record'
 
 var main = React.createClass({
-    handleDrag:function(){
-        console.log('drag')
-    },
-    handleDoubleClick:function(){
-        console.log('Double')
-    },
     render:function(){
         return (
             <div>
                 <br/>
                 <div className="row">
-                    <div className="column small-12 medium-7">
+                    <div className="column small-12 medium-6" >
                         <InvoiceSection/>
                     </div>
-                    <div className="column small-12 medium-5">
-                        <p>Logistic Section</p>
-                        <RaisedButton label="Double or Single Click" onDoubleClick={this.handleDoubleClick} />
+                    <div className="column small-12 medium-6">
+                        <Record/>
                     </div>
 
                 </div>

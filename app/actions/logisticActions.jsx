@@ -20,6 +20,27 @@ export var openLogisticInvoiceDialog = (invoice) =>{
 export var closeLogisticInvoiceDialog = () =>{
     return{
         type:'CLOSE_LOGISTIC_INVOICE_DIALOG',
+    }
+}
 
+export var toggleNonprocessInvoiceRecordShow = (targetItemIndex, toggle) =>{
+    return{
+        type:'TOGGLE_NONPROCESS_INVOICE_RECORD_SHOW',
+        targetItemIndex,
+        toggle
+    }
+}
+
+export var addNewLogisticIDDate = (date, id) =>{
+    return{
+        type:'ADD_NEW_LOGISTIC_ID_DATE',
+        date,
+        id
+    }
+}
+export var addNewLogisticPlate = (plate) =>{
+    return{
+        type:'ADD_NEW_LOGISTIC_PLATE',
+        plate
     }
 }

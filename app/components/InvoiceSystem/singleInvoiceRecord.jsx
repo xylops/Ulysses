@@ -65,6 +65,7 @@ var SingleInvoiceRecord = React.createClass({
     render:function(){
         var {record} = this.props
         var date = moment(record.date).format('DD/MM/YYYY');
+        console.log(record)
 
         const actions = [
             <FlatButton
