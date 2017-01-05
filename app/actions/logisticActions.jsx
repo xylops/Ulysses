@@ -17,6 +17,7 @@ export var openLogisticInvoiceDialog = (invoice) =>{
         invoice
     }
 }
+
 export var closeLogisticInvoiceDialog = () =>{
     return{
         type:'CLOSE_LOGISTIC_INVOICE_DIALOG',
@@ -38,9 +39,16 @@ export var addNewLogisticIDDate = (date, id) =>{
         id
     }
 }
+
 export var addNewLogisticPlate = (plate) =>{
     return{
         type:'ADD_NEW_LOGISTIC_PLATE',
         plate
+    }
+}
+
+export var clearNewLogistic = () =>{
+    return{
+        type:'CLEAR_NEW_LOGISTIC'
     }
 }

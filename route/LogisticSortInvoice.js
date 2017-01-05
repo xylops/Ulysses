@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async')
 var client = require('../modal/client_model.js')
 var invoice = require ('../modal/invoice_model')
 var logistic = require('../modal/logistic_model')
 var lorry = require('../modal/lorry_model')
+var productDetail = require('../modal/productDetail_model')
 
 router.get('/getNonProcessInvoice', function(req, res, next) {
     invoice.find({status:'未處理'}).populate('client').sort({id:1}).exec((err, result)=>{
@@ -28,6 +30,69 @@ router.get('/getLicencePlate', function(req, res, next) {
             console.log(err);
         }else{
             res.json(result)
+        }
+    })
+});
+
+router.post('/createNewLogistic', function(req, res, next) {
+    var record = JSON.parse(req.query.record);
+
+    var newLogisticRecord = new logistic();
+    newLogisticRecord.logisticID = record.logisticID;
+    newLogisticRecord.date = record.date;
+    newLogisticRecord.licencePlate = record.licencePlate;
+    newLogisticRecord.invoice = record.invoice;
+
+    //check each logistic invoicce
+    record.invoice.forEach((elem)=>{
+        invoice.findOne({_id:elem}, function(err, data){
+            if(err){
+                console.log(err)
+            }else{
+                var tempArray = []
+                async.forEach(data.item, (item, callback)=>{
+                    productDetail.findOne({_id:item.id}, function(err, prod){
+                        if(prod.OwnBrand){
+                            tempArray.push('1')
+                        }
+                        callback()
+                    })
+                }, function(err){
+                    if(tempArray.length > 0 ){
+                        invoice.findOneAndUpdate({_id:elem},{$set:{
+                            status:'處理中'
+                        }},{upsert : true}, function(err, data){
+                            if(err){
+                                console.log(err)
+                            }else{
+                                console.log('updated invoice')
+                            }
+                        })
+                    }else{
+                        invoice.findOneAndUpdate({_id:elem},{$set:{
+                            status:'己執未送'
+                        }},{upsert : true}, function(err, data){
+                            if(err){
+                                console.log(err)
+                            }else{
+                                console.log('updated invoice')
+                            }
+                        })
+                    }
+                    tempArray = [];
+                })
+
+
+
+            }
+        })
+    })
+    //save the logistic record
+    newLogisticRecord.save((err, record)=>{
+        if(err){
+            res.json({message:'Something is wrong : ' + err})
+        }else{
+            res.json({message:'New Logistic Record have been created'})
         }
     })
 });

@@ -59,6 +59,12 @@ export var createLogesticRecord = (state = {
                 ...state,
                 licencePlate:action.plate
             }
+        case 'CLEAR_NEW_LOGISTIC':
+            return{
+                date:'',
+                logisticID:'',
+                licencePlate:'',
+            }
         default:
             return state
     }

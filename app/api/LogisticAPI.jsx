@@ -21,4 +21,14 @@ module.exports = {
             return res
         })
     },
+    createNewLogistic:function(record){
+        return axios({
+            method:'post',
+            url:'/LGSI/createNewLogistic',
+            params:{
+                record
+            },
+            json:true
+        })
+    },
 }

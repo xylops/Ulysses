@@ -47,6 +47,16 @@ var InvoicSection = React.createClass({
             location:locationC
         })
     },
+    handleAdd:function(){
+        var {dispatch, NPI, invoice} = this.props;
+        var temp = []
+        NPI.forEach(function(elem){
+            temp.push(elem.invoiceID.indexOf(invoice.invoiceID));
+        })
+        var targetItem = temp.indexOf(0)
+        dispatch(actions.toggleNonprocessInvoiceRecordShow(targetItem, 1))
+        dispatch(actions.closeLogisticInvoiceDialog());
+    },
     render:function(){
         var {NPI, fetching, dialogOpen, invoice} = this.props
         if(this.state.location === 'N/A'){
@@ -124,7 +134,7 @@ var InvoicSection = React.createClass({
                 label="Submit"
                 primary={true}
                 style={{width:'50%'}}
-                onTouchTap={this.handleClose}
+                onTouchTap={this.handleAdd}
             />,
         ];
 
