@@ -35,7 +35,7 @@ router.post('/createNewInvoice', function(req, res, next) {
     newInvoiceRecord.item = invoice.item
     newInvoiceRecord.total = invoice.total
     newInvoiceRecord.remark = invoice.remark
-    newInvoiceRecord.status = invoice.status
+    newInvoiceRecord.status = '未處理'
 
     newInvoiceRecord.save((err, record)=>{
         if(err){

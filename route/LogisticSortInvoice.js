@@ -8,7 +8,7 @@ var lorry = require('../modal/lorry_model')
 var productDetail = require('../modal/productDetail_model')
 
 router.get('/getNonProcessInvoice', function(req, res, next) {
-    invoice.find({status:'未處理'}).populate('client').sort({id:1}).exec((err, result)=>{
+    invoice.find({$or:[ {'status':''}, {'status':'未處理'}]}).populate('client').sort({id:1}).exec((err, result)=>{
         if(err){
             console.log(err);
         }else{
@@ -44,7 +44,7 @@ router.post('/createNewLogistic', function(req, res, next) {
     newLogisticRecord.invoice = record.invoice;
 
     //check each logistic invoicce
-    record.invoice.forEach((elem)=>{
+    async.forEach(record.invoice, (elem, cb)=>{
         invoice.findOne({_id:elem}, function(err, data){
             if(err){
                 console.log(err)
@@ -65,7 +65,7 @@ router.post('/createNewLogistic', function(req, res, next) {
                             if(err){
                                 console.log(err)
                             }else{
-                                console.log('updated invoice')
+                                // console.log('updated invoice')
                             }
                         })
                     }else{
@@ -75,26 +75,25 @@ router.post('/createNewLogistic', function(req, res, next) {
                             if(err){
                                 console.log(err)
                             }else{
-                                console.log('updated invoice')
+                                // console.log('updated invoice')
                             }
                         })
                     }
                     tempArray = [];
+                    cb();
                 })
-
-
-
+            }
+        })
+    }, function(err){
+        newLogisticRecord.save((err, record)=>{
+            if(err){
+                res.json({message:'Something is wrong : ' + err})
+            }else{
+                res.json({message:'New Logistic Record have been created'})
             }
         })
     })
-    //save the logistic record
-    newLogisticRecord.save((err, record)=>{
-        if(err){
-            res.json({message:'Something is wrong : ' + err})
-        }else{
-            res.json({message:'New Logistic Record have been created'})
-        }
-    })
+
 });
 
 module.exports = router
