@@ -15,6 +15,10 @@ module.exports = {
                 genre
             }
         })
-
     }
+    action:function(){
+        return axios.get('maintaince/action').then(function(res){
+            return res
+        })
+    },
 }

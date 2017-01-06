@@ -69,3 +69,22 @@ export var createLogesticRecord = (state = {
             return state
     }
 }
+
+//*****************************Pick List ****************************//
+
+export var fetchPickList = (state = {isFetching: false , PL: []}, action) => {
+    switch (action.type){
+        case 'START_FETCHING_PICKLIST':
+            return{
+                isFetching:true,
+                PL:[]
+            }
+        case 'COMPLETE_FETCHING_PICKLIST':
+            return{
+                isFetching:false,
+                PL: action.PL
+            }
+        default:
+            return state
+    }
+}

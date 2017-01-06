@@ -31,4 +31,10 @@ module.exports = {
             json:true
         })
     },
+    //Pick List
+    getPickList:function(){
+        return axios.get('/LGPL/getPickList').then(function(res){
+            return res
+        })
+    },
 }

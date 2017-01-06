@@ -3,7 +3,7 @@ var React = require('react');
 var {connect} = require('react-redux')
 var actions = require('../../../actions/mainActions')
 //myCompoent
-import TopSection from './TopSection'
+import ProcessingList from './ProcessingList'
 
 var main = React.createClass({
     componentWillMount:function(){
@@ -13,9 +13,15 @@ var main = React.createClass({
 
     render:function(){
         return (
-            <div>
+            <div >
                 <br/>
-                <TopSection/>
+                <div className="row">
+                    <div className="column small-6">
+                        <ProcessingList/>
+                    </div>
+                    <div className="column small-6">
+                    </div>
+                </div>
             </div>
 
         )

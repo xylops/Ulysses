@@ -9,7 +9,8 @@ var clientManagement = require('./route/ClientManagement');
 var inventoryManagement = require('./route/InventoryManagement');
 var invoice = require('./route/Invoice');
 var logisticSortInvoice = require('./route/LogisticSortInvoice');
-
+var logisticPickList = require('./route/LogisticPickList')
+var maintaince = require('./route/maintaince')
 const PORT = process.env.PORT || 3000;
 
 app.use(function(req, res, next){
@@ -27,6 +28,9 @@ app.use('/CM', clientManagement)
 app.use('/IM', inventoryManagement)
 app.use('/IV', invoice);
 app.use('/LGSI', logisticSortInvoice)
+app.use('/LGPL', logisticPickList)
+app.use('/maintaince', maintaince)
+
 
 
 
