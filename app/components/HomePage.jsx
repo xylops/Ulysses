@@ -69,7 +69,7 @@ var HomePage = React.createClass({
                         <Link to="" ><RaisedButton label="Setting" disabled={true} fullWidth={true} /></Link>
                     </div>
                     <div className="column medium-3" style={style.navBtn}>
-                        <Link to="" ><RaisedButton label="Database" disabled={true} fullWidth={true} /></Link>
+                        <Link to="/LGPL" ><RaisedButton label="PickList" primary={true} fullWidth={true} /></Link>
                     </div>
                 </div><br/>
                 <div className="row">

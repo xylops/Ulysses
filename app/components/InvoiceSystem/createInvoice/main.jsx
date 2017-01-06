@@ -1,6 +1,7 @@
 var React = require('react');
 //redux
 var {connect} = require('react-redux');
+var actions = require('../../../actions/mainActions')
 var clientAction = require('../../../actions/clientManagementActions')
 var productActions = require('../../../actions/productDetailActions');
 //material-ui
@@ -39,7 +40,7 @@ var InvoiceSystem = React.createClass({
             dispatch(productActions.completeFetchPDL(PDL.data));
         })
         dispatch(productActions.updateProductFilterText(""))
-
+        dispatch(actions.changingNavBarText('New Invoice'))
     },
     render:function(){
         var {total} = this.props

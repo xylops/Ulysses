@@ -12,6 +12,7 @@ var logisticAPI = require('LogisticAPI')
 //myCompoent
 import Location from '../../ClientManagement/Location'
 import SingleInvoice from './SingleInvoice'
+import AdvanceInput from './AdvanceInput'
 //myStyle
 const style = {
     textAlign:'center',
@@ -153,6 +154,9 @@ var InvoicSection = React.createClass({
                                 location:'N/A'
                             })
                         }}/>
+                    </div>
+                    <div className="column small-12">
+                            <AdvanceInput/>
                     </div>
                 </div>
                 <hr/>

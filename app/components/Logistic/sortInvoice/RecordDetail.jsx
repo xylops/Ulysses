@@ -43,6 +43,13 @@ var RecordDetail = React.createClass({
             })
         })
     },
+    componentWillUnmount:function(){
+        var {dispatch} = this.props;
+        this.setState({
+            open:false
+        })
+        dispatch(actions.clearNewLogistic());
+    },
     handleChange:function(event, index, value){
         var {dispatch} = this.props;
         dispatch(actions.addNewLogisticPlate(value))

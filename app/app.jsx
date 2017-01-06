@@ -19,6 +19,7 @@ import InventoryManagement from './components/InventoryManagement/main'
 import InStock from './components/InventoryManagement/InStock/main'
 import Logistic from './components/Logistic/main'
 import SortInvoice from './components/Logistic/sortInvoice/main'
+import PickList from './components/Logistic/PickList/main'
 
 
 // Redux Function
@@ -50,6 +51,7 @@ const App = () => (
                     <Route path="IM" component={InStock}/>
                     <Route path="LG" component={SortInvoice}/>
                     <Route path="LGSI" component={SortInvoice}/>
+                    <Route path="LGPL" component={PickList}/>
                     <IndexRoute component={HomePage}/>
                 </Route>
             </Router>

@@ -1,12 +1,16 @@
 var React = require('react');
+//redux
 var {connect} = require('react-redux')
-//material-ui
-import RaisedButton from 'material-ui/RaisedButton';
+var actions = require('../../../actions/mainActions')
 //myCompoent
 import InvoiceSection from './InvoiceSection'
 import Record from './Record'
 
 var main = React.createClass({
+    componentWillMount:function(){
+        var {dispatch} = this.props;
+        dispatch(actions.changingNavBarText('Sort Invoice'))
+    },
     render:function(){
         return (
             <div>
