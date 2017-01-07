@@ -2,6 +2,7 @@ var React = require('react');
 //react-redux
 var {connect}= require('react-redux');
 var actions = require('../../../actions/pickListActions');
+var pickListActions = require('../../../actions/pickListActions')
 var snackBarActions = require('../../../actions/snackBarActions')
 
 //material-ui
@@ -44,17 +45,20 @@ var LogisticRecord = React.createClass({
                     record.item = tempItemArray
                 })
                 dispatch(actions.completeFetchPickList(res.data))
+                dispatch(pickListActions.updateSingleLogRecord(null))
             })
         });
     },
     render:function(){
         var {logRecord} = this.props;
         var renderSingleLogItem = () =>{
-            return logRecord.item.map((item)=>{
-                return(
-                    <LogRecordItem  key={item.id} item={item}/>
-                )
-            })
+            if(logRecord !== null){
+                return logRecord.item.map((item)=>{
+                    return(
+                        <LogRecordItem  key={item.id} item={item}/>
+                    )
+                })
+            }
         }
         var renderLogRecord = () =>{
             if(logRecord){
