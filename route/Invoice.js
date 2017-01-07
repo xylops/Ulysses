@@ -21,7 +21,7 @@ router.post('/checkInvoicePerDay', function(req, res, next) {
     var date = req.query.date
     invoiceRecord.find({date:date}, function(err, data){
         res.json({numberOfInvoice:data.length})
-        console.log(data.length)
+        console.log(data)
     })
 });
 

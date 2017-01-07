@@ -37,4 +37,14 @@ module.exports = {
             return res
         })
     },
+    completePickList:function(logisticID){
+        return axios({
+            method:'post',
+            url:'/LGPL/completePickList',
+            params:{
+                logisticID
+            },
+            json:true
+        })
+    },
 }

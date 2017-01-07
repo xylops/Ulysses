@@ -13,7 +13,6 @@ var SingleProcessingRecord = React.createClass({
     },
     render:function(){
         var {logRecord} = this.props;
-        var date = moment(logRecord.date).format('DD/MM/YYYY');
         var totalItem = 0
         logRecord.item.forEach((item)=>{
             totalItem += Number(item.quantity)
@@ -26,16 +25,13 @@ var SingleProcessingRecord = React.createClass({
                     this.handleOpen(logRecord)
                 }}
             >
-                <div className="column small-3">
+                <div className="column small-4">
                     {logRecord.logisticID}
                 </div>
-                <div className="column small-3">
-                    {date}
-                </div>
-                <div className="column small-3">
+                <div className="column small-4">
                     {logRecord.licencePlate}
                 </div>
-                <div className="column small-3">
+                <div className="column small-4">
                     {totalItem}
                 </div>
             </RaisedButton>

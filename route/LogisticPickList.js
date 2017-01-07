@@ -13,10 +13,10 @@ router.get('/getPickList', function(req, res, next) {
         var RCP = []
         //look for each logistic record if any of it's invoice contain
         //processing it will push it RCP (Result Contain Processing)
-        async.forEach(result, (record, callback)=>{
-            async.forEach(record.invoice, (invoice, callback2)=>{
-                if(invoice.status === '處理中' && RCP.indexOf(record) === -1){
-                    RCP.push(record)
+        async.forEach(result, (logRecord, callback)=>{
+            async.forEach(logRecord.invoice, (invoice, callback2)=>{
+                if(invoice.status === '處理中' && RCP.indexOf(logRecord) === -1){
+                    RCP.push(logRecord)
                 }
             })
             callback()
@@ -46,21 +46,19 @@ router.get('/getPickList', function(req, res, next) {
                                     }
                                     newLogisticPickRecord.item.push(tempItem)
                                 }
-                                // console.log(newLogisticPickRecord)
                                 cb3();
-                                // console.log('-------------------------------------------------')
-
                             })
                         }, (err)=>{
                             //push the new record to pick list
-
-                            cb2()
+                            cb2();
                         })
+                    }else{
+                        //if the invoice status are not 處理中 skip
+                        cb2()
                     }
                 },(err)=>{
-                    //empty callback
                     pickList.push(newLogisticPickRecord)
-                    cb()
+                    cb();
                 })
             }, (err)=>{
                 res.json(pickList)
@@ -68,5 +66,25 @@ router.get('/getPickList', function(req, res, next) {
         })
     })
 });
+
+
+router.post('/completePickList', function(req, res, next){
+    logistic.findOne({logisticID:req.query.logisticID},function(err, logData){
+        async.forEach(logData.invoice, (singleInvoice, cb)=>{
+            invoice.findOneAndUpdate({_id:singleInvoice},{
+                $set:{
+                    status:'己執未送'
+                }
+            }, function(err, invData){
+                cb()
+            })
+
+        },(err)=>{
+            res.json({message:'Database has been updated'})
+
+        })
+
+    })
+})
 
 module.exports = router

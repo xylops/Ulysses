@@ -38,7 +38,7 @@ var InvoiceDetail = React.createClass({
     },
     componentWillUnmount:function(){
         var {dispatch} = this.props;
-        dispatch(actions.clearInvoice());
+        // dispatch(actions.clearInvoice());
         dispatch(actions.updateRemark(''));
     },
     handleRemarkChange:function(){
