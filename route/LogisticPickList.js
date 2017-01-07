@@ -22,7 +22,6 @@ router.get('/getPickList', function(req, res, next) {
             callback()
         }, function(err,x){
             var pickList = [] //new pickList
-            console.log(RCP)
             async.forEach(RCP, (record, cb)=>{
                 //new record
                 var newLogisticPickRecord = {
@@ -43,21 +42,23 @@ router.get('/getPickList', function(req, res, next) {
                                         id: product.id,
                                         ProductID: product.ProductID,
                                         ProductName : product.ProductName,
-                                        Quantity: product.quantity,
+                                        quantity: product.quantity,
                                     }
                                     newLogisticPickRecord.item.push(tempItem)
                                 }
+                                // console.log(newLogisticPickRecord)
                                 cb3();
+                                // console.log('-------------------------------------------------')
+
                             })
                         }, (err)=>{
                             //push the new record to pick list
+
                             cb2()
                         })
                     }
                 },(err)=>{
                     //empty callback
-
-
                     pickList.push(newLogisticPickRecord)
                     cb()
                 })

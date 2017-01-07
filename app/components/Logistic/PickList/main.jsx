@@ -4,6 +4,7 @@ var {connect} = require('react-redux')
 var actions = require('../../../actions/mainActions')
 //myCompoent
 import ProcessingList from './ProcessingList'
+import LogisticRecord from './LogisticRecord'
 
 var main = React.createClass({
     componentWillMount:function(){
@@ -20,6 +21,7 @@ var main = React.createClass({
                         <ProcessingList/>
                     </div>
                     <div className="column small-6">
+                        <LogisticRecord/>
                     </div>
                 </div>
             </div>

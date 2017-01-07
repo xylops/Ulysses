@@ -10,3 +10,10 @@ export var completeFetchPickList = (PL) =>{
         PL
     }
 }
+
+export var  updateSingleLogRecord= (record) =>{
+    return{
+        type:'UPDATE_SINGLE_LOG_RECORD',
+        record
+    }
+}

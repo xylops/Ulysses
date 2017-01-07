@@ -72,17 +72,24 @@ export var createLogesticRecord = (state = {
 
 //*****************************Pick List ****************************//
 
-export var fetchPickList = (state = {isFetching: false , PL: []}, action) => {
+export var fetchPickList = (state = {isFetching: false , PL: []}, action, singleLogRecord={}) => {
     switch (action.type){
         case 'START_FETCHING_PICKLIST':
             return{
+                ...state,
                 isFetching:true,
                 PL:[]
             }
         case 'COMPLETE_FETCHING_PICKLIST':
             return{
+                ...state,
                 isFetching:false,
                 PL: action.PL
+            }
+        case 'UPDATE_SINGLE_LOG_RECORD':
+            return{
+                ...state,
+                singleLogRecord: action.record
             }
         default:
             return state

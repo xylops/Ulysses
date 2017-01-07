@@ -18,8 +18,7 @@ var Ulysses = React.createClass({
         var {dispatch, open, snackBarText} = this.props
         var path = this.props.location.pathname;
         var segment = path.split('/')[1] || 'root';
-        var windowHeight = $(window).height() - 64
-        console.log(windowHeight)
+        // var windowHeight = $(window).height() - 64
         return(
             <div>
                 <NavBar/>
