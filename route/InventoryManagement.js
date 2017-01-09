@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async')
 var stockLevel = require('../modal/stockLevel_model.js')
 var inventoryRecord = require('../modal/inventoryRecord_model.js')
 var productDetail = require('../modal/productDetail_model.js')
@@ -123,7 +124,15 @@ router.post('/deleteInventoryRecord', function(req, res, next) {
 
 router.post('/getDateInstockList', function(req, res, next) {
     inventoryRecord.find({Date:req.query.date},function(err,dataList){
-        res.json(dataList)
+        var tempArray = []
+        async.forEach(dataList, (record, cb)=>{
+            if(record.StockLevelChanges > 0 ){
+                tempArray.push(record)
+            }
+            cb()
+        }, (err)=>{
+            res.json(tempArray)
+        })
     })
 });
 

@@ -1,11 +1,13 @@
 var express = require('express');
+var moment = require('moment')
 var router = express.Router();
 var async = require('async')
 var client = require('../modal/client_model.js')
 var invoice = require ('../modal/invoice_model')
 var logistic = require('../modal/logistic_model')
-var lorry = require('../modal/lorry_model')
 var productDetail = require('../modal/productDetail_model')
+var stockLevel = require('../modal/stockLevel_model')
+var inventoryRecord = require('../modal/inventoryRecord_model.js')
 
 router.get('/getPickList', function(req, res, next) {
     //create an array filter logistic record include ownbrand product and  return their quantity need
@@ -70,18 +72,47 @@ router.get('/getPickList', function(req, res, next) {
 
 router.post('/completePickList', function(req, res, next){
     logistic.findOne({logisticID:req.query.logisticID},function(err, logData){
+        OBI = req.query.OBI
         async.forEach(logData.invoice, (singleInvoice, cb)=>{
+            //changing invoice status to 己執未送
             invoice.findOneAndUpdate({_id:singleInvoice},{
                 $set:{
                     status:'己執未送'
                 }
             }, function(err, invData){
-                cb()
-            })
+                    async.forEach(OBI, (singleProduct, cb2)=>{
+                        singleProduct = JSON.parse(singleProduct)
+                        var id = singleProduct.id
+                        var decrease = 0-singleProduct.quantity;
+                        productDetail.findOne({_id:id}, function(err, pd){
+                            // find OBrand product and decrease product level
+                            stockLevel.findOneAndUpdate({_id:pd.Inventory},{
+                                $inc:{stockLevel: decrease}
+                            }, function(err, sl){
+                                console.log(pd.ProductName + ' - ' + sl.stockLevel)
+                            })
+                            // create new inventory record
+                            var newInventoryRecord = new inventoryRecord;
+                            newInventoryRecord.ProductID = pd.ProductID;
+                            newInventoryRecord.Productname - pd.Productname;
+                            newInventoryRecord.StockLevelChanges = 0 - singleProduct.quantity;
+                            newInventoryRecord.Date = moment().format('DDMMYYYY');
+                            newInventoryRecord.RealPID = id;
+                            newInventoryRecord.StockLevelID = pd.Inventory;
 
+                            newInventoryRecord.save((err, record)=>{
+                                if(err){
+                                    console.log(err)
+                                }else{
+                                    console.log('complete')
+                                }
+                            })
+                        });
+                    })
+                    cb();
+            })
         },(err)=>{
             res.json({message:'Database has been updated'})
-
         })
 
     })

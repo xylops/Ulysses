@@ -15,7 +15,8 @@ import LogRecordItem from './LogRecordItem'
 var LogisticRecord = React.createClass({
     handleComplete:function(){
         var {logRecord, dispatch} = this.props;
-        logisticAPI.completePickList(logRecord.logisticID).then((response)=>{
+        console.log(logRecord.item)
+        logisticAPI.completePickList(logRecord.logisticID,logRecord.item).then((response)=>{
             var resText = response.data.message;
             dispatch(snackBarActions.openSnackBar(resText));
             //refetch processing list
