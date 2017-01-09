@@ -1,4 +1,5 @@
 var React = require('react');
+var moment = require('moment');
 //react-redux
 var {connect}= require('react-redux');
 var actions = require('../../../actions/pickListActions');
@@ -15,8 +16,8 @@ import LogRecordItem from './LogRecordItem'
 var LogisticRecord = React.createClass({
     handleComplete:function(){
         var {logRecord, dispatch} = this.props;
-        console.log(logRecord.item)
-        logisticAPI.completePickList(logRecord.logisticID,logRecord.item).then((response)=>{
+        var date = moment().format('DDMMYYYY');
+        logisticAPI.completePickList(logRecord.logisticID,logRecord.item, date).then((response)=>{
             var resText = response.data.message;
             dispatch(snackBarActions.openSnackBar(resText));
             //refetch processing list
