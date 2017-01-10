@@ -64,7 +64,7 @@ router.post('/pdf', function(req, res, next) {
     doc.text ('Hello world!', 100, 100)
     doc.text ('測試', 150, 150)
 
-    doc.font('./fonts/sharp.ttf')
+    doc.font('fonts/sharp.ttf')
         .fontSize(10)
         .text('testing2', 65, 145,  {width: 240, align: 'left'})
 
