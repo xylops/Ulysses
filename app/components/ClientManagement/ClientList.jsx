@@ -17,6 +17,11 @@ const style = {
 
 
 var ClientList = React.createClass({
+    getInitialState:function(){
+        return({
+            pageCount:0
+        })
+    },
     componentDidMount: function(){
         var {dispatch} = this.props;
         dispatch(actions.startFetchClientList())
@@ -24,6 +29,9 @@ var ClientList = React.createClass({
             dispatch(actions.completeFetchClientList(CL.data));
         })
         dispatch(actions.updateClientFilterText(""))
+    },
+    handleClick:function(){
+
     },
     render:function(){
         var {isFetching, clientList, clientFilterText} = this.props;

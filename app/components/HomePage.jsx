@@ -31,7 +31,7 @@ var HomePage = React.createClass({
     },
     getInitialState: function(){
         return {
-            opacity:1
+            opacity:0
         }
     },
     onHide:function(){
@@ -74,7 +74,6 @@ var HomePage = React.createClass({
                 </div><br/>
                 <div className="row">
                     <div className="column medium-3" style={style.navBtn}>
-                        <RaisedButton label="Animation Testing"secondary={true} fullWidth={true} onClick={this.onHide}/>
                         <div style={{...style.animation, opacity:this.state.opacity}}>
                             <Paper style={style.paper} zDepth={2} />
                         </div>
