@@ -61,12 +61,15 @@ router.post('/pdf', function(req, res, next) {
       size: [612, 573]
     });
     doc.pipe (writeStream = fs.createWriteStream('public/node1.pdf'))
-    doc.text ('Hello world!', 100, 100)
-    doc.text ('測試', 150, 150)
+    doc.text ('Hello world!', 100, 150)
+    doc.text ('測試', 300, 150)
 
     doc.font('fonts/sharp.ttf')
         .fontSize(10)
-        .text('testing2', 65, 145,  {width: 240, align: 'left'})
+        .text('testing2', 65, 105,  {width: 240, align: 'left'})
+    doc.font('fonts/sharp.ttf')
+        .fontSize(10)
+        .text('測試2', 300, 105,  {width: 240, align: 'left'})
 
     doc.end();
 
