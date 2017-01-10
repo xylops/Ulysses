@@ -68,7 +68,7 @@ router.post('/voidInvoice', function(req, res, next) {
 
 router.post('/printInvoice', function(req, res, next){
     var invoice = JSON.parse(req.query.invoice);
-    console.log(invoice)
+    var url = req.query.url
     doc = new PDFDocument({
       size: [612, 573]
     });
@@ -147,13 +147,12 @@ router.post('/printInvoice', function(req, res, next){
     writeStream.on('finish', function(){
 
         var x = process.env.ENV_VARIABLE
-        console.log(x)
 
-         if(req.headers['x-forwarded-proto'] === 'https'){
-             res.json({link:'http://ulysses-xylops.herokuapp.com/node.pdf'})
-         }else{
-             res.json({link:'http://localhost:3000/node.pdf'})
-         }
+        if(url === 'http://localhost:3000/#/IV'){
+            res.json({link:'http://localhost:3000/node.pdf'})
+        }else{
+            res.json({link:'http://ulysses-xylops.herokuapp.com/node.pdf'})
+        }
     })
 })
 

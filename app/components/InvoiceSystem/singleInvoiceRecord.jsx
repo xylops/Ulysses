@@ -45,7 +45,8 @@ var SingleInvoiceRecord = React.createClass({
         var {record} = this.props;
         var newWindow = window.open()
         var invoice = record
-        invoiceAPI.printInvoice(invoice).then((res)=>{
+        var url = window.location.href
+        invoiceAPI.printInvoice(invoice, url).then((res)=>{
             newWindow.location = res.data.link
         })
     },
