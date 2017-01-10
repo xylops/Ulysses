@@ -9,7 +9,6 @@ var main = React.createClass({
         var {dispatch} = this.props;
         dispatch(actions.changingNavBarText('Dispatch Record'))
     },
-
     render:function(){
         return (
             <div >

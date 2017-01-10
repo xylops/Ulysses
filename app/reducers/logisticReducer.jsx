@@ -95,3 +95,30 @@ export var fetchPickList = (state = {isFetching: false , PL: []}, action, single
             return state
     }
 }
+
+
+//*****************************Dispatch Record ****************************//
+
+export var dispatchRecord = (state = {isFetching: false , DR: [], singleDR:null}, action) => {
+    switch (action.type){
+        case 'START_FETCHING_DR':
+            return{
+                ...state,
+                isFetching:true,
+                DR:[]
+            }
+        case 'COMPLETE_FETCHING_DR':
+            return{
+                ...state,
+                isFetching:false,
+                DR: action.DR
+            }
+        case 'UPDATE_SINGLE_DR':
+            return{
+                ...state,
+                singleDR: action.record
+            }
+        default:
+            return state
+    }
+}

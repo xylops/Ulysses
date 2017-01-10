@@ -4,6 +4,7 @@ import {
     singleInvoiceDialog,
     createLogesticRecord,
     fetchPickList,
+    dispatchRecord
 } from './logisticReducer'
 
 
@@ -11,5 +12,6 @@ export default combineReducers({
     fetchNonProcessInvoice,
     singleInvoiceDialog,
     createLogesticRecord,
-    fetchPickList
+    fetchPickList,
+    dispatchRecord
 })
