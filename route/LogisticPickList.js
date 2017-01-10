@@ -1,5 +1,4 @@
 var express = require('express');
-var moment = require('moment');
 var router = express.Router();
 var async = require('async')
 var client = require('../modal/client_model.js')
@@ -96,7 +95,7 @@ router.post('/completePickList', function(req, res, next){
                             newInventoryRecord.ProductID = pd.ProductID;
                             newInventoryRecord.Productname - pd.Productname;
                             newInventoryRecord.StockLevelChanges = 0 - singleProduct.quantity;
-                            newInventoryRecord.Date = moment().format('DDMMYYYY');
+                            newInventoryRecord.Date = req.query.date
                             newInventoryRecord.RealPID = id;
                             newInventoryRecord.StockLevelID = pd.Inventory;
 

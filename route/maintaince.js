@@ -8,6 +8,9 @@ var lorry = require('../modal/lorry_model')
 var productDetail = require('../modal/productDetail_model')
 var stockLevel = require('../modal/stockLevel_model')
 
+PDFDocument = require ('pdfkit')
+var fs = require('fs')
+
 //clearing all purchase record
 router.get('/clearClientPurchaseRecord', function(req, res, next) {
     client.find({}, function(err, clients){
@@ -50,6 +53,23 @@ router.get('/setOwnBrandStockLevel', function(req, res, next) {
                 }
             })
         })
+    })
+});
+
+router.post('/pdf', function(req, res, next) {
+    doc = new PDFDocument({
+      size: [612, 573]
+    });
+    doc.pipe (writeStream = fs.createWriteStream('public/node1.pdf'))
+    doc.text ('Hello world!', 100, 100)
+    doc.font('public/fonts/SHARP.ttf')
+        .fontSize(10)
+        .text('testing', 65, 145,  {width: 240, align: 'left'})
+
+    doc.end();
+
+    writeStream.on('finish', function(){
+         res.json({link:'http://localhost:3000/node1.pdf'})
     })
 });
 
