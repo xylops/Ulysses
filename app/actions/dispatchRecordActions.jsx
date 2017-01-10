@@ -11,9 +11,22 @@ export var completeFetchingDR = (DR) =>{
     }
 }
 
-export var updateSingleDR = (record) =>{
+export var openSingleDR = (record) =>{
     return{
-        type:'UPDATE_SINGLE_DR',
+        type:'OPEN_SINGLE_DR',
         record
+    }
+}
+
+export var closeSingleDR = () =>{
+    return{
+        type:'CLOSE_SINGLE_DR'
+    }
+}
+
+export var updateDRSearchText = (text) =>{
+    return {
+        type:'UPDATE_DR_SERACHTEXT',
+        text
     }
 }

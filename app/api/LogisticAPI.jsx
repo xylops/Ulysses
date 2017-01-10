@@ -49,4 +49,20 @@ module.exports = {
             json:true
         })
     },
+    //dispatch Record
+    getPickNotComplete:function(){
+        return axios.get('/LGDR/getPickNotComplete').then(function(res){
+            return res
+        })
+    },
+    reConfirmReturn:function(record){
+        return axios({
+            method:'post',
+            url:'/LGDR/reConfirmReturn',
+            params:{
+                record
+            },
+            json:true
+        })
+    },
 }
