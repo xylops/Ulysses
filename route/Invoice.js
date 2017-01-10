@@ -145,7 +145,12 @@ router.post('/printInvoice', function(req, res, next){
     doc.end();
 
     writeStream.on('finish', function(){
-         res.json({link:'http://localhost:3000/node.pdf'})
+         if(req.headers['x-forwarded-proto'] === 'https'){
+             res.json({link:'http://ulysses-xylops.herokuapp.com/node.pdf'})
+
+         }else{
+             res.json({link:'http://localhost:3000/node.pdf'})
+         }
     })
 })
 
