@@ -46,5 +46,25 @@ module.exports = {
         return axios.get('/IV/getAllInvoice').then(function(res){
             return res
         })
-    }
+    },
+    getInvoice:function(skip){
+        return axios({
+            method:'post',
+            url:'/IV/getInvoice',
+            params:{
+                skip
+            },
+            json:true
+        })
+    },
+    filterInvoice:function(searchText){
+        return axios({
+            method:'post',
+            url:'/IV/filterInvoice',
+            params:{
+                searchText
+            },
+            json:true
+        })
+    },
 }

@@ -17,6 +17,37 @@ router.get('/getAllInvoice', function(req, res, next) {
     })
 });
 
+router.post('/getInvoice', function(req, res, next) {
+    if(req.query.skip === undefined){
+        var skip = 0
+    }else{
+        var skip = Number(req.query.skip)
+    }
+    invoiceRecord.find({}, function(err, data){
+        var length = data.length;
+        invoiceRecord.find({}).skip(skip).limit(15).populate('client').sort({invoiceID:-1}).exec((err, result)=>{
+            if(err){
+                console.log(err)
+            }else{
+                res.json({result, length})
+            }
+        })
+    })
+});
+
+router.post('/filterInvoice', function(req, res, next) {
+    var searchText = req.query.searchText
+    if(searchText != ""){
+        invoiceRecord.find({invoiceID:{ "$regex": searchText}}).skip(0).limit(15).populate('client').sort({invoiceID:1}).exec((err, result)=>{
+            res.json({result})
+        })
+    }else{
+        invoiceRecord.find({}).skip(0).limit(15).populate('client').sort({invoiceID:1}).exec((err, result)=>{
+            res.json({result})
+        })
+    }
+});
+
 router.post('/checkInvoicePerDay', function(req, res, next) {
     var date = req.query.date
     invoiceRecord.find({date:date}, function(err, data){

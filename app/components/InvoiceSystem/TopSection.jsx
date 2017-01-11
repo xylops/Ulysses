@@ -2,11 +2,33 @@ var React = require('react');
 var {Link} = require('react-router');
 //Redux
 var {connect}  = require('react-redux')
+var actions = require('../../actions/invoiceAction');
 //material-ui
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+//api
+var invoiceAPI = require('invoiceAPI')
 
 var TopSection = React.createClass({
+    getInitialState:function(){
+        return({
+            timer:null
+        })
+    },
+    handleChange:function(){
+        var {dispatch} = this.props
+        this.setState({
+            timer:clearTimeout(this.state.timer)
+        })
+        var text = this.refs.id.getValue();
+        this.setState({
+            timer : setTimeout(function(){
+                invoiceAPI.filterInvoice(text).then((response)=>{
+                    dispatch(actions.addInvoiceList(response.data.result))
+                });
+            }, 500)
+        })
+    },
     render:function(){
         return (
             <div className="row">
@@ -15,6 +37,8 @@ var TopSection = React.createClass({
                     <TextField
                       hintText="Search Invoice"
                       fullWidth={true}
+                      ref="id"
+                      onChange={this.handleChange}
                     /><br />
                 </div>
                 <div className="column small-12 medium-4">

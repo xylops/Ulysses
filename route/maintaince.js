@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment')
 var router = express.Router();
 var async = require('async')
 var client = require('../modal/client_model.js')
@@ -54,6 +55,10 @@ router.get('/setOwnBrandStockLevel', function(req, res, next) {
             })
         })
     })
+});
+
+router.get('/getTime', function(req, res, next) {
+    console.log(moment().format('x'))
 });
 
 
