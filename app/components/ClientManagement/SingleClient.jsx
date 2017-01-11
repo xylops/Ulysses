@@ -16,7 +16,7 @@ const style={
 var SingleClient = React.createClass({
     componentWillUnmount:function(){
         var {dispatch} = this.props;
-        dispatch(actions.closeSingleClientDialog());
+        // dispatch(actions.closeSingleClientDialog());
     },
     render:function(){
         var {client, dispatch} = this.props

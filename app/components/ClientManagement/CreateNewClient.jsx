@@ -60,7 +60,7 @@ var  CreateNewProduct = React.createClass({
                 var resText = response.data.message;
                 dispatch(actions.startFetchClientList())
                 clientManagementAPI.getFullClientData().then((CL)=>{
-                    dispatch(actions.completeFetchClientList(CL.data));
+                    dispatch(actions.completeFetchClientList(CL.data.result));
                     dispatch(actions.toggleCreateNewClientDialog());
                     dispatch(snackBarActions.openSnackBar(resText));
                 })

@@ -1,4 +1,6 @@
 var React = require('react');
+import ReactPaginate from 'react-paginate';
+
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../actions/clientManagementActions')
@@ -26,22 +28,29 @@ var ClientList = React.createClass({
         var {dispatch} = this.props;
         dispatch(actions.startFetchClientList())
         clientManagementAPI.getFullClientData().then((CL)=>{
-            dispatch(actions.completeFetchClientList(CL.data));
+            dispatch(actions.completeFetchClientList(CL.data.result));
+            this.setState({
+                pageCount:Math.ceil(CL.data.length/15)
+            })
         })
         dispatch(actions.updateClientFilterText(""))
     },
-    handleClick:function(){
-
+    handlePageClick:function(data){
+        var {dispatch} = this.props;
+        dispatch(actions.startFetchClientList())
+        clientManagementAPI.getFullClientData(data.selected * 15).then((CL)=>{
+            dispatch(actions.completeFetchClientList(CL.data.result));
+            this.setState({
+                pageCount:Math.ceil(CL.data.length/15)
+            })
+        })
     },
     render:function(){
-        var {isFetching, clientList, clientFilterText} = this.props;
-        let filteredClientList = clientList.filter((client)=>{
-            return (client.name.indexOf(clientFilterText) !== -1 || client.id.indexOf(clientFilterText) !== -1 || client.phone.indexOf(clientFilterText) !== -1);
-        });
+        var {isFetching, clientList} = this.props;
 
         var renderClientList = ()=>{
             if(!isFetching){
-                return filteredClientList.map((client)=>{
+                return clientList.map((client)=>{
                     return(
                         <SingleClient key={client._id} client={client}/>
                     )
@@ -56,9 +65,23 @@ var ClientList = React.createClass({
         }
 
         return (
-            <div>
+            <div style={{textAlign:'center'}}>
+                <ReactPaginate
+                    previousLabel={"previous"}
+                    nextLabel={"next"}
+                    breakLabel={<a href="">...</a>}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}
+                />
                 {renderClientList()}
                 <ClientDetail/>
+
             </div>
 
 
@@ -72,6 +95,5 @@ export default connect((state)=>{
         clientList: state.clientManagement.clientData.clientList,
         singleClientDialog: state.clientManagement.singleClient.open,
         singleClientAttr : state.clientManagement.singleClient.singleClientAttr,
-        clientFilterText : state.clientManagement.clientFilterText
     }
 })(ClientList)

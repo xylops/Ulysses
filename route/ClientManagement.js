@@ -3,14 +3,59 @@ var router = express.Router();
 var client = require('../modal/client_model.js')
 var invoice = require ('../modal/invoice_model')
 
-router.get('/getFullClientData', function(req, res, next) {
-    client.find({}).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
-        if(err){
-            console.log(err);
-        }else{
-            res.json(result);
-        }
+router.post('/getFullClientData', function(req, res, next) {
+    if(req.query.skip === undefined){
+        var skip = 0
+    }else{
+        var skip = Number(req.query.skip)
+    }
+    client.find({}, function(err, data){
+        var length = data.length
+        client.find({}).skip(skip).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+            if(err){
+                console.log(err);
+            }else{
+                res.json({result, length});
+            }
+        })
     })
+});
+
+router.post('/filterClient', function(req, res, next) {
+    var searchText = req.query.searchText
+    var type = req.query.type
+    console.log(searchText + ' - ' + type)
+    if(searchText != ""){
+        switch (type){
+            case 'id':
+                client.find({id:{ "$regex": searchText}}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+                    res.json({result, length:1})
+                })
+                break;
+            case 'name':
+                client.find({name:{ "$regex": searchText }}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+                    res.json({result, length:1})
+                })
+                break;
+            case 'phone':
+                client.find({phone:{ "$regex": searchText }}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+                    res.json({result, length:1})
+                })
+                break;
+        }
+    }else{
+        client.find({}, function(err, data){
+            var length = data.length
+            client.find({}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    res.json({result, length});
+                }
+            })
+        })
+    }
+
 });
 
 router.post('/createNewClient', function(req, res, next) {

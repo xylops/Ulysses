@@ -31,7 +31,7 @@ var InvoiceSystem = React.createClass({
         //adding client list
         dispatch(clientAction.startFetchClientList())
         clientManagementAPI.getFullClientData().then((CL)=>{
-            dispatch(clientAction.completeFetchClientList(CL.data));
+            dispatch(clientAction.completeFetchClientList(CL.data.result));
         })
         dispatch(clientAction.updateClientFilterText(""))
         //add product list

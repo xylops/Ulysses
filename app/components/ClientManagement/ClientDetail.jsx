@@ -73,7 +73,7 @@ var ClientDetail = React.createClass({
             var resText = response.data.message;
             dispatch(actions.startFetchClientList())
             clientManagementAPI.getFullClientData().then((CL)=>{
-                dispatch(actions.completeFetchClientList(CL.data));
+                dispatch(actions.completeFetchClientList(CL.data.result));
                 dispatch(actions.closeSingleClientDialog())
                 dispatch(snackBarActions.openSnackBar(resText));
             })
@@ -84,8 +84,8 @@ var ClientDetail = React.createClass({
         clientManagementAPI.deleteClient(clientAttr.id).then((response)=>{
             var resText = response.data.message;
             dispatch(actions.startFetchClientList())
-            clientManagementAPI.getFullClientData().then((PDL)=>{
-                dispatch(actions.completeFetchClientList(PDL.data));
+            clientManagementAPI.getFullClientData().then((CL)=>{
+                dispatch(actions.completeFetchClientList(CL.data.result));
                 dispatch(actions.closeSingleClientDialog())
                 dispatch(snackBarActions.openSnackBar(resText));
             })

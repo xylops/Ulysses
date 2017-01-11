@@ -48,7 +48,7 @@ export var toggleSingleClientDialog = (state = {open:false, singleClientAttr:{}}
     }
 }
 
-export var clientFilterText = (state={clientFilterText:undefined}, action) =>{
+export var clientFilterText = (state={clientFilterText:0}, action) =>{
     switch(action.type){
         case 'UPDATE_CLIENT_FILTER_TEXT':
             return action.text

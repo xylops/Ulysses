@@ -2,6 +2,8 @@ var React = require('react');
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../../actions/invoiceAction');
+var clientActions = require('../../../actions/clientManagementActions')
+
 //material-ui
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -10,6 +12,8 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 //API
 var invoiceAPI = require('../../../api/invoiceAPI')
+var clientManagementAPI = require('../../../api/ClientManagementAPI')
+
 //style
 const style = {
     paper:{
@@ -24,7 +28,8 @@ var SearchClientDialog = React.createClass({
     getInitialState:function(){
         return{
             client:undefined,
-            submit: true
+            submit: true,
+            timer:null
         }
     },
     handleClose:function(){
@@ -35,37 +40,41 @@ var SearchClientDialog = React.createClass({
             submit:true
         })
     },
-    handleChange:function(){
-        var {clientList} =this.props
-        var name = this.refs.name.getValue();
-        var id = this.refs.id.getValue();
-        var phone = this.refs.phone.getValue();
-
-        if(name !== ""){
-            var filteredClientList = clientList.filter((client)=>{
-                return client.name.indexOf(name) !== -1;
-            });
-        }else if(id !== ""){
-            var filteredClientList = clientList.filter((client)=>{
-                return client.id.indexOf(id) !== -1;
-            });
-        }else{
-            var filteredClientList = clientList.filter((client)=>{
-                return client.phone.indexOf(phone) !== -1;
-            });
+    handleChange:function(type){
+        var {dispatch} = this.props;
+        this.setState({
+            timer:clearTimeout(this.state.timer)
+        })
+        switch(type){
+            case 'id':
+                var text = this.refs.id.getValue();
+                break;
+            case 'name':
+                var text = this.refs.name.getValue();
+                break;
+            case 'phone':
+                var text = this.refs.phoneNo.getValue();
+                break;
         }
-
-        if(filteredClientList.length === 1){
-            this.setState({
-                client: filteredClientList[0],
-                submit: false
-            })
-        }else{
-            this.setState({
-                client: undefined,
-                submit: true
-            })
-        }
+        
+        var that = this
+        this.setState({
+            timer : setTimeout(function(){
+                clientManagementAPI.filterClient(text, type).then((response)=>{
+                    if(response.data.result.length === 1){
+                        that.setState({
+                           client: response.data.result[0],
+                           submit: false
+                        })
+                    }else{
+                        that.setState({
+                            client: undefined,
+                            submit: true
+                        })
+                    }
+                });
+            }, 500)
+        })
     },
     handleSave:function(){
         var {dispatch} = this.props;
@@ -78,6 +87,7 @@ var SearchClientDialog = React.createClass({
     },
     render:function(){
         var {dialog} = this.props
+        console.log(this.state.client)
 
         const actions = [
             <FlatButton
@@ -147,25 +157,25 @@ var SearchClientDialog = React.createClass({
                     <div className="column small-5">
                         <span>Search By :</span>
                         <TextField
-                            hintText="Client Name"
-                            floatingLabelText="Client Name"
-                            fullWidth={true}
-                            onChange={this.handleChange}
+                            style={style.textField}
+                            hintText="Search Client ID"
+                            floatingLabelText="ID"
+                            ref="id"
+                            onChange={()=>{this.handleChange('id')}}
+                        /><br />
+                        <TextField
+                            style={style.textField}
+                            hintText="Search Client Name"
+                            floatingLabelText="Name"
                             ref="name"
+                            onChange={()=>{this.handleChange('name')}}
                         /><br />
                         <TextField
-                            hintText="Client ID"
-                            floatingLabelText="Client ID"
-                            fullWidth={true}
-                            onChange={this.handleChange}
-                            ref='id'
-                        /><br />
-                        <TextField
-                            hintText="Phone Number"
-                            floatingLabelText="Phone Number"
-                            fullWidth={true}
-                            onChange={this.handleChange}
-                            ref='phone'
+                            style={style.textField}
+                            hintText="Search Client Phone"
+                            floatingLabelText="Phone"
+                            ref="phoneNo"
+                            onChange={()=>{this.handleChange('phone')}}
                         /><br />
                     </div>
                     <div className="column small-7">
