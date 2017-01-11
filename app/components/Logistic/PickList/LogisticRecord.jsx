@@ -16,7 +16,7 @@ import LogRecordItem from './LogRecordItem'
 var LogisticRecord = React.createClass({
     handleComplete:function(){
         var {logRecord, dispatch} = this.props;
-        var date = moment().format('DDMMYYYY');
+        var date = moment().format('YYYYMMDD');
         logisticAPI.completePickList(logRecord.logisticID,logRecord.item, date).then((response)=>{
             var resText = response.data.message;
             dispatch(snackBarActions.openSnackBar(resText));

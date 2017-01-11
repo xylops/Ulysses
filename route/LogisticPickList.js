@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 var async = require('async')
 var client = require('../modal/client_model.js')
@@ -26,6 +27,7 @@ router.get('/getPickList', function(req, res, next) {
             async.forEach(RCP, (record, cb)=>{
                 //new record
                 var newLogisticPickRecord = {
+                    id:moment().format('x'),
                     logisticID : record.logisticID,
                     date : record.date,
                     licencePlate: record.licencePlate,

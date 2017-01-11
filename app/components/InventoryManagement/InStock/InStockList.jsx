@@ -34,7 +34,7 @@ var NewInStockList = React.createClass({
         dispatch(actions.changeDate(true))
     },
     dateChange:function(e, date){
-        var date = moment(date).format('DDMMYYYY');
+        var date = moment(date).format('YYYYMMDD');
         var {dispatch} = this.props;
         dispatch(actions.clearInstockList())            //clear stock list every time it changes
         dispatch(actions.changeDate(date))              //change redux date state
