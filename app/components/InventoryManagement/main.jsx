@@ -1,10 +1,9 @@
 var React = require('react')
 var {connect} = require('react-redux')
-var {Link} = require('react-router')
 var actions = require('../../actions/mainActions')
-
-//material-ui
-import RaisedButton from 'material-ui/RaisedButton';
+//my component
+import TopSection from './TopSection';
+import RecordList from './RecordList';
 
 const style={
     title:{
@@ -18,21 +17,16 @@ const style={
 var main = React.createClass({
     componentWillMount:function(){
         var {dispatch} = this.props;
-        dispatch(actions.changingNavBarText('Inventory Mangement'))
+        dispatch(actions.changingNavBarText('Inventory Record'))
     },
     render:function(){
         var currentLocation = this.props.location.pathname
         return(
             <div>
-                <h2 style={style.title}><b>{currentLocation}</b></h2>
-                <div className="row">
-                    <div className="column small-12 medium-6">
-                        <Link to="IM/InStock"><RaisedButton label="In Stock" fullWidth={true} primary={true}/></Link>
-                    </div>
-                    <div className="column small-12 medium-6">
-                        <RaisedButton label="Out Stock" fullWidth={true} disabled={true}/>
-                    </div>
-                </div>
+                <br/>
+                <TopSection/>
+                <hr/>
+                <RecordList/>
             </div>
         )
     }

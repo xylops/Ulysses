@@ -49,7 +49,8 @@ const App = () => (
                     <Route path="IS" component={CreateInvoice}/>
                     <Route path="IV" component={InvoiceSystem}/>
                     <Route path="PD" component={ProductDetail}/>
-                    <Route path="IM" component={InStock}/>
+                    <Route path="IM" component={InventoryManagement}/>
+                    <Route path="IMIS" component={InStock}/>
                     <Route path="LG" component={SortInvoice}/>
                     <Route path="LGSI" component={SortInvoice}/>
                     <Route path="LGPL" component={PickList}/>

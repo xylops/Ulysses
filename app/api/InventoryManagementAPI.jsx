@@ -44,5 +44,16 @@ module.exports = {
             },
             json:true
         })
+    },
+    getInventoryRecord: function(startDate, endDate){
+        return axios({
+            method:'post',
+            url:'/IM/getInventoryRecord',
+            params:{
+                startDate,
+                endDate
+            },
+            json:true
+        })
     }
 }

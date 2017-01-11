@@ -24,7 +24,6 @@ router.post('/getFullClientData', function(req, res, next) {
 router.post('/filterClient', function(req, res, next) {
     var searchText = req.query.searchText
     var type = req.query.type
-    console.log(searchText + ' - ' + type)
     if(searchText != ""){
         switch (type){
             case 'id':

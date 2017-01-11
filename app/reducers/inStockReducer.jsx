@@ -113,3 +113,22 @@ export var newInStockList = (state = {
             return state;
     }
 }
+
+
+export var recordList = (state = {isFetching:false, IRL:[]}, action) =>{
+    switch(action.type){
+        case 'START_FETCHING_IRL':
+            return {
+                ...state,
+                isFetching:true
+            }
+        case 'COMPLETE_FETCHING_IRL':
+            return{
+                ...state,
+                isFetching:false,
+                IRL:action.IRL
+            }
+        default:
+            return state
+    }
+}

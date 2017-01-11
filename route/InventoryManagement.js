@@ -138,5 +138,16 @@ router.post('/getDateInstockList', function(req, res, next) {
 });
 
 
+router.post('/getInventoryRecord', function(req, res, next) {
+    var startDate = req.query.startDate;
+    var endDate = req.query.endDate;
+
+    inventoryRecord.find({ Date: { $gte: startDate, $lte: endDate }}, function (err, records) {
+         res.json(records)
+    });
+});
+
+
+
 
 module.exports = router;
