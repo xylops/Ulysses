@@ -7,5 +7,5 @@ Uylsses still in development
 * Keeping foundation to just 6.2.4 due to slight bugs on the setting.scss (solved)
 
 **Todo**
-* Adding Pagination to clientMangement, invoice system, productDetail, inventory Record
-* Inventory Management List
+* Adding Pagination to clientMangement, invoice system (complete)
+* Inventory Management List(complete)

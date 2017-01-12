@@ -95,11 +95,13 @@ router.post('/completePickList', function(req, res, next){
                             // create new inventory record
                             var newInventoryRecord = new inventoryRecord;
                             newInventoryRecord.ProductID = pd.ProductID;
-                            newInventoryRecord.Productname - pd.Productname;
+                            newInventoryRecord.ProductName = pd.ProductName;
                             newInventoryRecord.StockLevelChanges = 0 - singleProduct.quantity;
                             newInventoryRecord.Date = req.query.date
                             newInventoryRecord.RealPID = id;
                             newInventoryRecord.StockLevelID = pd.Inventory;
+
+                            console.log(newInventoryRecord)
 
                             newInventoryRecord.save((err, record)=>{
                                 if(err){

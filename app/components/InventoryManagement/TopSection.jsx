@@ -36,7 +36,6 @@ var TopSection = React.createClass({
                 inventoryAPI.getInventoryRecord(this.state.startDate, this.state.endDate).then((res)=>{
                     var recordList = res.data;
                     dispatch(actions.completeFetchIRL(res.data))
-                    console.log(recordList)
                 })
             }else{
                 alert('Start Date could NOT be larger then the End Date')
