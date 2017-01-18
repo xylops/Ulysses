@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var http = require('http');
+var bodyParser = require('body-parser');                //for login short peroid of flash saying login complete?
+var morgan = require('morgan')
+
 //create our App
 var app = express();
 
@@ -13,15 +17,13 @@ var logisticPickList = require('./route/LogisticPickList')
 var logisticDR = require('./route/LogisticDR')
 var maintaince = require('./route/maintaince')
 
-const PORT = process.env.PORT || 3000;
+var user = require('./route/user')
 
-app.use(function(req, res, next){
-    if(req.headers['x-forwarded-proto'] === 'https'){
-        res.redirect('http://' + req.hostname + req.url);
-    }else{
-        next();
-    }
-})
+
+app.use(morgan('combined'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({type: 'application/*+json'}));
+app.use('/user', user)
 
 app.use(express.static('public'));
 app.use('/', routes);
@@ -34,7 +36,15 @@ app.use('/LGPL', logisticPickList);
 app.use('/LGDR', logisticDR);
 app.use('/maintaince', maintaince);
 
+const PORT = process.env.PORT || 3000;
 
+app.use(function(req, res, next){
+    if(req.headers['x-forwarded-proto'] === 'https'){
+        res.redirect('http://' + req.hostname + req.url);
+    }else{
+        next();
+    }
+})
 
 
 app.listen(PORT, function(){

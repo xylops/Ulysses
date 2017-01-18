@@ -1,18 +1,79 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+    <meta charset="UTF-8">
+    <title>Ulysses ERP System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+<style>
+    body{
+        background:url('bg.jpg');
+        background-repeat: no-repeat;
+        padding:35px;
+        background-origin: content-box;
+    }
+    .container{
+        text-align:center;
+        width:40%;
+        margin-top:15vw;
+    }
+    p{
+        color:white;
+        font-size:30px;
+        font-weight:bold;
+        margin-bottom: 10px;
+    }
+    label{
+        color:white;
+    }
+    input{
+        width:100%;
+    }
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+</style>
 
 <body>
-  <div id="app"></div>
-  <script src="bundle.js"></script>
-</body>
+    <!-- <a href="system.html"><button class="btn btn-primary"> Testing</button></a> -->
+    <a href="createUser.html"><button class="btn btn-primary"> Create Users</button></a>
 
+    <form METHOD="POST">
+        <div class="container">
+            <p>Ulysses ERP System</p>
+            <br/>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="fname">User</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="fname" name="id">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="lname">Password</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="lname" name="pw">
+                </div>
+            </div>
+            <br/>
+            <input type="submit" value="LOGIN">
+        </div>
+    </form>
+</body>
 </html>
