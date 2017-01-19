@@ -1,45 +1,80 @@
 var express = require('express');
-var router = express.Router();
-var http = require('http');
-var bodyParser = require('body-parser');
-var morgan = require('morgan')
-var passportService = require('./service/passport')
-var passport = require('passport');
+var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var exphbs = require('express-handlebars');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+const MongoClient = require('mongodb').MongoClient
+var mongoose = require('mongoose');
+
+//own route
+var index = require('./route/index');
+var users = require('./route/users')
+//api
+var productDetail = require('./route/apiProductDetail');
+var clientManagement = require('./route/apiClientManagement');
+var inventoryManagement = require('./route/apiInventoryManagement');
+var invoice = require('./route/apiInvoice');
+var logisticSortInvoice = require('./route/apiLogisticSortInvoice');
+var logisticPickList = require('./route/apiLogisticPickList')
+var logisticDR = require('./route/apiLogisticDR')
+var maintaince = require('./route/maintaince')
 
 //create our App
 var app = express();
-
-var routes = require('./route/api');
-var productDetail = require('./route/productDetail');
-var clientManagement = require('./route/ClientManagement');
-var inventoryManagement = require('./route/InventoryManagement');
-var invoice = require('./route/Invoice');
-var logisticSortInvoice = require('./route/LogisticSortInvoice');
-var logisticPickList = require('./route/LogisticPickList')
-var logisticDR = require('./route/LogisticDR')
-var maintaince = require('./route/maintaince')
-
-var user = require('./route/user')
-
-var requireAuth = passport.authenticate('jwt', {session:false});
-
+//view engine
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', exphbs({defaultLayout:'layout'}));
+app.set('view engine', 'handlebars');
+//middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
-
-
-app.get('/system.html', requireAuth, function(req, res){
-    console.log('working')
-    res.send('working')
-})
-
-
-app.use(morgan('combined'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({type: 'application/*+json'}));
-app.use('/user', user)
-
+// Set Staic Folder
 app.use(express.static('public'));
-app.use('/', routes);
+//Express session
+app.use(session({
+    secret:'secret',
+    saveUninitialized:true,
+    resave:true
+}))
+//passport init
+app.use(passport.initialize());
+app.use(passport.session());
+//express validator
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+
+        while(namespace.length) {
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+            param : formParam,
+            msg   : msg,
+            value : value
+        };
+    }
+}));
+//Connect flash
+app.use(flash());
+//Globar Vars
+app.use(function(req,res, next){
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+app.use('/', index);
+app.use('/users', users)
+//app
 app.use('/PD', productDetail);
 app.use('/CM', clientManagement);
 app.use('/IM', inventoryManagement);
