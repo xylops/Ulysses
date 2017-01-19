@@ -50,7 +50,7 @@
     <!-- <a href="system.html"><button class="btn btn-primary"> Testing</button></a> -->
     <a href="createUser.html"><button class="btn btn-primary"> Create Users</button></a>
 
-    <form METHOD="POST">
+    <form action="user/login" method="post">
         <div class="container">
             <p>Ulysses ERP System</p>
             <br/>
@@ -59,7 +59,7 @@
                     <label for="fname">User</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="text" id="fname" name="id">
+                    <input type="text" name="id">
                 </div>
             </div>
             <br>
@@ -68,7 +68,7 @@
                     <label for="lname">Password</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="text" id="lname" name="pw">
+                    <input type="password" name="pw">
                 </div>
             </div>
             <br/>

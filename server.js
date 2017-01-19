@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var http = require('http');
-var bodyParser = require('body-parser');                //for login short peroid of flash saying login complete?
+var bodyParser = require('body-parser');
 var morgan = require('morgan')
+var passportService = require('./service/passport')
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
 
 //create our App
 var app = express();
@@ -18,6 +21,16 @@ var logisticDR = require('./route/LogisticDR')
 var maintaince = require('./route/maintaince')
 
 var user = require('./route/user')
+
+var requireAuth = passport.authenticate('jwt', {session:false});
+
+app.use(cookieParser());
+
+
+app.get('/system.html', requireAuth, function(req, res){
+    console.log('working')
+    res.send('working')
+})
 
 
 app.use(morgan('combined'));
@@ -45,7 +58,6 @@ app.use(function(req, res, next){
         next();
     }
 })
-
 
 app.listen(PORT, function(){
     console.log('Express server is up on port ' + PORT)
