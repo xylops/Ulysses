@@ -12,7 +12,10 @@ mongoose.connect(DB_URL, (err, database)=>{
 })
 
 router.get('/', ensureAuthenticated, function(req, res){
-    res.render('index')
+    res.render('index', {
+        username: req.user.username,
+        clearance: req.user.clearance
+    })
 });
 
 function ensureAuthenticated(req, res, next){

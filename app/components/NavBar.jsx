@@ -68,7 +68,7 @@ var NavBar = React.createClass({
                     <MenuItem onTouchTap={this.handleClose}>
                         <div className="drawerWelcoming">
                             <h4 style={style.drawerText}>Welcome</h4>
-                            <b><h2 style={style.drawerText}>User</h2></b>
+                            <b><h2 style={style.drawerText}>{username} - {clearance}</h2></b>
                         </div>
                     </MenuItem>
                     <Divider />
@@ -82,9 +82,11 @@ var NavBar = React.createClass({
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Reporting</MenuItem>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Top Management</MenuItem>
                     <Divider />
-                    <MenuItem onTouchTap={this.handleToggle} className="drawerCloseBtn">
-                        <NavigationClose />
-                    </MenuItem>
+                    <a href="/users/logout">
+                        <MenuItem onTouchTap={this.handleToggle} className="drawerCloseBtn" style={{color:'white', fontWeight:'bold'}}>
+                            Logout
+                        </MenuItem>
+                    </a>
                 </Drawer>
             </div>
         )
