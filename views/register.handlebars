@@ -1,1 +1,84 @@
-Register
+<style>
+     body{
+         background:url('/bg.jpg');
+         background-repeat: no-repeat;
+         background-origin: content-box;
+         background-size: 100%;
+     }
+     .container{
+         text-align:center;
+         width:40%;
+         margin-top:10vw;
+     }
+     .col-md-4{
+         text-align: left;
+     }
+     p{
+         color:white;
+         font-size:30px;
+         font-weight:bold;
+         margin-bottom: 10px;
+     }
+     label{
+         color:white;
+     }
+     input{
+         width:100%;
+     }
+     input[type=submit] {
+         width: 100%;
+         background-color: #4CAF50;
+         color: white;
+         padding: 14px 20px;
+         margin: 8px 0;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+     }
+     input[type=submit]:hover {
+         background-color: #45a049;
+     }
+ </style>
+
+
+<div class="container">
+    <p>Create New Users</p>
+    <br/>
+    {{#if errors}}
+        {{#each errors}}
+            <div class="alert alert-danger">
+                {{msg}}
+            </div>
+        {{/each}}
+    {{/if}}
+    <form class="" action="" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="id">User</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" name="id">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="pw">Password</label>
+            </div>
+            <div class="col-md-8">
+                <input type="password" name="pw">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="pw2">Confirm Password</label>
+            </div>
+            <div class="col-md-8">
+                <input type="password" name="pw2">
+            </div>
+        </div>
+        <br>
+        <input type="submit" value="Create Users">
+    </form>
+</div>

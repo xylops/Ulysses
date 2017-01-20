@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <!-- <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -17,19 +17,36 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Ulysses ERP System</a>
+                    <a class="navbar-brand" href="/">Ulysses ERP System</a>
                 </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/users/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-                        </li>
-                        <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                        </li>
+                <div class="collapse navbar-collapse pull-right" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        {{#if user}}
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="/users/logout">Logout</a></li>
+                        {{else}}
+                            <li><a href="/users/register">Register</a></li>
+                            <li><a href="/users/login">Login</a></li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
+        {{#if success_msg}}
+            <div class="alert alert-success">
+                {{success_msg}}
+            </div>
+        {{/if}}
+        {{#if error_msg}}
+        <div class="alert alert-danger">
+            {{error_msg}}
+        </div>
+        {{/if}}
+        {{#if error}}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+        {{/if}}
         {{{body}}}
     </body>
 </html>

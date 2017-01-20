@@ -8,12 +8,20 @@ mongoose.Promise = global.Promise;
 mongoose.connect(DB_URL, (err, database)=>{
     if (err) return console.log(err)
     db = database;
-    console.log('connnect to db through mongoose')
+    console.log('connnect to db through mongoose');
 })
 
-router.get('/', function(req, res){
-    res.render('index');
+router.get('/', ensureAuthenticated, function(req, res){
+    res.render('index')
 });
 
+function ensureAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }else{
+        // req.flash('error_msg', 'You are not Logged In');
+        res.redirect('/users/login');
+    }
+}
 
 module.exports = router;
