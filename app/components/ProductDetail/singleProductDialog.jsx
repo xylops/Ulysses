@@ -59,15 +59,18 @@ var singleProductDialog = React.createClass({
     },
     dialogDelete : function(prod){
         var {dispatch, SPA} =this.props
-        productDetailAPI.deleteProduct(SPA.ProductID).then((response)=>{
-            var resText = response.data.message;
-            dispatch(actions.startFetchPDL())
-            productDetailAPI.getFullProductData().then((PDL)=>{
-                dispatch(actions.completeFetchPDL(PDL.data));
-                dispatch(actions.closeSingleProductDialog())
-                dispatch(snackBarActions.openSnackBar(resText));
-            })
-        })
+        dispatch(snackBarActions.openSnackBar('Permission Decline'));
+        dispatch(actions.closeSingleProductDialog())
+
+        // productDetailAPI.deleteProduct(SPA.ProductID).then((response)=>{
+        //     var resText = response.data.message;
+        //     dispatch(actions.startFetchPDL())
+        //     productDetailAPI.getFullProductData().then((PDL)=>{
+        //         dispatch(actions.completeFetchPDL(PDL.data));
+        //         dispatch(actions.closeSingleProductDialog())
+        //
+        //     })
+        // })
     },
 
     render:function(){

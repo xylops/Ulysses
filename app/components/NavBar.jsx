@@ -68,19 +68,19 @@ var NavBar = React.createClass({
                     <MenuItem onTouchTap={this.handleClose}>
                         <div className="drawerWelcoming">
                             <h4 style={style.drawerText}>Welcome</h4>
-                            <b><h2 style={style.drawerText}>{username} - {clearance}</h2></b>
+                            <b><h2 style={style.drawerText}>{username}</h2></b>
                         </div>
                     </MenuItem>
                     <Divider />
                     <Link to="/"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Home</MenuItem></Link>
                     <Link to="/CM"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Client Management</MenuItem></Link>
+                    <Link to="/PD"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Product Detail</MenuItem></Link>
                     <Link to="/IS"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Invoice System</MenuItem></Link>
                     <Link to="/IM"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Inventory Management</MenuItem></Link>
-                    <Link to="/LG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Logistic</MenuItem></Link>
+                    <Link to="/LG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Sort Invoice</MenuItem></Link>
                     <Link to="/LGPL"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>PickList</MenuItem></Link>
-                    <Link to="/PD"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Product Detail</MenuItem></Link>
+                    <Link to="/LGDR"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Dispatch Record</MenuItem></Link>
                     <MenuItem onTouchTap={this.handleClose} disabled={true}>Reporting</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Top Management</MenuItem>
                     <Divider />
                     <a href="/users/logout">
                         <MenuItem onTouchTap={this.handleToggle} className="drawerCloseBtn" style={{color:'white', fontWeight:'bold'}}>

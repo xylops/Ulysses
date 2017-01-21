@@ -101,8 +101,6 @@ router.post('/completePickList', function(req, res, next){
                             newInventoryRecord.RealPID = id;
                             newInventoryRecord.StockLevelID = pd.Inventory;
 
-                            console.log(newInventoryRecord)
-
                             newInventoryRecord.save((err, record)=>{
                                 if(err){
                                     console.log(err)

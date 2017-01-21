@@ -127,7 +127,7 @@ router.post('/getDateInstockList', function(req, res, next) {
     inventoryRecord.find({Date:req.query.date},function(err,dataList){
         var tempArray = []
         async.forEach(dataList, (record, cb)=>{
-            if(record.StockLevelChanges > 0 ){
+            if(record.StockLevelChanges >= 0 ){
                 tempArray.push(record)
             }
             cb()

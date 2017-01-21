@@ -2,6 +2,8 @@ var React = require('react')
 //Redux
 var {connect} = require('react-redux');
 var actions = require('../../../actions/inStockAction')
+var snackBarActions = require('../../../actions/snackBarActions')
+
 //material-ui
 import TextField from 'material-ui/TextField';
 //API
@@ -31,13 +33,14 @@ var newInstockItem = React.createClass({
     },
     handleRemove:function(item){
         var {dispatch , newStockList, date} = this.props
-        var temp = []
-        newStockList.forEach(function(elem){
-            temp.push(elem.id.indexOf(item.id));
-        })
-        var targetItem = temp.indexOf(0)
-        InventoryManagementAPI.deleteInventoryRecord(item.id, date, item.inventory)
-        dispatch(actions.removeNewItemFromNewList(targetItem))
+        dispatch(snackBarActions.openSnackBar('Permission Decline'));
+        // var temp = []
+        // newStockList.forEach(function(elem){
+        //     temp.push(elem.id.indexOf(item.id));
+        // })
+        // var targetItem = temp.indexOf(0)
+        // InventoryManagementAPI.deleteInventoryRecord(item.id, date, item.inventory)
+        // dispatch(actions.removeNewItemFromNewList(targetItem))
     },
     render:function(){
         var {item, newStockList} = this.props

@@ -80,18 +80,24 @@ router.post('/createNewClient', function(req, res, next) {
 });
 
 router.post('/deleteClient', function(req, res, next){
+    client.findOne({id:req.query.ID}, function(err, client){
+        if(client.purchaseRecord.length === 0){
+            client.findOneAndRemove({
+                id: req.query.ID
+            }, (err, data)=>{
+                if(err){
+                    res.json({message:'Something is wrong : ' + err})
+                }else{
+                    console.log('Client '+ req.query.ID +' has been Deleted')
+                    res.json({message:"Client "+  req.query.ID +" have been delete from database"})
+                }
 
-    client.findOneAndRemove({
-        id: req.query.ID
-    }, (err, data)=>{
-        if(err){
-            res.json({message:'Something is wrong : ' + err})
+            })
         }else{
-            console.log('Client '+ req.query.ID +' has been Deleted')
-            res.json({message:"Client "+  req.query.ID +" have been delete from database"})
+            res.json({message:"Premission Decline"})
         }
-
     })
+
 
 })
 

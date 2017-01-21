@@ -81,15 +81,18 @@ var ClientDetail = React.createClass({
     },
     dialogDelete : function(){
         var {dispatch, clientAttr} =this.props
-        clientManagementAPI.deleteClient(clientAttr.id).then((response)=>{
-            var resText = response.data.message;
-            dispatch(actions.startFetchClientList())
-            clientManagementAPI.getFullClientData().then((CL)=>{
-                dispatch(actions.completeFetchClientList(CL.data.result));
-                dispatch(actions.closeSingleClientDialog())
-                dispatch(snackBarActions.openSnackBar(resText));
-            })
-        })
+        dispatch(snackBarActions.openSnackBar('Permission Decline'));
+        dispatch(actions.closeSingleClientDialog())
+
+        // clientManagementAPI.deleteClient(clientAttr.id).then((response)=>{
+        //     var resText = response.data.message;
+        //     dispatch(actions.startFetchClientList())
+        //     clientManagementAPI.getFullClientData().then((CL)=>{
+        //         dispatch(actions.completeFetchClientList(CL.data.result));
+        //         dispatch(actions.closeSingleClientDialog())
+        //         dispatch(snackBarActions.openSnackBar(resText));
+        //     })
+        // })
     },
 
     render:function(){
