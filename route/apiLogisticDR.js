@@ -3,8 +3,10 @@ var router = express.Router();
 var async = require('async')
 var invoice = require ('../modal/invoice_model')
 
+var accessControl = require('../service/logisticDRAccess')
 
-router.get('/getPickNotComplete', function(req, res, next) {
+
+router.get('/getPickNotComplete', accessControl, function(req, res, next) {
     invoice.find({status:'己執未送'}).populate('client').sort({id:1}).exec((err, result)=>{
         if(err){
             console.log(err);
@@ -14,7 +16,7 @@ router.get('/getPickNotComplete', function(req, res, next) {
     })
 });
 
-router.post('/reConfirmReturn', function(req, res, next) {
+router.post('/reConfirmReturn', accessControl, function(req, res, next) {
     var record = JSON.parse(req.query.record);
     invoice.findOneAndUpdate({_id:record._id}, {
         $set:{status:'己完成'}

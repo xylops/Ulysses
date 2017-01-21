@@ -7,7 +7,9 @@ var logistic = require('../modal/logistic_model')
 var lorry = require('../modal/lorry_model')
 var productDetail = require('../modal/productDetail_model')
 
-router.get('/getNonProcessInvoice', function(req, res, next) {
+var accessControl = require('../service/logisticSIAccess')
+
+router.get('/getNonProcessInvoice', accessControl, function(req, res, next) {
     invoice.find({$or:[ {'status':''}, {'status':'未處理'}]}).populate('client').sort({id:1}).exec((err, result)=>{
         if(err){
             console.log(err);
@@ -17,14 +19,14 @@ router.get('/getNonProcessInvoice', function(req, res, next) {
     })
 });
 
-router.post('/checkLogisticPerDay', function(req, res, next) {
+router.post('/checkLogisticPerDay', accessControl, function(req, res, next) {
     var date = req.query.date
     logistic.find({date:date}, function(err, data){
         res.json({numberOfLogistic:data.length})
     })
 });
 
-router.get('/getLicencePlate', function(req, res, next) {
+router.get('/getLicencePlate', accessControl, function(req, res, next) {
     lorry.find({}).exec((err, result)=>{
         if(err){
             console.log(err);
@@ -34,7 +36,7 @@ router.get('/getLicencePlate', function(req, res, next) {
     })
 });
 
-router.post('/createNewLogistic', function(req, res, next) {
+router.post('/createNewLogistic', accessControl, function(req, res, next) {
     var record = JSON.parse(req.query.record);
 
     var newLogisticRecord = new logistic();

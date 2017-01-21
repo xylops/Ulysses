@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var accessControl = require('../service/clientAccess')
 var client = require('../modal/client_model.js')
 var invoice = require ('../modal/invoice_model')
 
-router.post('/getFullClientData', function(req, res, next) {
+router.post('/getFullClientData',accessControl, function(req, res, next) {
     if(req.query.skip === undefined){
         var skip = 0
     }else{
@@ -21,7 +22,7 @@ router.post('/getFullClientData', function(req, res, next) {
     })
 });
 
-router.post('/filterClient', function(req, res, next) {
+router.post('/filterClient', accessControl, function(req, res, next) {
     var searchText = req.query.searchText
     var type = req.query.type
     if(searchText != ""){
@@ -57,7 +58,7 @@ router.post('/filterClient', function(req, res, next) {
 
 });
 
-router.post('/createNewClient', function(req, res, next) {
+router.post('/createNewClient', accessControl, function(req, res, next) {
 
     var newClient = new client();
 
@@ -79,7 +80,7 @@ router.post('/createNewClient', function(req, res, next) {
     });
 });
 
-router.post('/deleteClient', function(req, res, next){
+router.post('/deleteClient', accessControl, function(req, res, next){
     client.findOne({id:req.query.ID}, function(err, client){
         if(client.purchaseRecord.length === 0){
             client.findOneAndRemove({
@@ -91,7 +92,6 @@ router.post('/deleteClient', function(req, res, next){
                     console.log('Client '+ req.query.ID +' has been Deleted')
                     res.json({message:"Client "+  req.query.ID +" have been delete from database"})
                 }
-
             })
         }else{
             res.json({message:"Premission Decline"})
@@ -101,7 +101,7 @@ router.post('/deleteClient', function(req, res, next){
 
 })
 
-router.post('/updateClient', function(req, res, next){
+router.post('/updateClient', accessControl, function(req, res, next){
     client.findOneAndUpdate({
         id: req.query.UpdatedClient[0],
     }, {
@@ -121,10 +121,7 @@ router.post('/updateClient', function(req, res, next){
             res.json({message:"Client " + req.query.UpdatedClient[1] + " have been Updated"})
         }
     })
-
 })
-
-
 
 
 

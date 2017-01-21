@@ -9,7 +9,9 @@ var productDetail = require('../modal/productDetail_model')
 var stockLevel = require('../modal/stockLevel_model')
 var inventoryRecord = require('../modal/inventoryRecord_model.js')
 
-router.get('/getPickList', function(req, res, next) {
+var accessControl = require('../service/logisticPLAccess')
+
+router.get('/getPickList', accessControl, function(req, res, next) {
     //create an array filter logistic record include ownbrand product and  return their quantity need
     logistic.find({}).populate('invoice').exec((err, result)=>{
         var RCP = []
@@ -71,7 +73,7 @@ router.get('/getPickList', function(req, res, next) {
 });
 
 
-router.post('/completePickList', function(req, res, next){
+router.post('/completePickList', accessControl,  function(req, res, next){
     logistic.findOne({logisticID:req.query.logisticID},function(err, logData){
         OBI = req.query.OBI
         async.forEach(logData.invoice, (singleInvoice, cb)=>{

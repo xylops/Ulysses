@@ -6,8 +6,10 @@ var stockLevel = require('../modal/stockLevel_model.js')
 var inventoryRecord = require('../modal/inventoryRecord_model.js')
 var productDetail = require('../modal/productDetail_model.js')
 
+var accessControl = require('../service/inventoryAccess')
 
-router.get('/getOwnBrandList', function(req, res, next) {
+
+router.get('/getOwnBrandList', accessControl, function(req, res, next) {
     productDetail.find({OwnBrand:true}).sort({id:1}).exec((err, result)=>{
         if(err){
             console.log(err);
@@ -17,7 +19,7 @@ router.get('/getOwnBrandList', function(req, res, next) {
     })
 });
 
-router.get('/allProductLevel', function(req, res, next) {
+router.get('/allProductLevel', accessControl, function(req, res, next) {
     productDetail.find({}).populate('Inventory').exec(function(err, doc){
         if(err){
             console.log(err)
@@ -37,7 +39,7 @@ router.get('/allProductLevel', function(req, res, next) {
     })
 });
 
-router.post('/createAndEditInstockList', function(req, res, next) {
+router.post('/createAndEditInstockList', accessControl, function(req, res, next) {
 
     var instockList = req.query.list;
     var date = req.query.date;
@@ -98,7 +100,7 @@ router.post('/createAndEditInstockList', function(req, res, next) {
     res.json({message:'Instock List has been added to database'})
 });
 
-router.post('/deleteInventoryRecord', function(req, res, next) {
+router.post('/deleteInventoryRecord', accessControl, function(req, res, next) {
     var date = req.query.date
     var id = req.query.id
     var inventory = req.query.inventoryID
@@ -123,7 +125,7 @@ router.post('/deleteInventoryRecord', function(req, res, next) {
 
 });
 
-router.post('/getDateInstockList', function(req, res, next) {
+router.post('/getDateInstockList', accessControl, function(req, res, next) {
     inventoryRecord.find({Date:req.query.date},function(err,dataList){
         var tempArray = []
         async.forEach(dataList, (record, cb)=>{

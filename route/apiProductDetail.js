@@ -3,7 +3,9 @@ var router = express.Router();
 var productDetail = require('../modal/productDetail_model.js')
 var stockLevel = require('../modal/stockLevel_model.js')
 
-router.get('/getFullProductData', function(req, res, next) {
+var accessControl = require('../service/productAccess')
+
+router.get('/getFullProductData', accessControl, function(req, res, next) {
     productDetail.find({}).sort({ProductID:1}).exec((err, result)=>{
         if(err){
             console.log(err)
@@ -13,7 +15,7 @@ router.get('/getFullProductData', function(req, res, next) {
     })
 });
 
-router.post('/createNewProduct', function(req, res, next) {
+router.post('/createNewProduct', accessControl, function(req, res, next) {
 
     var newProduct = new productDetail();
 
@@ -51,7 +53,7 @@ router.post('/createNewProduct', function(req, res, next) {
 });
 
 
-router.post('/deleteProduct', function(req, res, next){
+router.post('/deleteProduct', accessControl, function(req, res, next){
     productDetail.findOne({ProductID:req.query.ID}, function(err, singleProduct){
         stockLevel.findOneAndRemove({_id:singleProduct.Inventory}, (err, data)=>{
             if(err){console.log(err)}else{
@@ -72,7 +74,7 @@ router.post('/deleteProduct', function(req, res, next){
     })
 })
 
-router.post('/updateProduct', function(req, res, next){
+router.post('/updateProduct', accessControl, function(req, res, next){
     productDetail.findOneAndUpdate({
         ProductID: req.query.UpdatedProduct[0]
     }, {

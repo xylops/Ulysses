@@ -4,10 +4,12 @@ var router = express.Router();
 var client = require('../modal/client_model.js')
 var invoiceRecord = require('../modal/invoice_model.js')
 
+var accessControl = require('../service/invoiceAccess');
+
 PDFDocument = require ('pdfkit')
 var fs = require('fs')
 
-router.get('/getAllInvoice', function(req, res, next) {
+router.get('/getAllInvoice', accessControl, function(req, res, next) {
     invoiceRecord.find({}).populate('client').sort({invoiceID:-1}).exec((err, result)=>{
         if(err){
             console.log(err)
@@ -17,7 +19,7 @@ router.get('/getAllInvoice', function(req, res, next) {
     })
 });
 
-router.post('/getInvoice', function(req, res, next) {
+router.post('/getInvoice', accessControl, function(req, res, next) {
     if(req.query.skip === undefined){
         var skip = 0
     }else{
@@ -25,7 +27,7 @@ router.post('/getInvoice', function(req, res, next) {
     }
     invoiceRecord.find({}, function(err, data){
         var length = data.length;
-        invoiceRecord.find({}).skip(skip).limit(15).populate('client').sort({invoiceID:-1}).exec((err, result)=>{
+        invoiceRecord.find({}).sort({invoiceID: -1}).skip(skip).limit(15).populate('client').sort({invoiceID:-1}).exec((err, result)=>{
             if(err){
                 console.log(err)
             }else{
@@ -35,7 +37,7 @@ router.post('/getInvoice', function(req, res, next) {
     })
 });
 
-router.post('/filterInvoice', function(req, res, next) {
+router.post('/filterInvoice', accessControl, function(req, res, next) {
     var searchText = req.query.searchText
     if(searchText != ""){
         invoiceRecord.find({invoiceID:{ "$regex": searchText}}).skip(0).limit(15).populate('client').sort({invoiceID:1}).exec((err, result)=>{
@@ -48,7 +50,7 @@ router.post('/filterInvoice', function(req, res, next) {
     }
 });
 
-router.post('/checkInvoicePerDay', function(req, res, next) {
+router.post('/checkInvoicePerDay', accessControl, function(req, res, next) {
     var date = req.query.date
     invoiceRecord.find({date:date}, function(err, data){
         res.json({numberOfInvoice:data.length})
@@ -56,7 +58,7 @@ router.post('/checkInvoicePerDay', function(req, res, next) {
     })
 });
 
-router.post('/createNewInvoice', function(req, res, next) {
+router.post('/createNewInvoice', accessControl, function(req, res, next) {
     var invoice = JSON.parse(req.query.invoice);
     var newInvoiceRecord = new invoiceRecord()
     console.log(invoice)
@@ -90,14 +92,14 @@ router.post('/createNewInvoice', function(req, res, next) {
     })
 });
 
-router.post('/voidInvoice', function(req, res, next) {
+router.post('/voidInvoice', accessControl, function(req, res, next) {
     var invoiceID = req.query.invoiceID
     invoiceRecord.findOneAndUpdate({invoiceID}, {$set:{status:'VOID'}}, function(err, data){
         res.json({message:'Invoice ' + invoiceID + 'has been void'})
     })
 });
 
-router.post('/printInvoice', function(req, res, next){
+router.post('/printInvoice', accessControl, function(req, res, next){
     var invoice = JSON.parse(req.query.invoice);
     var url = req.query.url
     doc = new PDFDocument({
@@ -179,7 +181,7 @@ router.post('/printInvoice', function(req, res, next){
 
         var x = process.env.ENV_VARIABLE
 
-        if(url === 'http://localhost:3000/#/IV'){
+        if(url === 'http://localhost:3000/#/IV' || url === 'http://localhost:3000/#/IS' ){
             res.json({link:'http://localhost:3000/node.pdf'})
         }else{
             res.json({link:'http://ulysses-xylops.herokuapp.com/node.pdf'})

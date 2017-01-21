@@ -8,6 +8,8 @@ var logistic = require('../modal/logistic_model')
 var lorry = require('../modal/lorry_model')
 var productDetail = require('../modal/productDetail_model')
 var stockLevel = require('../modal/stockLevel_model')
+var accessControl = require('../modal/accessControl_model')
+
 
 PDFDocument = require ('pdfkit')
 var fs = require('fs')
@@ -60,6 +62,17 @@ router.get('/setOwnBrandStockLevel', function(req, res, next) {
 router.get('/getTime', function(req, res, next) {
     console.log(moment().format('x'))
 });
+
+router.get ('/ac', function(req, res, next){
+    var newAccessControl = new accessControl();
+    newAccessControl.role = 'topMan',
+    newAccessControl.permission.cmRead = true;
+    newAccessControl.permission.cmWrite = false;
+    newAccessControl.permission.cmEdit = true;
+    newAccessControl.save(function(err, date){
+        res.json({message:'done'})
+    })
+})
 
 
 module.exports = router
