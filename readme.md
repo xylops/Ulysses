@@ -11,3 +11,4 @@ Uylsses still in development
 * Adding Pagination to clientMangement, invoice system (complete)
 * Inventory Management List(complete)
 * Add client top 10 purchase record
+* pagination for product detail

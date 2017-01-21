@@ -27,6 +27,7 @@ import DispatchRecord from './components/logistic/dispatchRecord/main'
 var pdActions = require('./actions/productDetailActions')
 
 var store = require('configureStore').configure();
+loadCheck = true;
 
 store.subscribe(() => {
     var state = store.getState();

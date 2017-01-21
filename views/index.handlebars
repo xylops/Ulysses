@@ -1,7 +1,31 @@
 <script type="text/javascript">
     var username = "{{username}}";
     var clearance = "{{clearance}}"
+    var loadCheck = false;
+    var check = setInterval(function(){
+        if(loadCheck){
+            $('#progress').fadeOut('fast');
+            clearInterval(check)
+        }
+    }, 1000)
 </script>
+<style media="screen">
+    #progress{
+        text-align:center;
+        background:white;
+        position:absolute;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        top:30%;
+        z-index:10;
+    }
+</style>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div id="progress">
+    <img src="/progress.gif" alt="">
+    <h2><b>Loading</b></h2>
+</div>
 <div id="app"></div>
 <script src="bundle.js"></script>

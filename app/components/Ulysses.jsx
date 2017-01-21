@@ -14,6 +14,7 @@ const style={
 }
 
 var Ulysses = React.createClass({
+    
     render :function(){
         var {dispatch, open, snackBarText} = this.props
         var path = this.props.location.pathname;

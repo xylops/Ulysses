@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var accessControl = new Schema({
-    role:String,
+    role:{type:String, default:'unclass'},
     permission:{
         cmRead: Boolean,
         cmWrite: Boolean,
