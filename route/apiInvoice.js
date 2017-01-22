@@ -37,6 +37,10 @@ router.post('/getInvoice', accessControl, function(req, res, next) {
     })
 });
 
+router.post('/top10', function(req, res, next){
+
+})
+
 router.post('/filterInvoice', accessControl, function(req, res, next) {
     var searchText = req.query.searchText
     if(searchText != ""){
