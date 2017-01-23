@@ -25,6 +25,8 @@ var invoice = require('./route/apiInvoice');
 var logisticSortInvoice = require('./route/apiLogisticSortInvoice');
 var logisticPickList = require('./route/apiLogisticPickList')
 var logisticDR = require('./route/apiLogisticDR')
+var logging = require('./route/apiLogging')
+
 var maintaince = require('./route/maintaince')
 
 //create our App
@@ -77,28 +79,6 @@ app.use(function(req,res, next){
     next();
 });
 
-// for(var i = 0; i < 1000; i ++){
-//     logger.warn('this is warning')
-//     logger.info('this is info');
-//     logger.debug('Debugs' + i)
-// }
-
-// var options = {
-//   from: new Date - 24 * 60 * 60 * 1000,
-//   until: new Date,
-//   limit: 300,
-//   start: 0,
-//   order: 'desc',
-//   fields: ['message']
-// };
-//
-// logger.query(options, function (err, results) {
-//   if (err) {
-//     throw err;
-//   }
-//   console.log(results);
-// });
-
 app.use('/', index);
 app.use('/users', users)
 //app
@@ -110,6 +90,7 @@ app.use('/LGSI', logisticSortInvoice);
 app.use('/LGPL', logisticPickList);
 app.use('/LGDR', logisticDR);
 app.use('/maintaince', maintaince);
+app.use('/LOG', logging)
 
 const PORT = process.env.PORT || 3000;
 
