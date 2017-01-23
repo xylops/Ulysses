@@ -80,7 +80,7 @@ var NavBar = React.createClass({
                     <Link to="/LG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Sort Invoice</MenuItem></Link>
                     <Link to="/LGPL"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>PickList</MenuItem></Link>
                     <Link to="/LGDR"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Dispatch Record</MenuItem></Link>
-                    <MenuItem onTouchTap={this.handleClose} disabled={true}>Reporting</MenuItem>
+                    <Link to="/LOG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>LOG Record</MenuItem></Link>
                     <Divider />
                     <a href="/users/logout">
                         <MenuItem onTouchTap={this.handleToggle} className="drawerCloseBtn" style={{color:'white', fontWeight:'bold'}}>

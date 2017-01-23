@@ -94,7 +94,7 @@ router.post('/completePickList', accessControl,  function(req, res, next){
                             stockLevel.findOneAndUpdate({_id:pd.Inventory},{
                                 $inc:{stockLevel: decrease}
                             }, function(err, sl){
-                                logger.info(req.user.username + '--has out stock product ' + pd.ProductName + 'by' +  sl.stockLevel)
+                                logger.info(req.user.username + ' -- has out stock product ' + pd.ProductName + ' by ' +  sl.stockLevel)
                                 console.log(pd.ProductName + ' - ' + sl.stockLevel)
                             })
                             // create new inventory record
@@ -110,7 +110,7 @@ router.post('/completePickList', accessControl,  function(req, res, next){
                                 if(err){
                                     logger.warn(req.user.username + ' -- ' + err)
                                 }else{
-                                    logger.info(req.user.username + ' -- has reduce ' + pd.ProductName +' stock level by'  + singleProduct.quantity )
+                                    logger.info(req.user.username + ' -- has reduce ' + pd.ProductName +' stock level by '  + singleProduct.quantity )
                                 }
                             })
                         });

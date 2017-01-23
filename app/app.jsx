@@ -21,6 +21,7 @@ import Logistic from './components/Logistic/main'
 import SortInvoice from './components/Logistic/sortInvoice/main'
 import PickList from './components/Logistic/PickList/main'
 import DispatchRecord from './components/logistic/dispatchRecord/main'
+import Logging from './components/logging/main'
 
 
 // Redux Function
@@ -56,6 +57,7 @@ const App = () => (
                     <Route path="LGSI" component={SortInvoice}/>
                     <Route path="LGPL" component={PickList}/>
                     <Route path="LGDR" component={DispatchRecord}/>
+                    <Route path="LOG" component={Logging}/>
                     <IndexRoute component={HomePage}/>
                 </Route>
             </Router>
