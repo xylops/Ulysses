@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-// var moment = require('moment')
+var logger = require('../service/logger')
 var client = require('../modal/client_model.js')
 var invoiceRecord = require('../modal/invoice_model.js')
 
@@ -12,8 +12,9 @@ var fs = require('fs')
 router.get('/getAllInvoice', accessControl, function(req, res, next) {
     invoiceRecord.find({}).populate('client').sort({invoiceID:-1}).exec((err, result)=>{
         if(err){
-            console.log(err)
+            logger.warn(req.user.username + ' -- ' + err)
         }else{
+            logger.info(req.user.username + '-- has request to get all invoice')
             res.json(result)
         }
     })
@@ -29,8 +30,9 @@ router.post('/getInvoice', accessControl, function(req, res, next) {
         var length = data.length;
         invoiceRecord.find({}).sort({invoiceID: -1}).skip(skip).limit(15).populate('client').sort({invoiceID:-1}).exec((err, result)=>{
             if(err){
-                console.log(err)
+                logger.warn(req.user.username + ' -- ' + err)
             }else{
+                logger.info(req.user.username + '-- has request to get invoice')
                 res.json({result, length})
             }
         })
@@ -45,6 +47,7 @@ router.post('/filterInvoice', accessControl, function(req, res, next) {
     var searchText = req.query.searchText
     if(searchText != ""){
         invoiceRecord.find({invoiceID:{ "$regex": searchText}}).skip(0).limit(15).populate('client').sort({invoiceID:1}).exec((err, result)=>{
+            logger.info(req.user.username + '-- has request to get filter invoice by keywords ' + searchText)
             res.json({result})
         })
     }else{
@@ -57,6 +60,7 @@ router.post('/filterInvoice', accessControl, function(req, res, next) {
 router.post('/checkInvoicePerDay', accessControl, function(req, res, next) {
     var date = req.query.date
     invoiceRecord.find({date:date}, function(err, data){
+        logger.info(req.user.username + ' -- have check invoice per day')
         res.json({numberOfInvoice:data.length})
         console.log(data)
     })
@@ -65,7 +69,7 @@ router.post('/checkInvoicePerDay', accessControl, function(req, res, next) {
 router.post('/createNewInvoice', accessControl, function(req, res, next) {
     var invoice = JSON.parse(req.query.invoice);
     var newInvoiceRecord = new invoiceRecord()
-    console.log(invoice)
+
     newInvoiceRecord.invoiceID = invoice.invoiceID;
     newInvoiceRecord.client = invoice.client._id
     newInvoiceRecord.date = invoice.date
@@ -76,7 +80,7 @@ router.post('/createNewInvoice', accessControl, function(req, res, next) {
 
     newInvoiceRecord.save((err, record)=>{
         if(err){
-            res.json({message:'Something is wrong : ' + err})
+            logger.warn(req.user.username + ' -- ' + err)
         }else{
             client.findOneAndUpdate({
                 id: invoice.client.id,
@@ -86,8 +90,9 @@ router.post('/createNewInvoice', accessControl, function(req, res, next) {
                 }
             },{upsert : true}, (err, data)=>{
                 if(err){
-                    res.json('Something is wrong '+ err)
+                    logger.warn(req.user.username + ' -- ' + err)
                 }else{
+                    logger.info(req.user.username + '-- have create new invoce ' + newInvoiceRecord)
                     res.json({message:'New Invoice Record has been added to database'})
                 }
             })
@@ -99,6 +104,7 @@ router.post('/createNewInvoice', accessControl, function(req, res, next) {
 router.post('/voidInvoice', accessControl, function(req, res, next) {
     var invoiceID = req.query.invoiceID
     invoiceRecord.findOneAndUpdate({invoiceID}, {$set:{status:'VOID'}}, function(err, data){
+        logger.info(req.user.username + 'have VOID invoice ' + data)
         res.json({message:'Invoice ' + invoiceID + 'has been void'})
     })
 });
@@ -184,7 +190,7 @@ router.post('/printInvoice', accessControl, function(req, res, next){
     writeStream.on('finish', function(){
 
         var x = process.env.ENV_VARIABLE
-
+        logger.info(req.user.username + 'have print invoice ' + invoice.invoiceID);
         if(url === 'http://localhost:3000/#/IV' || url === 'http://localhost:3000/#/IS' ){
             res.json({link:'http://localhost:3000/node.pdf'})
         }else{

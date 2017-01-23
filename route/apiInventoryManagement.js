@@ -2,6 +2,7 @@ var express = require('express');
 var moment = require('moment')
 var router = express.Router();
 var async = require('async')
+var logger = require('../service/logger')
 var stockLevel = require('../modal/stockLevel_model.js')
 var inventoryRecord = require('../modal/inventoryRecord_model.js')
 var productDetail = require('../modal/productDetail_model.js')
@@ -12,8 +13,9 @@ var accessControl = require('../service/inventoryAccess')
 router.get('/getOwnBrandList', accessControl, function(req, res, next) {
     productDetail.find({OwnBrand:true}).sort({id:1}).exec((err, result)=>{
         if(err){
-            console.log(err);
+            logger.warn(req.user.username + ' -- ' + err)
         }else{
+            logger.info(req.user.username + ' -- has request OwnBrand List')
             res.json(result);
         }
     })
@@ -34,6 +36,7 @@ router.get('/allProductLevel', accessControl, function(req, res, next) {
                     stockLevel: elem.Inventory
                 })
             })
+            logger.info(req.user.username + ' -- has request all product level List')
             res.json (json);
         }
     })
@@ -59,15 +62,14 @@ router.post('/createAndEditInstockList', accessControl, function(req, res, next)
 
                 //if date, product id are the same but level are different
                 var different = obj.amount - item[0].StockLevelChanges
-                console.log(different)
                 stockLevel.findOneAndUpdate({_id:obj.inventory},{$inc:{stockLevel:different}}, function(err, data){
-                    console.log('Stock Level Updated')
+                    logger.info(req.user.username + ' -- has update ' + item[0].ProductName + ' stock level from ' + item[0].StockLevelChanges  + ' to ' + obj.amount )
                 })
                 inventoryRecord.findOneAndUpdate(
                     {Date:date,  RealPID: obj.id},
                     {$inc:{StockLevelChanges:different}},
                     function(err, data){
-                    console.log('Inventory Record Updated')
+                    logger.info(req.user.username + ' -- has update inventory Record database of ' + item[0].ProductName + ' on ' + item[0].cts)
                 } )
 
             }else if(item.length === 0){
@@ -75,7 +77,7 @@ router.post('/createAndEditInstockList', accessControl, function(req, res, next)
                 //if there are new items
                 stockLevel.findOneAndUpdate({_id:obj.inventory},{$inc:{stockLevel:obj.amount}}, function(err, data){
                     CurrentStockLevel = data.stockLevel + Number(obj.amount);
-                    console.log('Product Stock Level Updated')
+                    logger.info(req.user.username + ' -- has increase ' + item.ProductName +' stock level by'  + obj.amount )
                 })
                 var newInventoryRecord = new inventoryRecord()
 
@@ -91,7 +93,7 @@ router.post('/createAndEditInstockList', accessControl, function(req, res, next)
                     if(err){
                         res.json({message:'Something is wrong : ' + err})
                     }else{
-                        console.log('New Inventory Record Created')
+                        logger.info(req.user.username + ' -- create new Inventory Record on product ' + obj.name + ' by ' + date)
                     }
                 });
             }
@@ -109,16 +111,18 @@ router.post('/deleteInventoryRecord', accessControl, function(req, res, next) {
             var removeItem = -data[0].StockLevelChanges
             console.log(inventory)
             stockLevel.findOneAndUpdate({_id:inventory},{$inc:{stockLevel:removeItem}}, function(err, data){
-                console.log('Product Stock Level Updated')
+                logger.warn(req.user.username + ' -- have trigger delete inventory record')
             })
             inventoryRecord.findOneAndRemove(
                 {Date:date,  RealPID: id},
                 function(err, data){
-                console.log('Inventory Record Updated')
+                logger.warn(req.user.username + ' -- have trigger delete inventory record')
+
             } )
 
         }else{
-            console.log('nothing found in DB')
+            logger.warn(req.user.username + ' -- have trigger delete inventory record')
+
         }
         res.json({message:'item has been delete from db'})
     })
@@ -134,6 +138,7 @@ router.post('/getDateInstockList', accessControl, function(req, res, next) {
             }
             cb()
         }, (err)=>{
+            logger.info(req.user.username + ' --  have request get InStock list on date ' + req.query.date)
             res.json(tempArray)
         })
     })
@@ -145,6 +150,7 @@ router.post('/getInventoryRecord', function(req, res, next) {
     var endDate = req.query.endDate;
 
     inventoryRecord.find({ Date: { $gte: startDate, $lte: endDate }}, function (err, records) {
+        logger.info(req.user.username + ' -- have request inventory record from ' + startDate + ' to ' + endDate)
          res.json(records)
     });
 });

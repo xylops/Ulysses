@@ -10,6 +10,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
+//logger
+var winston = require('winston');
+var logger = require('./service/logger.js')
 
 //own route
 var index = require('./route/index');
@@ -40,7 +43,8 @@ app.use(express.static('public'));
 app.use(session({
     secret:'secret',
     saveUninitialized:true,
-    resave:true
+    resave:true,
+    cookie: {maxAge: 480000 }
 }))
 //passport init
 app.use(passport.initialize());
@@ -72,6 +76,28 @@ app.use(function(req,res, next){
     res.locals.user = req.user || null;
     next();
 });
+
+// for(var i = 0; i < 1000; i ++){
+//     logger.warn('this is warning')
+//     logger.info('this is info');
+//     logger.debug('Debugs' + i)
+// }
+
+// var options = {
+//   from: new Date - 24 * 60 * 60 * 1000,
+//   until: new Date,
+//   limit: 300,
+//   start: 0,
+//   order: 'desc',
+//   fields: ['message']
+// };
+//
+// logger.query(options, function (err, results) {
+//   if (err) {
+//     throw err;
+//   }
+//   console.log(results);
+// });
 
 app.use('/', index);
 app.use('/users', users)

@@ -28,7 +28,7 @@ var SingeleInventoryRecord = React.createClass({
         return(
             <div className="row" style={inde()}>
                 <div className="column medium-2">
-                    {record.Date}
+                    {moment(record.cts).format('DD/MM/YYYY')}
                 </div>
                 <div className="column medium-2">
                     {record.ProductID}

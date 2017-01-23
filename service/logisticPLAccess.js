@@ -1,4 +1,5 @@
 var accessControl = require('../modal/accessControl_model')
+var logger = require('./logger')
 
 module.exports= function(req, res, next){
     if(req.user === undefined){
@@ -17,23 +18,11 @@ module.exports= function(req, res, next){
         }
 
         accessControl.findOne({role:clearanceLevel}, function(err, data){
-            switch(cate){
-                case 'lgplRead':
-                    if(data.permission.lgplRead){
-                        next();
-                    }else{
-                        res.json({message:'Premission Decline'})
-                    }
-                    break;
-                case 'lgplEdit':
-                    if(data.permission.lgplEdit){
-                        next();
-                    }else{
-                        res.json({message:'Premission Decline'})
-                    }
-                    break;
-                default:
-                    res.json({message:'Premission Decline'})
+            if(data.permission[cate]){
+                next()
+            }else{
+                logger.warn(req.user.username + ' -- ' + req.route.path + ' -- Permission Decline')
+                res.json({message:'Premission Decline'})
             }
         })
     }

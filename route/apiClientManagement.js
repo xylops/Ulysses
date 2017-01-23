@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var logger = require('../service/logger')
 var accessControl = require('../service/clientAccess')
 var client = require('../modal/client_model.js')
 var invoice = require ('../modal/invoice_model')
@@ -14,8 +15,9 @@ router.post('/getFullClientData',accessControl, function(req, res, next) {
         var length = data.length
         client.find({}).skip(skip).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
             if(err){
-                console.log(err);
+                logger.warn(req.user.username + ' -- ' + err)
             }else{
+                logger.info(req.user.username + ' -- has request full client list')
                 res.json({result, length});
             }
         })
@@ -25,20 +27,26 @@ router.post('/getFullClientData',accessControl, function(req, res, next) {
 router.post('/filterClient', accessControl, function(req, res, next) {
     var searchText = req.query.searchText
     var type = req.query.type
+
+
     if(searchText != ""){
         switch (type){
             case 'id':
                 client.find({id:{ "$regex": searchText}}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+                    logger.info(req.user.username + ' -- has request filtered client id list by keywords -- ' + searchText)
                     res.json({result, length:1})
                 })
                 break;
             case 'name':
                 client.find({name:{ "$regex": searchText }}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+                    logger.info(req.user.username + ' -- has request filtered client name list by keywords -- ' + searchText)
                     res.json({result, length:1})
                 })
                 break;
             case 'phone':
                 client.find({phone:{ "$regex": searchText }}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
+                    logger.info(req.user.username + ' -- has request filtered client phone list by keywords -- ' + searchText)
+
                     res.json({result, length:1})
                 })
                 break;
@@ -48,7 +56,7 @@ router.post('/filterClient', accessControl, function(req, res, next) {
             var length = data.length
             client.find({}).skip(0).limit(15).populate('purchaseRecord').sort({id:1}).exec((err, result)=>{
                 if(err){
-                    console.log(err);
+                    logger.warn(req.user.username + ' -- ' + err)
                 }else{
                     res.json({result, length});
                 }
@@ -72,9 +80,10 @@ router.post('/createNewClient', accessControl, function(req, res, next) {
 
     newClient.save((err, client)=>{
         if(err){
+            logger.warn(req.user.username + ' -- ' + err)
             res.json({message:'Something is wrong : ' + err})
         }else{
-            console.log('New Client Created: ' + newClient)
+            logger.info(req.user.username + ' -- has create new Client -- ' + newClient)
             res.json({message:'Client ' + req.query.newClient[1] + ' have been added to database'})
         }
     });
@@ -87,9 +96,10 @@ router.post('/deleteClient', accessControl, function(req, res, next){
                 id: req.query.ID
             }, (err, data)=>{
                 if(err){
+                    logger.err(req.user.username + ' -- ' + err)
                     res.json({message:'Something is wrong : ' + err})
                 }else{
-                    console.log('Client '+ req.query.ID +' has been Deleted')
+                    logger.info(req.user.username + ' -- has delete client -- ' + client)
                     res.json({message:"Client "+  req.query.ID +" have been delete from database"})
                 }
             })
@@ -115,9 +125,10 @@ router.post('/updateClient', accessControl, function(req, res, next){
         }
     },{upsert : true}, (err, data)=>{
         if(err){
+            logger.err(req.user.username + ' -- ' + err)
             res.json('Something is wrong '+ err)
         }else{
-            console.log('Client '+ req.query.UpdatedClient[1] +' has been Updated')
+            logger.info(req.user.username + ' -- has update client -- ' + data)
             res.json({message:"Client " + req.query.UpdatedClient[1] + " have been Updated"})
         }
     })

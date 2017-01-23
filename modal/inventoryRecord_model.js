@@ -7,7 +7,8 @@ var inventoryRecordSchema = new Schema({
     StockLevelChanges:{type:Number, require:true},
     Date:{type:Number, require:true},
     RealPID:{type:String, require:true},
-    StockLevelID:{type:String, require:true}
+    StockLevelID:{type:String, require:true},
+    cts: { type: Date, default: Date.now }
 }, {collection:'inventoryRecord'});
 
 module.exports = mongoose.model('inventoryRecordModel', inventoryRecordSchema)
