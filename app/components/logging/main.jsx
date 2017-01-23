@@ -9,43 +9,46 @@ var loggingAPI = require('../../api/loggingAPI')
 
 var main = React.createClass ({
 
-    componentWillMount:function(){
-        var options = {
-          from: new Date - 24 * 60 * 60 * 1000,
-          until: new Date,
-          limit: 30,
-          start: 0,
-          order: 'desc',
-        //   fields: ['message']
-        };
-        // loggingAPI.queryLog(options)
-    },
-    dateChange:function(e, date){
-        var dateTwo = moment(date).format('YYYYMMDD')
-        var dateThree = moment(dateTwo).format('x')
+    timeChange:function(result){
 
-        console.log(dateThree)
+        var startDate = this.refs.startDate.value;
+        var endDate = this.refs.endDate.value
+
+        if(startDate !== ''){
+            startDate = this.refs.startDate.value;
+        }else{
+            var startDate = new Date - 24 * 60 * 60 * 1000
+        }
+
+        if(endDate !== ''){
+            endDate = this.refs.endDate.value;
+        }else{
+            var endDate = new Date
+        }
+
+        console.log('Start Date-------------' +  startDate)
+        console.log('end Date-------------' +  endDate)
+
         var options = {
-          from: dateThree,
-          until: new Date,
-          limit: 5,
+          from: startDate,
+          until: endDate,
+        //   limit: 5,
           start: 0,
-          order: 'desc',
-        //   fields: ['message']
+        //   order: 'desc',
+          fields: ['message', 'timestamp']
         };
         loggingAPI.queryLog(options)
-    },
-    timeChange:function(result){
-        console.log(this.refs.inputValue.value)
+
     },
     render:function(){
         return (
             <div>
                 <br/>
                 Logging session
-                <DatePicker hintText="Landscape Dialog" mode="landscape" onChange={this.dateChange}/>
-                <DatePicker hintText="Landscape Dialog" mode="landscape" onChange={this.timeChange}/>
-                <input type="datetime-local" onChange={this.timeChange} ref="inputValue"/>
+
+                <input type="datetime-local" onChange={this.timeChange} ref="startDate"/>
+                <input type="datetime-local" onChange={this.timeChange} ref="endDate"/>
+
 
             </div>
         )
