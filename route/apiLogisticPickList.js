@@ -2,6 +2,7 @@ var express = require('express');
 var moment = require('moment');
 var router = express.Router();
 var async = require('async')
+var logger = require('../service/logger')
 var client = require('../modal/client_model.js')
 var invoice = require ('../modal/invoice_model')
 var logistic = require('../modal/logistic_model')
@@ -66,6 +67,7 @@ router.get('/getPickList', accessControl, function(req, res, next) {
                     cb();
                 })
             }, (err)=>{
+                logger.info(req.user.username + ' -- has request pickList')
                 res.json(pickList)
             })
         })
@@ -92,6 +94,7 @@ router.post('/completePickList', accessControl,  function(req, res, next){
                             stockLevel.findOneAndUpdate({_id:pd.Inventory},{
                                 $inc:{stockLevel: decrease}
                             }, function(err, sl){
+                                logger.info(req.user.username + '--has out stock product ' + pd.ProductName + 'by' +  sl.stockLevel)
                                 console.log(pd.ProductName + ' - ' + sl.stockLevel)
                             })
                             // create new inventory record
@@ -105,9 +108,9 @@ router.post('/completePickList', accessControl,  function(req, res, next){
 
                             newInventoryRecord.save((err, record)=>{
                                 if(err){
-                                    console.log(err)
+                                    logger.warn(req.user.username + ' -- ' + err)
                                 }else{
-                                    console.log('complete')
+                                    logger.info(req.user.username + ' -- has reduce ' + pd.ProductName +' stock level by'  + singleProduct.quantity )
                                 }
                             })
                         });
@@ -115,6 +118,7 @@ router.post('/completePickList', accessControl,  function(req, res, next){
                     cb();
             })
         },(err)=>{
+
             res.json({message:'Database has been updated'})
         })
 

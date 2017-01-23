@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var logger = require('../service/logger')
 var productDetail = require('../modal/productDetail_model.js')
 var stockLevel = require('../modal/stockLevel_model.js')
 
@@ -10,6 +11,7 @@ router.get('/getFullProductData', accessControl, function(req, res, next) {
         if(err){
             console.log(err)
         }else{
+            logger.info(req.user.username +  '-- has request full Product List' )
             res.json(result)
         }
     })
@@ -42,8 +44,7 @@ router.post('/createNewProduct', accessControl, function(req, res, next) {
                             Inventory : newInventory._id
                         }
                     }, function(err, data){
-                        // finish push a Inventory ID to PD
-                        console.log('New Product & stockLevel Created')
+                        logger.info(req.user.username + '-- has create new Product ' + newProduct)
                         res.json({message:'Item ' + newProduct.ProductName + ' have been added to database'})
                     })
                 }//end if !err
@@ -57,6 +58,7 @@ router.post('/deleteProduct', accessControl, function(req, res, next){
     productDetail.findOne({ProductID:req.query.ID}, function(err, singleProduct){
         stockLevel.findOneAndRemove({_id:singleProduct.Inventory}, (err, data)=>{
             if(err){console.log(err)}else{
+                logger.warn (req.user.username + '-- access delete product')
                 console.log('Inventory Delete')
             }
         })
@@ -66,9 +68,10 @@ router.post('/deleteProduct', accessControl, function(req, res, next){
         ProductID: req.query.ID
     }, (err, data)=>{
         if(err){
+            logger.warn(req.user.username + ' -- ' + err)
             res.json({message:'Something is wrong : ' + err})
         }else{
-            console.log('Product '+ req.query.ID +' has been Deleted')
+            logger.warn (req.user.username + '-- access delete product')
             res.json({message:"Product "+  req.query.ID +" have been delete from database"})
         }
     })
@@ -87,9 +90,10 @@ router.post('/updateProduct', accessControl, function(req, res, next){
         }
     },{upsert : true}, (err, data)=>{
         if(err){
+            logger.warn(req.user.username + ' -- ' + err)
             res.json('Something is wrong '+ err)
         }else{
-            console.log('Product '+ req.query.UpdatedProduct[1] +' has been Updated')
+            logger.info(req.user.username + ' -- has update product ' + req.query.UpdatedProduct[1])
             res.json({message:"Product " + req.query.UpdatedProduct[1] + " have been Updated"})
         }
     })
