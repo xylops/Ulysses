@@ -2,7 +2,8 @@ import React from 'react';
 var {Link} = require('react-router');
 var {connect} = require('react-redux');
 var actions = require('../actions/mainActions')
-
+import {green500, lightGreen500, teal500, deepOrange500
+, grey50 } from 'material-ui/styles/colors';
 
 //material-ui
 import RaisedButton from 'material-ui/RaisedButton';
@@ -49,34 +50,33 @@ var HomePage = React.createClass({
                         <Link to="/CM" ><RaisedButton label="Client Managemnet"  primary={true} fullWidth={true} /></Link>
                     </div>
                     <div className="column medium-3" style={style.navBtn}>
+                        <Link to="/PD" ><RaisedButton label="Product Detail" primary={true} fullWidth={true} /></Link>
+                    </div>
+                    <div className="column medium-3" style={style.navBtn}>
                         <Link to="/IV" ><RaisedButton label="Invoice System" secondary={true} fullWidth={true} /></Link>
                     </div>
                     <div className="column medium-3" style={style.navBtn}>
-                        <Link to="/IM" ><RaisedButton label="Inventory Management" primary={true} fullWidth={true} /></Link>
-                    </div>
-                    <div className="column medium-3" style={style.navBtn}>
-                        <Link to="/LG" ><RaisedButton label="Sort Invoice" secondary={true} fullWidth={true} /></Link>
+                        <Link to="/IM" ><RaisedButton label="Inventory Management" secondary={true} fullWidth={true} /></Link>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column medium-3" style={style.navBtn}>
-                        <Link to="/PD" ><RaisedButton label="Product Detail"secondary={true} fullWidth={true} /></Link>
+
+                    <div className="column medium-4" style={style.navBtn} >
+                        <Link to="/LG" ><RaisedButton label="Sort Invoice" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
                     </div>
-                    <div className="column medium-3" style={style.navBtn}>
-                        <Link to="/LOG" ><RaisedButton label="LOG Record" primary={true} fullWidth={true} /></Link>
+                    <div className="column medium-4" style={style.navBtn}>
+                        <Link to="/LGDR" ><RaisedButton label="Dispatch Record" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
                     </div>
-                    <div className="column medium-3" style={style.navBtn}>
-                        <Link to="/LGDR" ><RaisedButton label="Dispatch Record" secondary={true} fullWidth={true} /></Link>
+                    <div className="column medium-4" style={style.navBtn}>
+                        <Link to="/LGPL" ><RaisedButton label="PickList" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
                     </div>
-                    <div className="column medium-3" style={style.navBtn}>
-                        <Link to="/LGPL" ><RaisedButton label="PickList" primary={true} fullWidth={true} /></Link>
-                    </div>
-                </div><br/>
+                </div>
                 <div className="row">
-                    <div className="column medium-3" style={style.navBtn}>
-                        <div style={{...style.animation, opacity:this.state.opacity}}>
-                            <Paper style={style.paper} zDepth={2} />
-                        </div>
+                    <div className="column medium-6" style={style.navBtn}>
+                        <Link to="/LOG" ><RaisedButton label="LOG Record" fullWidth={true} backgroundColor={'#51B300'} labelColor={'white'}/></Link>
+                    </div>
+                    <div className="column medium-6" style={style.navBtn}>
+                        <Link to="/REP" ><RaisedButton label="Reporting" fullWidth={true} backgroundColor={'#51B300'} labelColor={'white'}/></Link>
                     </div>
                 </div><br/>
             </div>

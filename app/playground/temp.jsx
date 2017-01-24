@@ -15,3 +15,9 @@ productDetail.find({}, function(err, data){
         })
     })
 })
+
+<div className="column medium-3" style={style.navBtn}>
+    <div style={{...style.animation, opacity:this.state.opacity}}>
+        <Paper style={style.paper} zDepth={2} />
+    </div>
+</div>

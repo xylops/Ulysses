@@ -90,8 +90,8 @@ var main = React.createClass ({
                     </div>
                     <div className="column small-12 medium-3" style={{textAlign:'center'}}>
                         <select name="order" ref="order">
-                            <option value="asc">Accending</option>
                             <option value="desc">Descending</option>
+                            <option value="asc">Accending</option>
                         </select>
                     </div>
                     <div className="column small-12 medium-1">
