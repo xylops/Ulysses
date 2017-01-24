@@ -9,7 +9,7 @@ router.post('/queryLog', function(req, res, next){
       if (err) {
         throw err;
       }
-      console.log(results.file);
+      res.json(results)
     });
 })
 
