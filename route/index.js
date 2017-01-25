@@ -4,7 +4,10 @@ const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
 var logger = require('../service/logger')
 
-var DB_URL = 'mongodb://users:1234@ds147995.mlab.com:47995/ulysses-data'
+// var DB_URL = 'mongodb://users:1234@ds147995.mlab.com:47995/ulysses-data';
+var DB_URL = 'mongodb://xylops:xxxx@ds113608.mlab.com:13608/ulysses';
+
+
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_URL, (err, database)=>{
     if (err) return logger.error(err)

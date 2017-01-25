@@ -23,6 +23,7 @@ import PickList from './components/Logistic/PickList/main'
 import DispatchRecord from './components/logistic/dispatchRecord/main'
 import Logging from './components/logging/main'
 import Report from './components/Report/main'
+import Admin from './components/Admin/main'
 
 // Redux Function
 var pdActions = require('./actions/productDetailActions')
@@ -59,6 +60,7 @@ const App = () => (
                     <Route path="LGDR" component={DispatchRecord}/>
                     <Route path="LOG" component={Logging}/>
                     <Route path="REP" component={Report}/>
+                    <Route path="AD" component={Admin}/>
                     <IndexRoute component={HomePage}/>
                 </Route>
             </Router>

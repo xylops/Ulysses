@@ -11,7 +11,7 @@ import Paper from 'material-ui/Paper';
 
 const style = {
     navBtn:{
-        marginTop: '2vw'
+        marginTop: '1.5vw'
     },
     paper:{
         height: 100,
@@ -43,6 +43,22 @@ var HomePage = React.createClass({
     render:function(){
         var {searchText} = this.props
         var windowHeight = $(window).height() - 64
+
+        var renderAdminBtn = () =>{
+            if(clearance === 'admin' || clearance === 'topMan'){
+                return (
+                    <div className="row">
+                        <div className="column medium-6" style={style.navBtn}>
+                            <Link to="/LOG" ><RaisedButton label="LOG Record" fullWidth={true} backgroundColor={'#D96A00'} labelColor={'white'}/></Link>
+                        </div>
+                        <div className="column medium-6" style={style.navBtn}>
+                            <Link to="/AD" ><RaisedButton label="Admin Panel" fullWidth={true} backgroundColor={'#D96A00'} labelColor={'white'}/></Link>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
         return(
             <div style={{marginTop:'50px', height:windowHeight}}>
                 <div className="row">
@@ -65,20 +81,19 @@ var HomePage = React.createClass({
                         <Link to="/LG" ><RaisedButton label="Sort Invoice" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
                     </div>
                     <div className="column medium-4" style={style.navBtn}>
-                        <Link to="/LGDR" ><RaisedButton label="Dispatch Record" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
+                        <Link to="/LGPL" ><RaisedButton label="PickList" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
                     </div>
                     <div className="column medium-4" style={style.navBtn}>
-                        <Link to="/LGPL" ><RaisedButton label="PickList" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
+                        <Link to="/LGDR" ><RaisedButton label="Dispatch Record" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column medium-6" style={style.navBtn}>
-                        <Link to="/LOG" ><RaisedButton label="LOG Record" fullWidth={true} backgroundColor={'#51B300'} labelColor={'white'}/></Link>
-                    </div>
-                    <div className="column medium-6" style={style.navBtn}>
+                    <div className="column medium-12" style={style.navBtn}>
                         <Link to="/REP" ><RaisedButton label="Reporting" fullWidth={true} backgroundColor={'#51B300'} labelColor={'white'}/></Link>
                     </div>
-                </div><br/>
+                </div>
+                {renderAdminBtn()}
+
             </div>
         )
     }

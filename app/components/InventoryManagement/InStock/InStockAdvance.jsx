@@ -52,7 +52,8 @@ var advanceDialog = React.createClass({
     handleChange:function(){
         var {ownBrandList} = this.props
         var value = this.refs.idInput.value;
-        var id = value.toUpperCase()
+        // var id = value.toUpperCase()
+        var id = value
         let item = ownBrandList.filter((elem)=>{
             return elem.ProductID.indexOf(id) !== -1;
         });

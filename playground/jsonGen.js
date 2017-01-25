@@ -1,9 +1,8 @@
 // generator JSON info at http://www.json-generator.com/
 //client generator
 [
-    '{{repeat(800)}}',
+    '{{repeat(2000)}}',
     {
-        _id: '{{objectId()}}',
         id: '{{floating(1000, 4000, 2, "0,0")}}',
         name: '{{firstName()}} {{surname()}}',
         phone: '+1 {{phone()}}',
@@ -14,5 +13,20 @@
             return method[tags.integer(0, method.length - 1)];
         },
         location:'{{state()}}'
+    }
+]
+
+[
+    '{{repeat(800)}}',
+    {
+        ProductID: 'a{{index()}}',
+        ProductName: '{{surname()}}',
+        Spec: '{{floating(1000, 4000, 2, "0,0")}} pcs',
+        Price: '{{integer(1000, 4000)}}',
+        Unit: function (tags) {
+            var method = ['盒', '箱', '件'];
+            return method[tags.integer(0, method.length - 1)];
+        },
+        OwnBrand:'{{bool()}}'
     }
 ]
