@@ -4,16 +4,11 @@ import {browserHistory} from 'react-router';
 
 var main = React.createClass({
     componentWillMount:function(){
-        if(clearance !== 'admin' || clearance !== 'topMan'){
-            var repeatingAlert = setInterval(function(){alert('you are not suppose to be here')}, 1000)
-        }
-    },
-    componentWillUnmount:function(){
-        clearInterval(repeatingAlert)
     },
     render:function(){
         return(
             <div>
+                <br/>
                 Admin Session
             </div>
         )

@@ -5,11 +5,12 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
-var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 //logger
 var winston = require('winston');
 var logger = require('./service/logger.js')
@@ -46,6 +47,9 @@ app.use(session({
     secret:'secret',
     saveUninitialized:true,
     resave:true,
+    store: new MongoStore({
+        url: 'mongodb://xylops:xxxx@ds113608.mlab.com:13608/ulysses',
+    })
 }))
 //passport init
 app.use(passport.initialize());
@@ -77,6 +81,7 @@ app.use(function(req,res, next){
     res.locals.user = req.user || null;
     next();
 });
+//connect mongodb
 
 app.use('/', index);
 app.use('/users', users)

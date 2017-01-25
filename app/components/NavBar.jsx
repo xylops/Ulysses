@@ -54,7 +54,7 @@ var NavBar = React.createClass({
             if(clearance === 'admin' || clearance === 'topMan'){
                 return (
                     <div>
-                        <Link to="/LOG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>LOG Record</MenuItem></Link>
+                        <Link to="/LOG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Logging</MenuItem></Link>
                         <Link to="/AD"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Admin</MenuItem></Link>
                     </div>
                 )
@@ -91,7 +91,7 @@ var NavBar = React.createClass({
                     <Link to="/LGPL"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>PickList</MenuItem></Link>
                     <Link to="/LGDR"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Dispatch Record</MenuItem></Link>
                     <Link to="/REP"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Reporting</MenuItem></Link>
-
+                    {renderAdminBtn()}
                     <Divider />
                     <a href="/users/logout">
                         <MenuItem onTouchTap={this.handleToggle} className="drawerCloseBtn" style={{color:'white', fontWeight:'bold'}}>
