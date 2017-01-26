@@ -454,3 +454,19 @@
 {"level":"info","message":"xylops -- has login","timestamp":"2017-01-25T16:08:52.430Z"}
 {"level":"info","message":"xylops -- has request full client list","timestamp":"2017-01-25T16:09:04.371Z"}
 {"level":"info","message":"xylops-- has request full Product List","timestamp":"2017-01-25T16:09:11.815Z"}
+{"level":"info","message":"connnect to db through mongoose","timestamp":"2017-01-26T04:55:52.432Z"}
+{"level":"info","message":"xylops -- has login","timestamp":"2017-01-26T04:55:53.439Z"}
+{"level":"info","message":"xylops -- has login","timestamp":"2017-01-26T04:55:53.452Z"}
+{"level":"info","message":"connnect to db through mongoose","timestamp":"2017-01-26T04:56:04.766Z"}
+{"level":"info","message":"connnect to db through mongoose","timestamp":"2017-01-26T04:56:19.335Z"}
+{"level":"info","message":"connnect to db through mongoose","timestamp":"2017-01-26T04:56:31.195Z"}
+{"level":"info","message":"xylops -- has login","timestamp":"2017-01-26T04:56:32.212Z"}
+{"level":"info","message":"clement -- has login","timestamp":"2017-01-26T04:57:12.029Z"}
+{"level":"info","message":"clement -- has request full client list","timestamp":"2017-01-26T04:58:33.757Z"}
+{"level":"info","message":"clement -- has request full client list","timestamp":"2017-01-26T04:58:37.746Z"}
+{"level":"info","message":"clement-- have request invoice to be reConfirm","timestamp":"2017-01-26T04:58:52.767Z"}
+{"level":"info","message":"admin -- has login","timestamp":"2017-01-26T05:02:45.115Z"}
+{"level":"info","message":"guest -- has login","timestamp":"2017-01-26T05:02:55.729Z"}
+{"level":"info","message":"connnect to db through mongoose","timestamp":"2017-01-26T05:07:17.403Z"}
+{"level":"info","message":"connnect to db through mongoose","timestamp":"2017-01-26T05:08:33.844Z"}
+{"level":"info","message":"connnect to db through mongoose","timestamp":"2017-01-26T05:09:01.792Z"}

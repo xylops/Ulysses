@@ -49,10 +49,10 @@ var HomePage = React.createClass({
                 return (
                     <div className="row">
                         <div className="column medium-6" style={style.navBtn}>
-                            <Link to="/LOG" ><RaisedButton label="LOG Record" fullWidth={true} backgroundColor={'#D96A00'} labelColor={'white'}/></Link>
+                            <Link to="/LOG" ><RaisedButton label="LOG Record" fullWidth={true} backgroundColor={'#51B300'} labelColor={'white'}/></Link>
                         </div>
                         <div className="column medium-6" style={style.navBtn}>
-                            <Link to="/AD" ><RaisedButton label="Admin Panel" fullWidth={true} backgroundColor={'#D96A00'} labelColor={'white'}/></Link>
+                            <Link to="/REP" ><RaisedButton label="Reporting" fullWidth={true} backgroundColor={'#51B300'} labelColor={'white'}/></Link>
                         </div>
                     </div>
                 )
@@ -85,11 +85,6 @@ var HomePage = React.createClass({
                     </div>
                     <div className="column medium-4" style={style.navBtn}>
                         <Link to="/LGDR" ><RaisedButton label="Dispatch Record" fullWidth={true} backgroundColor={'#8A02A7'} labelColor={'white'}/></Link>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="column medium-12" style={style.navBtn}>
-                        <Link to="/REP" ><RaisedButton label="Reporting" fullWidth={true} backgroundColor={'#51B300'} labelColor={'white'}/></Link>
                     </div>
                 </div>
                 {renderAdminBtn()}

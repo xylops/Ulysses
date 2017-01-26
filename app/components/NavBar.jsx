@@ -15,8 +15,6 @@ import Divider from 'material-ui/Divider';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 const containerStyle={
-    // height: 'calc(100% - 64px)',
-    // top: 64,
     backgroundColor:'#00AA72',
 }
 
@@ -54,8 +52,8 @@ var NavBar = React.createClass({
             if(clearance === 'admin' || clearance === 'topMan'){
                 return (
                     <div>
+                        <Link to="/REP"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Reporting</MenuItem></Link>
                         <Link to="/LOG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Logging</MenuItem></Link>
-                        <Link to="/AD"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Admin</MenuItem></Link>
                     </div>
                 )
             }
@@ -90,7 +88,6 @@ var NavBar = React.createClass({
                     <Link to="/LG"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Sort Invoice</MenuItem></Link>
                     <Link to="/LGPL"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>PickList</MenuItem></Link>
                     <Link to="/LGDR"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Dispatch Record</MenuItem></Link>
-                    <Link to="/REP"><MenuItem onTouchTap={this.handleClose} style={style.drawerText}>Reporting</MenuItem></Link>
                     {renderAdminBtn()}
                     <Divider />
                     <a href="/users/logout">

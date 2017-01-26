@@ -15,6 +15,9 @@
          width:40%;
          margin-top:15vw;
      }
+     span{
+         color:white;
+     }
      .col-md-4{
          text-align: left;
      }
@@ -47,10 +50,21 @@
 <div class="container">
     <p>Ulysses ERP System</p>
     <br/>
+    <div class="row">
+        <div class="col-md-6">
+            <span>Admin Account</span></br>
+            <span>Username: admin / Password: admin</span>
+        </div>
+        <div class="col-md-6">
+            <span>Guest Account</span></br>
+            <span>Username: guest / Password: guest</span>
+        </div>
+    </div>
+    <br/>
     <form class="" action="" method="post">
         <div class="row">
             <div class="col-md-4">
-                <label for="id">User</label>
+                <label for="id">Username</label>
             </div>
             <div class="col-md-8">
                 <input type="text" name="username">
